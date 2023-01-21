@@ -1,4 +1,4 @@
-import Head from '@/app/components/Head/Head';
+import { Head } from '@/app/components';
 import { fetchMovie } from './queries';
 
 type Props = {
@@ -9,11 +9,5 @@ type Props = {
 
 export default async function MovieHead({ params }: Props) {
   const { data } = await fetchMovie(parseInt(params.id));
-
-  return (
-    <>
-      <Head />
-      <title>{data.movie.title}</title>
-    </>
-  );
+  return <Head title={`${data.movie.title} (${data.movie.year})`} />;
 }

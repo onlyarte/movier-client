@@ -1,4 +1,4 @@
-import Head from './components/Head/Head';
+import { Head } from './components';
 
 export default function AppHead() {
   return <Head />;

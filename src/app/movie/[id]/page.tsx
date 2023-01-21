@@ -1,3 +1,4 @@
+import { Layout } from '@/app/components';
 import Image from 'next/image';
 import { fetchMovie } from './queries';
 
@@ -11,7 +12,7 @@ export default async function Movie({ params }: Props) {
   const { data } = await fetchMovie(parseInt(params.id));
 
   return (
-    <div className="flex flex-col lg:flex-row min-h-screen lg:h-screen">
+    <Layout>
       <div className="basis-[400px] lg:basis-2/5">
         <div className="h-full w-full relative">
           <Image
@@ -62,6 +63,6 @@ export default async function Movie({ params }: Props) {
           />
         )}
       </div>
-    </div>
+    </Layout>
   );
 }
