@@ -16,6 +16,7 @@ const GET_MOVIE = gql`
       writers
       stars
       rating
+      trailerUrl
     }
   }
 `;
