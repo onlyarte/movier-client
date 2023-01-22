@@ -12,7 +12,7 @@ export default function Input({ value, onChange, placeholder }: Props) {
       value={value}
       onChange={onChange}
       placeholder={placeholder}
-      className="w-full h-12 px-5 py-2 rounded-3xl focus-visible:outline-none"
+      className="w-full h-12 px-5 py-2 rounded-3xl focus-visible:outline-none bg-background border"
     />
   );
 }
