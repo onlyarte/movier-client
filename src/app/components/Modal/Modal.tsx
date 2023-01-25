@@ -30,7 +30,7 @@ export default function Modal({ isOpen, onClose, children }: Props) {
           onClick={onClose}
           className="absolute z-10 top-4 right-4"
         />
-        <div className="p-4 pt-[72px]">{children}</div>
+        <div className="p-4">{children}</div>
       </div>
     </CSSTransition>
   );

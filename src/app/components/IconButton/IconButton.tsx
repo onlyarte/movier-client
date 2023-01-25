@@ -1,3 +1,5 @@
+'use client';
+
 import { Icon, Loader } from 'react-feather';
 
 type Props = React.ButtonHTMLAttributes<HTMLButtonElement> & {

@@ -9,6 +9,7 @@ type Props = {
 };
 
 export default async function Movie({ params }: Props) {
+  // https://beta.nextjs.org/docs/data-fetching/fetching#asyncawait-in-server-components
   const { data } = await fetchMovie(parseInt(params.id));
 
   return (
@@ -66,3 +67,6 @@ export default async function Movie({ params }: Props) {
     </Layout>
   );
 }
+
+// https://beta.nextjs.org/docs/api-reference/segment-config#revalidate
+export const revalidate = 0;
