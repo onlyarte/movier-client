@@ -1,5 +1,6 @@
 import { Head } from '@/app/components';
-import { fetchMovie } from './queries';
+import { GetMovieDocument } from '@/graphql/graphql';
+import { apolloClient } from '@/utils/apollo';
 
 type Props = {
   params: {
@@ -8,6 +9,10 @@ type Props = {
 };
 
 export default async function MovieHead({ params }: Props) {
-  const { data } = await fetchMovie(parseInt(params.id));
+  const { data } = await apolloClient.query({
+    query: GetMovieDocument,
+    variables: { id: parseInt(params.id) },
+  });
+
   return <Head title={`${data.movie.title} (${data.movie.year})`} />;
 }
