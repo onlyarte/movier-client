@@ -1,4 +1,4 @@
-query GetMovie($id: Int!) {
+query Movie($id: Int!) {
   movie(id: $id) {
     id
     imdbId

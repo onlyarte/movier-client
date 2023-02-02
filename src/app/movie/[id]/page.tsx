@@ -1,5 +1,4 @@
-import { Layout } from '@/app/components';
-import { GetMovieDocument } from '@/graphql/graphql';
+import { MovieDocument } from '@/graphql/graphql';
 import { apolloClient } from '@/utils/apollo';
 import Image from 'next/image';
 
@@ -12,12 +11,12 @@ type Props = {
 export default async function Movie({ params }: Props) {
   // https://beta.nextjs.org/docs/data-fetching/fetching#asyncawait-in-server-components
   const { data } = await apolloClient.query({
-    query: GetMovieDocument,
+    query: MovieDocument,
     variables: { id: parseInt(params.id) },
   });
 
   return (
-    <Layout>
+    <>
       <div className="basis-[400px] lg:basis-2/5">
         <div className="h-full w-full relative">
           <Image
@@ -73,7 +72,7 @@ export default async function Movie({ params }: Props) {
           />
         )}
       </div>
-    </Layout>
+    </>
   );
 }
 

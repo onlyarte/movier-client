@@ -1,0 +1,12 @@
+query List($id: String!) {
+  list(id: $id) {
+    id
+    title
+    movies {
+      id
+      title
+      poster
+      year
+    }
+  }
+}

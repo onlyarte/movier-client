@@ -1,4 +1,4 @@
-query FindMovies($input: String!) {
+query Search($input: String!) {
   search(input: $input) {
     id
     title

@@ -1,5 +1,5 @@
 import { Head } from '@/app/components';
-import { GetMovieDocument } from '@/graphql/graphql';
+import { MovieDocument } from '@/graphql/graphql';
 import { apolloClient } from '@/utils/apollo';
 
 type Props = {
@@ -10,7 +10,7 @@ type Props = {
 
 export default async function MovieHead({ params }: Props) {
   const { data } = await apolloClient.query({
-    query: GetMovieDocument,
+    query: MovieDocument,
     variables: { id: parseInt(params.id) },
   });
 

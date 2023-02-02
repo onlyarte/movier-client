@@ -13,8 +13,9 @@ import { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/
  * Therefore it is highly recommended to use the babel-plugin for production.
  */
 const documents = {
-    "query GetMovie($id: Int!) {\n  movie(id: $id) {\n    id\n    imdbId\n    title\n    description\n    poster\n    year\n    countries\n    genres\n    directors\n    writers\n    stars\n    rating\n    trailerUrl\n  }\n}": types.GetMovieDocument,
-    "query FindMovies($input: String!) {\n  search(input: $input) {\n    id\n    title\n    poster\n    year\n    genres\n  }\n}": types.FindMoviesDocument,
+    "query List($id: String!) {\n  list(id: $id) {\n    id\n    title\n    movies {\n      id\n      title\n      poster\n      year\n    }\n  }\n}": types.ListDocument,
+    "query Movie($id: Int!) {\n  movie(id: $id) {\n    id\n    imdbId\n    title\n    description\n    poster\n    year\n    countries\n    genres\n    directors\n    writers\n    stars\n    rating\n    trailerUrl\n  }\n}": types.MovieDocument,
+    "query Search($input: String!) {\n  search(input: $input) {\n    id\n    title\n    poster\n    year\n    genres\n  }\n}": types.SearchDocument,
 };
 
 /**
@@ -34,11 +35,15 @@ export function graphql(source: string): unknown;
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function graphql(source: "query GetMovie($id: Int!) {\n  movie(id: $id) {\n    id\n    imdbId\n    title\n    description\n    poster\n    year\n    countries\n    genres\n    directors\n    writers\n    stars\n    rating\n    trailerUrl\n  }\n}"): (typeof documents)["query GetMovie($id: Int!) {\n  movie(id: $id) {\n    id\n    imdbId\n    title\n    description\n    poster\n    year\n    countries\n    genres\n    directors\n    writers\n    stars\n    rating\n    trailerUrl\n  }\n}"];
+export function graphql(source: "query List($id: String!) {\n  list(id: $id) {\n    id\n    title\n    movies {\n      id\n      title\n      poster\n      year\n    }\n  }\n}"): (typeof documents)["query List($id: String!) {\n  list(id: $id) {\n    id\n    title\n    movies {\n      id\n      title\n      poster\n      year\n    }\n  }\n}"];
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function graphql(source: "query FindMovies($input: String!) {\n  search(input: $input) {\n    id\n    title\n    poster\n    year\n    genres\n  }\n}"): (typeof documents)["query FindMovies($input: String!) {\n  search(input: $input) {\n    id\n    title\n    poster\n    year\n    genres\n  }\n}"];
+export function graphql(source: "query Movie($id: Int!) {\n  movie(id: $id) {\n    id\n    imdbId\n    title\n    description\n    poster\n    year\n    countries\n    genres\n    directors\n    writers\n    stars\n    rating\n    trailerUrl\n  }\n}"): (typeof documents)["query Movie($id: Int!) {\n  movie(id: $id) {\n    id\n    imdbId\n    title\n    description\n    poster\n    year\n    countries\n    genres\n    directors\n    writers\n    stars\n    rating\n    trailerUrl\n  }\n}"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "query Search($input: String!) {\n  search(input: $input) {\n    id\n    title\n    poster\n    year\n    genres\n  }\n}"): (typeof documents)["query Search($input: String!) {\n  search(input: $input) {\n    id\n    title\n    poster\n    year\n    genres\n  }\n}"];
 
 export function graphql(source: string) {
   return (documents as any)[source] ?? {};

@@ -6,12 +6,12 @@ import { Search as SearchIcon } from 'react-feather';
 import { IconButton, Input } from '@/app/components';
 import { withApolloProvider } from '@/utils/apollo';
 import { useLazyQuery } from '@apollo/client';
-import { FindMoviesDocument } from '@/graphql/graphql';
+import { SearchDocument } from '@/graphql/graphql';
 
 function Search() {
   const [inputValue, setInputValue] = useState('');
 
-  const [fetchResults, { data, loading }] = useLazyQuery(FindMoviesDocument);
+  const [fetchResults, { data, loading }] = useLazyQuery(SearchDocument);
 
   const handleSearch: React.FormEventHandler<HTMLFormElement> = (event) => {
     event.preventDefault();
