@@ -1,0 +1,17 @@
+query GetMovie($id: Int!) {
+  movie(id: $id) {
+    id
+    imdbId
+    title
+    description
+    poster
+    year
+    countries
+    genres
+    directors
+    writers
+    stars
+    rating
+    trailerUrl
+  }
+}

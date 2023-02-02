@@ -1,18 +1,16 @@
 'use client';
 
 import { useState } from 'react';
-import { useLazyQuery } from '@apollo/client';
 import Link from 'next/link';
 import { Search as SearchIcon } from 'react-feather';
 import { IconButton, Input } from '@/app/components';
 import { withApolloProvider } from '@/utils/apollo';
-
-import { FIND_MOVIES } from './queries';
+import { useFindMoviesLazyQuery } from '@/graphql/graphql';
 
 function Search() {
   const [inputValue, setInputValue] = useState('');
 
-  const [fetchResults, { data, loading }] = useLazyQuery(FIND_MOVIES);
+  const [fetchResults, { data, loading }] = useFindMoviesLazyQuery();
 
   const handleSearch: React.FormEventHandler<HTMLFormElement> = (event) => {
     event.preventDefault();
@@ -37,7 +35,8 @@ function Search() {
       <div className="flex flex-col gap-2">
         {data?.search.map((movie: any) => (
           <Link href={`/movie/${movie.id}`} key={movie.id}>
-            {movie.title} ({movie.year})
+            {movie.title}
+            {movie.year !== null && <> ({movie.year})</>}
           </Link>
         ))}
       </div>

@@ -1,6 +1,7 @@
 import { Layout } from '@/app/components';
+import { GetMovieDocument } from '@/graphql/graphql';
+import { apolloClient } from '@/utils/apollo';
 import Image from 'next/image';
-import { fetchMovie } from './queries';
 
 type Props = {
   params: {
@@ -10,14 +11,20 @@ type Props = {
 
 export default async function Movie({ params }: Props) {
   // https://beta.nextjs.org/docs/data-fetching/fetching#asyncawait-in-server-components
-  const { data } = await fetchMovie(parseInt(params.id));
+  const { data } = await apolloClient.query({
+    query: GetMovieDocument,
+    variables: { id: parseInt(params.id) },
+  });
 
   return (
     <Layout>
       <div className="basis-[400px] lg:basis-2/5">
         <div className="h-full w-full relative">
           <Image
-            src={data.movie.poster}
+            src={
+              data.movie.poster ??
+              'https://storage.googleapis.com/movier-us/uploads%2F98eb2e7399cdbff0e67e42b967e15c50.jpg'
+            }
             alt="Poster"
             fill
             className="object-cover"
@@ -27,7 +34,9 @@ export default async function Movie({ params }: Props) {
       <div className="basis-auto lg:basis-3/5 px-5 py-8 lg:p-8 lg:overflow-y-auto">
         <div className="flex justify-between gap-3">
           <h1 className="text-3xl lg:text-5xl mb-2">{data.movie.title}</h1>
-          <span className="text-2xl lg:text-5xl">{data.movie.rating}/10</span>
+          {data.movie.rating != null && (
+            <span className="text-2xl lg:text-5xl">{data.movie.rating}/10</span>
+          )}
         </div>
         <div className="text-xl mb-4">
           {data.movie.year} | {data.movie.genres.join(', ')}
@@ -35,11 +44,13 @@ export default async function Movie({ params }: Props) {
         <p className="text-base mb-4">{data.movie.description}</p>
         <table className="mb-4">
           <tbody>
-            {[
-              { key: 'directors', title: 'Directors' },
-              { key: 'writers', title: 'Writers' },
-              { key: 'stars', title: 'Stars' },
-            ].map(
+            {(
+              [
+                { key: 'directors', title: 'Directors' },
+                { key: 'writers', title: 'Writers' },
+                { key: 'stars', title: 'Stars' },
+              ] as const
+            ).map(
               ({ key, title }) =>
                 data.movie[key] &&
                 data.movie[key].length > 0 && (
@@ -54,8 +65,6 @@ export default async function Movie({ params }: Props) {
 
         {data.movie.trailerUrl && (
           <iframe
-            // width="100%"
-            // height="450"
             src={data.movie.trailerUrl}
             title={`${data.movie.title} Trailer`}
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"

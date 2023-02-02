@@ -1,0 +1,9 @@
+query FindMovies($input: String!) {
+  search(input: $input) {
+    id
+    title
+    poster
+    year
+    genres
+  }
+}
