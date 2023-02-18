@@ -37,7 +37,7 @@ export default async function ListPage({ params }: Props) {
                 className="object-cover"
               />
             </div>
-            <h2 className="text-l text-center">
+            <h2 className="text-lg text-center">
               {movie.title} ({movie.year})
             </h2>
           </Link>
@@ -46,3 +46,5 @@ export default async function ListPage({ params }: Props) {
     </div>
   );
 }
+
+export const revalidate = 0;

@@ -1,0 +1,34 @@
+fragment UserList on List {
+  id
+  title
+  cover
+  updatedAt
+  movies {
+    id
+    title
+    poster
+  }
+}
+
+query User($id: String!) {
+  user(id: $id) {
+    id
+    email
+    name
+    photoUrl
+    following {
+      id
+      name
+    }
+    followers {
+      id
+      name
+    }
+    lists {
+      ...UserList
+    }
+    savedLists {
+      ...UserList
+    }
+  }
+}

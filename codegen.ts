@@ -8,6 +8,9 @@ const config: CodegenConfig = {
     'src/graphql/': {
       preset: 'client',
       plugins: [],
+      config: {
+        flattenGeneratedTypes: true,
+      },
     },
   },
 };

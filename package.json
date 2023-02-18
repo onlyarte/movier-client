@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "deploy": "firebase deploy",
+    "deploy": "next build && firebase deploy",
     "generate": "graphql-codegen --config codegen.ts"
   },
   "dependencies": {

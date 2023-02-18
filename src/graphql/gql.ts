@@ -16,6 +16,7 @@ const documents = {
     "query List($id: String!) {\n  list(id: $id) {\n    id\n    title\n    movies {\n      id\n      title\n      poster\n      year\n    }\n  }\n}": types.ListDocument,
     "query Movie($id: Int!) {\n  movie(id: $id) {\n    id\n    imdbId\n    title\n    description\n    poster\n    year\n    countries\n    genres\n    directors\n    writers\n    stars\n    rating\n    trailerUrl\n  }\n}": types.MovieDocument,
     "query Search($input: String!) {\n  search(input: $input) {\n    id\n    title\n    poster\n    year\n    genres\n  }\n}": types.SearchDocument,
+    "fragment UserList on List {\n  id\n  title\n  cover\n  updatedAt\n  movies {\n    id\n    title\n    poster\n  }\n}\n\nquery User($id: String!) {\n  user(id: $id) {\n    id\n    email\n    name\n    photoUrl\n    following {\n      id\n      name\n    }\n    followers {\n      id\n      name\n    }\n    lists {\n      ...UserList\n    }\n    savedLists {\n      ...UserList\n    }\n  }\n}": types.UserListFragmentDoc,
 };
 
 /**
@@ -44,6 +45,10 @@ export function graphql(source: "query Movie($id: Int!) {\n  movie(id: $id) {\n 
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function graphql(source: "query Search($input: String!) {\n  search(input: $input) {\n    id\n    title\n    poster\n    year\n    genres\n  }\n}"): (typeof documents)["query Search($input: String!) {\n  search(input: $input) {\n    id\n    title\n    poster\n    year\n    genres\n  }\n}"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "fragment UserList on List {\n  id\n  title\n  cover\n  updatedAt\n  movies {\n    id\n    title\n    poster\n  }\n}\n\nquery User($id: String!) {\n  user(id: $id) {\n    id\n    email\n    name\n    photoUrl\n    following {\n      id\n      name\n    }\n    followers {\n      id\n      name\n    }\n    lists {\n      ...UserList\n    }\n    savedLists {\n      ...UserList\n    }\n  }\n}"): (typeof documents)["fragment UserList on List {\n  id\n  title\n  cover\n  updatedAt\n  movies {\n    id\n    title\n    poster\n  }\n}\n\nquery User($id: String!) {\n  user(id: $id) {\n    id\n    email\n    name\n    photoUrl\n    following {\n      id\n      name\n    }\n    followers {\n      id\n      name\n    }\n    lists {\n      ...UserList\n    }\n    savedLists {\n      ...UserList\n    }\n  }\n}"];
 
 export function graphql(source: string) {
   return (documents as any)[source] ?? {};

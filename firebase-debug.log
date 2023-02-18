@@ -1,0 +1,167 @@
+[debug] [2023-02-18T12:26:39.494Z] ----------------------------------------------------------------------
+[debug] [2023-02-18T12:26:39.495Z] Command:       /Users/ruslanpurii/.nvm/versions/node/v16.18.1/bin/node /Users/ruslanpurii/.nvm/versions/node/v16.18.1/bin/firebase deploy
+[debug] [2023-02-18T12:26:39.496Z] CLI Version:   11.23.1
+[debug] [2023-02-18T12:26:39.496Z] Platform:      darwin
+[debug] [2023-02-18T12:26:39.497Z] Node Version:  v16.18.1
+[debug] [2023-02-18T12:26:39.498Z] Time:          Sat Feb 18 2023 13:26:39 GMT+0100 (Central European Standard Time)
+[debug] [2023-02-18T12:26:39.499Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2023-02-18T12:26:39.584Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2023-02-18T12:26:39.585Z] > authorizing via signed-in user (ruslanpurii@gmail.com)
+[debug] [2023-02-18T12:26:39.586Z] [iam] checking project movier-371821 for permissions ["firebase.projects.get","firebasehosting.sites.update"]
+[debug] [2023-02-18T12:26:39.588Z] >>> [apiv2][query] POST https://cloudresourcemanager.googleapis.com/v1/projects/movier-371821:testIamPermissions [none]
+[debug] [2023-02-18T12:26:39.589Z] >>> [apiv2][(partial)header] POST https://cloudresourcemanager.googleapis.com/v1/projects/movier-371821:testIamPermissions x-goog-quota-user=projects/movier-371821
+[debug] [2023-02-18T12:26:39.589Z] >>> [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/movier-371821:testIamPermissions {"permissions":["firebase.projects.get","firebasehosting.sites.update"]}
+[debug] [2023-02-18T12:26:40.541Z] <<< [apiv2][status] POST https://cloudresourcemanager.googleapis.com/v1/projects/movier-371821:testIamPermissions 200
+[debug] [2023-02-18T12:26:40.544Z] <<< [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/movier-371821:testIamPermissions {"permissions":["firebase.projects.get","firebasehosting.sites.update"]}
+[debug] [2023-02-18T12:26:40.547Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/movier-371821 [none]
+[debug] [2023-02-18T12:26:40.925Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/movier-371821 200
+[debug] [2023-02-18T12:26:40.926Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/movier-371821 {"projectId":"movier-371821","projectNumber":"899981005574","displayName":"Movier","name":"projects/movier-371821","resources":{"hostingSite":"movier-371821","storageBucket":"movier-371821.appspot.com","locationId":"europe-west"},"state":"ACTIVE","etag":"1_4d02b429-30e0-4111-8131-ca604757bee2"}
+[info] 
+[info] === Deploying to 'movier-371821'...
+[info] 
+[info] i  deploying functions, hosting 
+[debug] [2023-02-18T12:27:22.304Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/movier-371821 [none]
+[debug] [2023-02-18T12:27:22.590Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/movier-371821 200
+[debug] [2023-02-18T12:27:22.591Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/movier-371821 {"projectId":"movier-371821","projectNumber":"899981005574","displayName":"Movier","name":"projects/movier-371821","resources":{"hostingSite":"movier-371821","storageBucket":"movier-371821.appspot.com","locationId":"europe-west"},"state":"ACTIVE","etag":"1_4d02b429-30e0-4111-8131-ca604757bee2"}
+[info] i  functions: preparing codebase firebase-frameworks-movier-371821 for deployment 
+[info] i  functions: ensuring required API cloudfunctions.googleapis.com is enabled... 
+[info] i  functions: ensuring required API cloudbuild.googleapis.com is enabled... 
+[info] i  artifactregistry: ensuring required API artifactregistry.googleapis.com is enabled... 
+[debug] [2023-02-18T12:27:22.594Z] >>> [apiv2][query] GET https://serviceusage.googleapis.com/v1/projects/movier-371821/services/cloudfunctions.googleapis.com [none]
+[debug] [2023-02-18T12:27:22.594Z] >>> [apiv2][(partial)header] GET https://serviceusage.googleapis.com/v1/projects/movier-371821/services/cloudfunctions.googleapis.com x-goog-quota-user=projects/movier-371821
+[debug] [2023-02-18T12:27:22.596Z] >>> [apiv2][query] GET https://serviceusage.googleapis.com/v1/projects/movier-371821/services/runtimeconfig.googleapis.com [none]
+[debug] [2023-02-18T12:27:22.596Z] >>> [apiv2][(partial)header] GET https://serviceusage.googleapis.com/v1/projects/movier-371821/services/runtimeconfig.googleapis.com x-goog-quota-user=projects/movier-371821
+[debug] [2023-02-18T12:27:22.598Z] >>> [apiv2][query] GET https://serviceusage.googleapis.com/v1/projects/movier-371821/services/cloudbuild.googleapis.com [none]
+[debug] [2023-02-18T12:27:22.598Z] >>> [apiv2][(partial)header] GET https://serviceusage.googleapis.com/v1/projects/movier-371821/services/cloudbuild.googleapis.com x-goog-quota-user=projects/movier-371821
+[debug] [2023-02-18T12:27:22.600Z] >>> [apiv2][query] GET https://serviceusage.googleapis.com/v1/projects/movier-371821/services/artifactregistry.googleapis.com [none]
+[debug] [2023-02-18T12:27:22.600Z] >>> [apiv2][(partial)header] GET https://serviceusage.googleapis.com/v1/projects/movier-371821/services/artifactregistry.googleapis.com x-goog-quota-user=projects/movier-371821
+[debug] [2023-02-18T12:27:23.741Z] <<< [apiv2][status] GET https://serviceusage.googleapis.com/v1/projects/movier-371821/services/runtimeconfig.googleapis.com 200
+[debug] [2023-02-18T12:27:23.742Z] <<< [apiv2][body] GET https://serviceusage.googleapis.com/v1/projects/movier-371821/services/runtimeconfig.googleapis.com [omitted]
+[debug] [2023-02-18T12:27:23.743Z] <<< [apiv2][status] GET https://serviceusage.googleapis.com/v1/projects/movier-371821/services/artifactregistry.googleapis.com 200
+[debug] [2023-02-18T12:27:23.743Z] <<< [apiv2][body] GET https://serviceusage.googleapis.com/v1/projects/movier-371821/services/artifactregistry.googleapis.com [omitted]
+[info] ✔  artifactregistry: required API artifactregistry.googleapis.com is enabled 
+[debug] [2023-02-18T12:27:23.746Z] <<< [apiv2][status] GET https://serviceusage.googleapis.com/v1/projects/movier-371821/services/cloudbuild.googleapis.com 200
+[debug] [2023-02-18T12:27:23.746Z] <<< [apiv2][body] GET https://serviceusage.googleapis.com/v1/projects/movier-371821/services/cloudbuild.googleapis.com [omitted]
+[info] ✔  functions: required API cloudbuild.googleapis.com is enabled 
+[debug] [2023-02-18T12:27:23.747Z] <<< [apiv2][status] GET https://serviceusage.googleapis.com/v1/projects/movier-371821/services/cloudfunctions.googleapis.com 200
+[debug] [2023-02-18T12:27:23.747Z] <<< [apiv2][body] GET https://serviceusage.googleapis.com/v1/projects/movier-371821/services/cloudfunctions.googleapis.com [omitted]
+[info] ✔  functions: required API cloudfunctions.googleapis.com is enabled 
+[debug] [2023-02-18T12:27:23.748Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/movier-371821/adminSdkConfig [none]
+[debug] [2023-02-18T12:27:24.140Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/movier-371821/adminSdkConfig 200
+[debug] [2023-02-18T12:27:24.140Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/movier-371821/adminSdkConfig {"projectId":"movier-371821","storageBucket":"movier-371821.appspot.com","locationId":"europe-west"}
+[debug] [2023-02-18T12:27:24.142Z] >>> [apiv2][query] GET https://runtimeconfig.googleapis.com/v1beta1/projects/movier-371821/configs [none]
+[debug] [2023-02-18T12:27:24.458Z] <<< [apiv2][status] GET https://runtimeconfig.googleapis.com/v1beta1/projects/movier-371821/configs 200
+[debug] [2023-02-18T12:27:24.458Z] <<< [apiv2][body] GET https://runtimeconfig.googleapis.com/v1beta1/projects/movier-371821/configs {}
+[debug] [2023-02-18T12:27:24.463Z] Validating nodejs source
+[warn] ⚠  functions: package.json indicates an outdated version of firebase-functions. Please upgrade using npm install --save firebase-functions@latest in your functions directory. 
+[warn] ⚠  functions: Please note that there will be breaking changes when you upgrade. 
+[debug] [2023-02-18T12:27:25.143Z] > [functions] package.json contents: {
+  "name": "the-movier-client",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "deploy": "next build && firebase deploy",
+    "generate": "graphql-codegen --config codegen.ts"
+  },
+  "dependencies": {
+    "@apollo/client": "^3.7.4",
+    "@next/font": "13.1.2",
+    "@types/node": "18.11.18",
+    "@types/react": "18.0.26",
+    "@types/react-dom": "18.0.10",
+    "@types/react-transition-group": "^4.4.5",
+    "eslint": "8.31.0",
+    "eslint-config-next": "13.1.2",
+    "graphql": "^16.6.0",
+    "next": "13.1.2",
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
+    "react-feather": "^2.0.10",
+    "react-transition-group": "^4.4.5",
+    "typescript": "4.9.4",
+    "firebase-frameworks": "^0.6.0",
+    "firebase-functions": "^3.23.0",
+    "firebase-admin": "^11.0.1"
+  },
+  "main": "server.js",
+  "engines": {
+    "node": "16"
+  }
+}
+[debug] [2023-02-18T12:27:25.144Z] Building nodejs source
+[debug] [2023-02-18T12:27:25.187Z] Found functions.yaml. Got spec: {
+  "endpoints": {
+    "ssrmovier371821": {
+      "platform": "gcfv2",
+      "region": [
+        "us-central1"
+      ],
+      "labels": {},
+      "httpsTrigger": {},
+      "entryPoint": "ssr"
+    }
+  },
+  "specVersion": "v1alpha1",
+  "requiredAPIs": []
+}
+[info] i  functions: Loaded environment variables from .env. 
+[info] i  functions: preparing .firebase/movier-371821/functions directory for uploading... 
+[info] i  functions: packaged /Users/ruslanpurii/Documents/GitHub/the-movier-client/.firebase/movier-371821/functions (124.83 MB) for uploading 
+[debug] [2023-02-18T12:27:31.663Z] >>> [apiv2][query] GET https://cloudfunctions.googleapis.com/v1/projects/movier-371821/locations/-/functions [none]
+[debug] [2023-02-18T12:27:32.207Z] <<< [apiv2][status] GET https://cloudfunctions.googleapis.com/v1/projects/movier-371821/locations/-/functions 200
+[debug] [2023-02-18T12:27:32.207Z] <<< [apiv2][body] GET https://cloudfunctions.googleapis.com/v1/projects/movier-371821/locations/-/functions {}
+[debug] [2023-02-18T12:27:32.208Z] >>> [apiv2][query] GET https://cloudfunctions.googleapis.com/v2/projects/movier-371821/locations/-/functions filter=environment%3D%22GEN_2%22
+[debug] [2023-02-18T12:27:33.264Z] <<< [apiv2][status] GET https://cloudfunctions.googleapis.com/v2/projects/movier-371821/locations/-/functions 200
+[debug] [2023-02-18T12:27:33.264Z] <<< [apiv2][body] GET https://cloudfunctions.googleapis.com/v2/projects/movier-371821/locations/-/functions {"functions":[{"name":"projects/movier-371821/locations/us-central1/functions/ssrmovier371821","buildConfig":{"build":"projects/899981005574/locations/us-central1/builds/aa81416f-4bf8-4209-95da-675f99c19cde","runtime":"nodejs16","entryPoint":"ssr","source":{"storageSource":{"bucket":"gcf-v2-sources-899981005574-us-central1","object":"ssrmovier371821/function-source.zip"}},"sourceProvenance":{"resolvedStorageSource":{"bucket":"gcf-v2-sources-899981005574-us-central1","object":"ssrmovier371821/function-source.zip","generation":"1674674703981424"}}},"serviceConfig":{"service":"projects/movier-371821/locations/us-central1/services/ssrmovier371821","timeoutSeconds":60,"environmentVariables":{"__FIREBASE_FRAMEWORKS_ENTRY__":"next.js","FIREBASE_CONFIG":"{\"projectId\":\"movier-371821\",\"storageBucket\":\"movier-371821.appspot.com\",\"locationId\":\"europe-west\"}","GCLOUD_PROJECT":"movier-371821","EVENTARC_CLOUD_EVENT_SOURCE":"projects/movier-371821/locations/us-central1/services/ssrmovier371821"},"maxInstanceCount":100,"ingressSettings":"ALLOW_ALL","uri":"https://ssrmovier371821-jhevdatanq-uc.a.run.app","serviceAccountEmail":"899981005574-compute@developer.gserviceaccount.com","availableMemory":"256Mi","allTrafficOnLatestRevision":true,"revision":"ssrmovier371821-00002-zap","maxInstanceRequestConcurrency":1,"availableCpu":"0.1666"},"state":"ACTIVE","updateTime":"2023-01-25T19:27:52.744799963Z","labels":{"deployment-tool":"cli-firebase","firebase-functions-codebase":"firebase-frameworks-movier-371821","firebase-functions-hash":"85576157b94492d1f2c0c2d8a51dee828d4658e5"},"environment":"GEN_2"}]}
+[debug] [2023-02-18T12:27:33.265Z] >>> [apiv2][query] GET https://run.googleapis.com/v1/projects/movier-371821/locations/us-central1/services/ssrmovier371821 [none]
+[debug] [2023-02-18T12:27:34.229Z] <<< [apiv2][status] GET https://run.googleapis.com/v1/projects/movier-371821/locations/us-central1/services/ssrmovier371821 200
+[debug] [2023-02-18T12:27:34.229Z] <<< [apiv2][body] GET https://run.googleapis.com/v1/projects/movier-371821/locations/us-central1/services/ssrmovier371821 {"apiVersion":"serving.knative.dev/v1","kind":"Service","metadata":{"name":"ssrmovier371821","namespace":"899981005574","selfLink":"/apis/serving.knative.dev/v1/namespaces/899981005574/services/ssrmovier371821","uid":"ab5e4408-3d45-40d8-8186-01ac124f83a3","resourceVersion":"AAXzG6CpOWE","generation":2,"labels":{"goog-managed-by":"cloudfunctions","goog-cloudfunctions-runtime":"nodejs16","cloud.googleapis.com/location":"us-central1"},"annotations":{"run.googleapis.com/client-name":"cli-firebase","serving.knative.dev/creator":"service-899981005574@gcf-admin-robot.iam.gserviceaccount.com","serving.knative.dev/lastModifier":"service-899981005574@gcf-admin-robot.iam.gserviceaccount.com","client.knative.dev/user-image":"us-central1-docker.pkg.dev/movier-371821/gcf-artifacts/ssrmovier371821:version_1","cloudfunctions.googleapis.com/function-id":"ssrmovier371821","run.googleapis.com/operation-id":"658ac4a0-6107-4823-a217-9ecf08c9ff23","run.googleapis.com/ingress":"all","run.googleapis.com/ingress-status":"all"},"creationTimestamp":"2023-01-25T19:18:26.710652Z"},"spec":{"template":{"metadata":{"name":"ssrmovier371821-00002-zap","annotations":{"run.googleapis.com/client-name":"cli-firebase","cloudfunctions.googleapis.com/trigger-type":"HTTP_TRIGGER","client.knative.dev/user-image":"us-central1-docker.pkg.dev/movier-371821/gcf-artifacts/ssrmovier371821:version_1","autoscaling.knative.dev/maxScale":"100","run.googleapis.com/cpu-throttling":"true","run.googleapis.com/startup-cpu-boost":"true"}},"spec":{"containerConcurrency":1,"timeoutSeconds":60,"serviceAccountName":"899981005574-compute@developer.gserviceaccount.com","containers":[{"image":"us-central1-docker.pkg.dev/movier-371821/gcf-artifacts/ssrmovier371821:version_1","env":[{"name":"__FIREBASE_FRAMEWORKS_ENTRY__","value":"next.js"},{"name":"FIREBASE_CONFIG","value":"{\"projectId\":\"movier-371821\",\"storageBucket\":\"movier-371821.appspot.com\",\"locationId\":\"europe-west\"}"},{"name":"GCLOUD_PROJECT","value":"movier-371821"},{"name":"EVENTARC_CLOUD_EVENT_SOURCE","value":"projects/movier-371821/locations/us-central1/services/ssrmovier371821"}],"resources":{"limits":{"cpu":"0.1666","memory":"256Mi"}},"ports":[{"name":"http1","containerPort":8080}]}]}},"traffic":[{"percent":100,"latestRevision":true}]},"status":{"observedGeneration":2,"conditions":[{"type":"Ready","status":"True","lastTransitionTime":"2023-01-25T19:27:48.519463Z"},{"type":"ConfigurationsReady","status":"True","lastTransitionTime":"2023-01-25T19:27:43.489811Z"},{"type":"RoutesReady","status":"True","lastTransitionTime":"2023-01-25T19:27:48.664673Z"}],"latestReadyRevisionName":"ssrmovier371821-00002-zap","latestCreatedRevisionName":"ssrmovier371821-00002-zap","traffic":[{"revisionName":"ssrmovier371821-00002-zap","percent":100,"latestRevision":true}],"url":"https://ssrmovier371821-jhevdatanq-uc.a.run.app","address":{"url":"https://ssrmovier371821-jhevdatanq-uc.a.run.app"}}}
+[info] i  functions: ensuring required API run.googleapis.com is enabled... 
+[info] i  functions: ensuring required API eventarc.googleapis.com is enabled... 
+[info] i  functions: ensuring required API pubsub.googleapis.com is enabled... 
+[info] i  functions: ensuring required API storage.googleapis.com is enabled... 
+[debug] [2023-02-18T12:27:34.234Z] >>> [apiv2][query] GET https://serviceusage.googleapis.com/v1/projects/movier-371821/services/run.googleapis.com [none]
+[debug] [2023-02-18T12:27:34.235Z] >>> [apiv2][(partial)header] GET https://serviceusage.googleapis.com/v1/projects/movier-371821/services/run.googleapis.com x-goog-quota-user=projects/movier-371821
+[debug] [2023-02-18T12:27:34.236Z] >>> [apiv2][query] GET https://serviceusage.googleapis.com/v1/projects/movier-371821/services/eventarc.googleapis.com [none]
+[debug] [2023-02-18T12:27:34.236Z] >>> [apiv2][(partial)header] GET https://serviceusage.googleapis.com/v1/projects/movier-371821/services/eventarc.googleapis.com x-goog-quota-user=projects/movier-371821
+[debug] [2023-02-18T12:27:34.237Z] >>> [apiv2][query] GET https://serviceusage.googleapis.com/v1/projects/movier-371821/services/pubsub.googleapis.com [none]
+[debug] [2023-02-18T12:27:34.237Z] >>> [apiv2][(partial)header] GET https://serviceusage.googleapis.com/v1/projects/movier-371821/services/pubsub.googleapis.com x-goog-quota-user=projects/movier-371821
+[debug] [2023-02-18T12:27:34.238Z] >>> [apiv2][query] GET https://serviceusage.googleapis.com/v1/projects/movier-371821/services/storage.googleapis.com [none]
+[debug] [2023-02-18T12:27:34.238Z] >>> [apiv2][(partial)header] GET https://serviceusage.googleapis.com/v1/projects/movier-371821/services/storage.googleapis.com x-goog-quota-user=projects/movier-371821
+[debug] [2023-02-18T12:27:35.299Z] <<< [apiv2][status] GET https://serviceusage.googleapis.com/v1/projects/movier-371821/services/eventarc.googleapis.com 200
+[debug] [2023-02-18T12:27:35.299Z] <<< [apiv2][body] GET https://serviceusage.googleapis.com/v1/projects/movier-371821/services/eventarc.googleapis.com [omitted]
+[info] ✔  functions: required API eventarc.googleapis.com is enabled 
+[debug] [2023-02-18T12:27:35.302Z] <<< [apiv2][status] GET https://serviceusage.googleapis.com/v1/projects/movier-371821/services/pubsub.googleapis.com 200
+[debug] [2023-02-18T12:27:35.302Z] <<< [apiv2][body] GET https://serviceusage.googleapis.com/v1/projects/movier-371821/services/pubsub.googleapis.com [omitted]
+[info] ✔  functions: required API pubsub.googleapis.com is enabled 
+[debug] [2023-02-18T12:27:35.303Z] <<< [apiv2][status] GET https://serviceusage.googleapis.com/v1/projects/movier-371821/services/run.googleapis.com 200
+[debug] [2023-02-18T12:27:35.303Z] <<< [apiv2][body] GET https://serviceusage.googleapis.com/v1/projects/movier-371821/services/run.googleapis.com [omitted]
+[info] ✔  functions: required API run.googleapis.com is enabled 
+[debug] [2023-02-18T12:27:35.303Z] <<< [apiv2][status] GET https://serviceusage.googleapis.com/v1/projects/movier-371821/services/storage.googleapis.com 200
+[debug] [2023-02-18T12:27:35.303Z] <<< [apiv2][body] GET https://serviceusage.googleapis.com/v1/projects/movier-371821/services/storage.googleapis.com [omitted]
+[info] ✔  functions: required API storage.googleapis.com is enabled 
+[info] i  functions: generating the service identity for pubsub.googleapis.com... 
+[info] i  functions: generating the service identity for eventarc.googleapis.com... 
+[debug] [2023-02-18T12:27:35.304Z] >>> [apiv2][query] POST https://serviceusage.googleapis.com/v1beta1/projects/899981005574/services/pubsub.googleapis.com:generateServiceIdentity [none]
+[debug] [2023-02-18T12:27:35.306Z] >>> [apiv2][query] POST https://serviceusage.googleapis.com/v1beta1/projects/899981005574/services/eventarc.googleapis.com:generateServiceIdentity [none]
+[debug] [2023-02-18T12:27:36.390Z] <<< [apiv2][status] POST https://serviceusage.googleapis.com/v1beta1/projects/899981005574/services/eventarc.googleapis.com:generateServiceIdentity 200
+[debug] [2023-02-18T12:27:36.391Z] <<< [apiv2][body] POST https://serviceusage.googleapis.com/v1beta1/projects/899981005574/services/eventarc.googleapis.com:generateServiceIdentity {"name":"operations/finished.DONE_OPERATION","done":true,"response":{"@type":"type.googleapis.com/google.api.serviceusage.v1beta1.ServiceIdentity","email":"service-899981005574@gcp-sa-eventarc.iam.gserviceaccount.com","uniqueId":"113805354716305707338"}}
+[debug] [2023-02-18T12:27:36.392Z] <<< [apiv2][status] POST https://serviceusage.googleapis.com/v1beta1/projects/899981005574/services/pubsub.googleapis.com:generateServiceIdentity 200
+[debug] [2023-02-18T12:27:36.392Z] <<< [apiv2][body] POST https://serviceusage.googleapis.com/v1beta1/projects/899981005574/services/pubsub.googleapis.com:generateServiceIdentity {"name":"operations/finished.DONE_OPERATION","done":true,"response":{"@type":"type.googleapis.com/google.api.serviceusage.v1beta1.ServiceIdentity","email":"service-899981005574@gcp-sa-pubsub.iam.gserviceaccount.com","uniqueId":"101277540204985494608"}}
+[debug] [2023-02-18T12:27:36.397Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/movier-371821 [none]
+[debug] [2023-02-18T12:27:36.666Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/movier-371821 200
+[debug] [2023-02-18T12:27:36.667Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/movier-371821 {"projectId":"movier-371821","projectNumber":"899981005574","displayName":"Movier","name":"projects/movier-371821","resources":{"hostingSite":"movier-371821","storageBucket":"movier-371821.appspot.com","locationId":"europe-west"},"state":"ACTIVE","etag":"1_4d02b429-30e0-4111-8131-ca604757bee2"}
+[debug] [2023-02-18T12:27:36.671Z] >>> [apiv2][query] POST https://firebasehosting.googleapis.com/v1beta1/projects/-/sites/movier-371821/versions [none]
+[debug] [2023-02-18T12:27:36.671Z] >>> [apiv2][body] POST https://firebasehosting.googleapis.com/v1beta1/projects/-/sites/movier-371821/versions {"status":"CREATED","labels":{"deployment-tool":"cli-firebase","firebase-web-framework":"next_ssr"}}
+[debug] [2023-02-18T12:27:38.070Z] <<< [apiv2][status] POST https://firebasehosting.googleapis.com/v1beta1/projects/-/sites/movier-371821/versions 200
+[debug] [2023-02-18T12:27:38.071Z] <<< [apiv2][body] POST https://firebasehosting.googleapis.com/v1beta1/projects/-/sites/movier-371821/versions {"name":"projects/899981005574/sites/movier-371821/versions/df8de34fa842ca43","status":"CREATED","config":{},"labels":{"deployment-tool":"cli-firebase","firebase-web-framework":"next_ssr"}}
+[debug] [2023-02-18T12:27:38.075Z] >>> [apiv2][query] POST https://cloudfunctions.googleapis.com/v2/projects/movier-371821/locations/us-central1/functions:generateUploadUrl [none]
+[debug] [2023-02-18T12:27:38.948Z] <<< [apiv2][status] POST https://cloudfunctions.googleapis.com/v2/projects/movier-371821/locations/us-central1/functions:generateUploadUrl 200
+[debug] [2023-02-18T12:27:38.949Z] <<< [apiv2][body] POST https://cloudfunctions.googleapis.com/v2/projects/movier-371821/locations/us-central1/functions:generateUploadUrl {"uploadUrl":"https://storage.googleapis.com/gcf-v2-uploads-899981005574-us-central1/65d54c6e-3f2b-4f16-81ef-578c3c7f8f4f.zip?GoogleAccessId=service-899981005574@gcf-admin-robot.iam.gserviceaccount.com&Expires=1676725058&Signature=YpddkzU7kVfyhdrsNBpeTbcur0mjbe1xFOIqrWW0fg%2BKnd8RyZrcL1gpr6uPfHu%2B832KS7WTb5JKZoHVyUytE4usDRac%2BysAzAvepGdA6Ah%2BEQWASwVVVCKp3DifkcoTfy5bXhH6w3llT6kBgV1UtjLNk5KfQjm9fxdgimITgj5o1mY1qDpGCH0YPkwvQDUwjkQ72RYRwwSE%2FnP5ONU2CBpeq6fnzjoLvVGqlhZIAszEl5v8U3DTXJGurBszWv0lG5uKEdZkeof2mZnKTUvMIZrpBalbTINOkyzc3RJ4C1k1UX%2FshZI0r4WUhm5kWdrP9ssds9%2FEm3ZTeqIVYGaJgA%3D%3D","storageSource":{"bucket":"gcf-v2-uploads-899981005574-us-central1","object":"65d54c6e-3f2b-4f16-81ef-578c3c7f8f4f.zip"}}
+[debug] [2023-02-18T12:27:38.952Z] >>> [apiv2][query] PUT https://storage.googleapis.com/gcf-v2-uploads-899981005574-us-central1/65d54c6e-3f2b-4f16-81ef-578c3c7f8f4f.zip GoogleAccessId=service-899981005574%40gcf-admin-robot.iam.gserviceaccount.com&Expires=1676725058&Signature=YpddkzU7kVfyhdrsNBpeTbcur0mjbe1xFOIqrWW0fg%2BKnd8RyZrcL1gpr6uPfHu%2B832KS7WTb5JKZoHVyUytE4usDRac%2BysAzAvepGdA6Ah%2BEQWASwVVVCKp3DifkcoTfy5bXhH6w3llT6kBgV1UtjLNk5KfQjm9fxdgimITgj5o1mY1qDpGCH0YPkwvQDUwjkQ72RYRwwSE%2FnP5ONU2CBpeq6fnzjoLvVGqlhZIAszEl5v8U3DTXJGurBszWv0lG5uKEdZkeof2mZnKTUvMIZrpBalbTINOkyzc3RJ4C1k1UX%2FshZI0r4WUhm5kWdrP9ssds9%2FEm3ZTeqIVYGaJgA%3D%3D
+[debug] [2023-02-18T12:27:38.952Z] >>> [apiv2][body] PUT https://storage.googleapis.com/gcf-v2-uploads-899981005574-us-central1/65d54c6e-3f2b-4f16-81ef-578c3c7f8f4f.zip [stream]
