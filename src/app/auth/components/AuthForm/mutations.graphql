@@ -1,0 +1,19 @@
+fragment AuthData on LoginOutput {
+  token
+  user {
+    id
+    name
+  }
+}
+
+mutation Login($input: LoginInput!) {
+  login(input: $input) {
+    ...AuthData
+  }
+}
+
+mutation Signup($input: SignupInput!) {
+  signup(input: $input) {
+    ...AuthData
+  }
+}
