@@ -12,8 +12,8 @@ export type Scalars = {
   Boolean: boolean;
   Int: number;
   Float: number;
-  /** Date custom scalar type */
-  Date: any;
+  /** A date-time string at UTC, such as 2007-12-03T10:15:30Z, compliant with the `date-time` format outlined in section 5.6 of the RFC 3339 profile of the ISO 8601 standard for representation of dates and times using the Gregorian calendar. */
+  DateTime: any;
 };
 
 export type CreateListInput = {
@@ -25,13 +25,13 @@ export type CreateListInput = {
 export type List = {
   __typename?: 'List';
   cover?: Maybe<Scalars['String']>;
-  createdAt: Scalars['Date'];
+  createdAt: Scalars['DateTime'];
   description?: Maybe<Scalars['String']>;
   id: Scalars['ID'];
   movies: Array<Movie>;
   owner: User;
   title: Scalars['String'];
-  updatedAt: Scalars['Date'];
+  updatedAt: Scalars['DateTime'];
 };
 
 export type LoginInput = {
@@ -41,6 +41,7 @@ export type LoginInput = {
 
 export type LoginOutput = {
   __typename?: 'LoginOutput';
+  expiresAt: Scalars['DateTime'];
   token: Scalars['String'];
   user: User;
 };
@@ -188,7 +189,7 @@ export type SignupInput = {
   email: Scalars['String'];
   name: Scalars['String'];
   password: Scalars['String'];
-  photoUrl: Scalars['String'];
+  photoUrl?: InputMaybe<Scalars['String']>;
 };
 
 export type UpdateListInput = {
@@ -209,7 +210,7 @@ export type User = {
   savedLists: Array<List>;
 };
 
-export type AuthDataFragment = { __typename?: 'LoginOutput', token: string, user: { __typename?: 'User', id: string, name: string } } & { ' $fragmentName'?: 'AuthDataFragment' };
+export type AuthDataFragment = { __typename?: 'LoginOutput', token: string, expiresAt: any, user: { __typename?: 'User', id: string, name: string } } & { ' $fragmentName'?: 'AuthDataFragment' };
 
 export type LoginMutationVariables = Exact<{
   input: LoginInput;
@@ -267,7 +268,7 @@ export type UserQuery = { __typename?: 'Query', user?: { __typename?: 'User', id
       & { ' $fragmentRefs'?: { 'UserListFragment': UserListFragment } }
     )> } | null };
 
-export const AuthDataFragmentDoc = {"kind":"Document","definitions":[{"kind":"FragmentDefinition","name":{"kind":"Name","value":"AuthData"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"LoginOutput"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"token"}},{"kind":"Field","name":{"kind":"Name","value":"user"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}}]}}]}}]} as unknown as DocumentNode<AuthDataFragment, unknown>;
+export const AuthDataFragmentDoc = {"kind":"Document","definitions":[{"kind":"FragmentDefinition","name":{"kind":"Name","value":"AuthData"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"LoginOutput"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"token"}},{"kind":"Field","name":{"kind":"Name","value":"expiresAt"}},{"kind":"Field","name":{"kind":"Name","value":"user"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}}]}}]}}]} as unknown as DocumentNode<AuthDataFragment, unknown>;
 export const UserListFragmentDoc = {"kind":"Document","definitions":[{"kind":"FragmentDefinition","name":{"kind":"Name","value":"UserList"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"List"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"cover"}},{"kind":"Field","name":{"kind":"Name","value":"updatedAt"}},{"kind":"Field","name":{"kind":"Name","value":"movies"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"poster"}}]}}]}}]} as unknown as DocumentNode<UserListFragment, unknown>;
 export const LoginDocument = {"kind":"Document", "definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"Login"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"input"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"LoginInput"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"login"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"input"},"value":{"kind":"Variable","name":{"kind":"Name","value":"input"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"AuthData"}}]}}]}},...AuthDataFragmentDoc.definitions]} as unknown as DocumentNode<LoginMutation, LoginMutationVariables>;
 export const SignupDocument = {"kind":"Document", "definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"Signup"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"input"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"SignupInput"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"signup"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"input"},"value":{"kind":"Variable","name":{"kind":"Name","value":"input"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"AuthData"}}]}}]}},...AuthDataFragmentDoc.definitions]} as unknown as DocumentNode<SignupMutation, SignupMutationVariables>;

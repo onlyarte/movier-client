@@ -4,11 +4,10 @@ import { useState } from 'react';
 import Link from 'next/link';
 import { Search as SearchIcon } from 'react-feather';
 import { IconButton, Input } from '@/app/components';
-import { withApolloProvider } from '@/utils/apollo';
 import { useLazyQuery } from '@apollo/client';
 import { SearchDocument } from '@/graphql/graphql';
 
-function Search() {
+export default function Search() {
   const [inputValue, setInputValue] = useState('');
 
   const [fetchResults, { data, loading }] = useLazyQuery(SearchDocument);
@@ -44,5 +43,3 @@ function Search() {
     </>
   );
 }
-
-export default withApolloProvider(Search);

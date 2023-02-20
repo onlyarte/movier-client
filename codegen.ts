@@ -10,6 +10,9 @@ const config: CodegenConfig = {
       plugins: [],
       config: {
         flattenGeneratedTypes: true,
+        scalars: {
+          Date: 'String',
+        },
       },
     },
   },

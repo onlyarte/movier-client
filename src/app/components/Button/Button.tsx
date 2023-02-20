@@ -1,6 +1,6 @@
 'use client';
 
-import { Icon, Loader } from 'react-feather';
+import { Loader } from 'react-feather';
 
 type Props = React.ButtonHTMLAttributes<HTMLButtonElement> & {
   loading?: boolean;
@@ -13,20 +13,16 @@ export default function Button({
   children,
   ...otherProps
 }: Props) {
-  const iconProps = {
-    strokeWidth: 1,
-    size: 32,
-  };
-
   return (
     <button
       onClick={onClick}
-      className={`rounded-3xl bg-background p-2 ${className}`}
+      className={`rounded-3xl bg-background p-3 border flex gap-2 items-center justify-center ${className}`}
       {...otherProps}
     >
       {loading && (
         <Loader
-          {...iconProps}
+          strokeWidth={1}
+          size={24}
           style={{
             animationName: 'spin',
             animationDuration: '5000ms',

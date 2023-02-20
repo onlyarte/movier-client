@@ -1,5 +1,6 @@
 fragment AuthData on LoginOutput {
   token
+  expiresAt
   user {
     id
     name

@@ -1,8 +1,7 @@
 import { UserDocument, UserListFragment } from '@/graphql/graphql';
 import { apolloClient } from '@/utils/apollo';
 import Image from 'next/image';
-import Link from 'next/link';
-import ListGroup from './components/ListGroup';
+import { ListGroup, UserControls } from './components';
 
 type Props = {
   params: {
@@ -20,6 +19,7 @@ export default async function UserPage({ params }: Props) {
     <>
       <div className="basis-[350px] lg:basis-2/5 overflow-hidden">
         <div className="h-full w-full relative">
+          <UserControls data={data} />
           <Image
             src={
               data.user?.photoUrl ??

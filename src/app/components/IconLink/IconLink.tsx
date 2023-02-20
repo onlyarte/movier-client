@@ -5,6 +5,7 @@ import { Icon, Loader } from 'react-feather';
 
 type Props = LinkProps & {
   Icon: Icon;
+  title?: string;
   loading?: boolean;
   className?: string;
 };
