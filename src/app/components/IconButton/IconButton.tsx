@@ -1,5 +1,6 @@
 'use client';
 
+import { ForwardedRef, forwardRef } from 'react';
 import { Icon, Loader } from 'react-feather';
 
 type Props = React.ButtonHTMLAttributes<HTMLButtonElement> & {
@@ -7,13 +8,10 @@ type Props = React.ButtonHTMLAttributes<HTMLButtonElement> & {
   loading?: boolean;
 };
 
-export default function IconButton({
-  Icon,
-  onClick,
-  className,
-  loading,
-  ...otherProps
-}: Props) {
+export default forwardRef(function IconButton(
+  { Icon, onClick, className, loading, ...otherProps }: Props,
+  ref: ForwardedRef<HTMLButtonElement | null>
+) {
   const iconProps = {
     strokeWidth: 1,
     size: 32,
@@ -23,6 +21,7 @@ export default function IconButton({
     <button
       onClick={onClick}
       className={`rounded-3xl bg-background p-2 ${className}`}
+      ref={ref}
       {...otherProps}
     >
       {loading ? (
@@ -40,4 +39,4 @@ export default function IconButton({
       )}
     </button>
   );
-}
+});

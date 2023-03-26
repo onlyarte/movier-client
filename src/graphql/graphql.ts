@@ -74,6 +74,7 @@ export type Mutation = {
   createList: List;
   deleteList: Scalars['Boolean'];
   followUser: Scalars['Boolean'];
+  importMoviesFromImdb: Scalars['Boolean'];
   login: LoginOutput;
   pullMovie: Scalars['Boolean'];
   pushMovie: Scalars['Boolean'];
@@ -97,6 +98,12 @@ export type MutationDeleteListArgs = {
 
 export type MutationFollowUserArgs = {
   id: Scalars['String'];
+};
+
+
+export type MutationImportMoviesFromImdbArgs = {
+  imdbIds: Array<Scalars['String']>;
+  listId: Scalars['String'];
 };
 
 
@@ -210,27 +217,21 @@ export type User = {
   savedLists: Array<List>;
 };
 
-export type AuthDataFragment = { __typename?: 'LoginOutput', token: string, expiresAt: any, user: { __typename?: 'User', id: string, name: string } } & { ' $fragmentName'?: 'AuthDataFragment' };
+export type AuthDataFragment = { __typename?: 'LoginOutput', token: string, expiresAt: any, user: { __typename?: 'User', id: string, name: string } };
 
 export type LoginMutationVariables = Exact<{
   input: LoginInput;
 }>;
 
 
-export type LoginMutation = { __typename?: 'Mutation', login: (
-    { __typename?: 'LoginOutput' }
-    & { ' $fragmentRefs'?: { 'AuthDataFragment': AuthDataFragment } }
-  ) };
+export type LoginMutation = { __typename?: 'Mutation', login: { __typename?: 'LoginOutput', token: string, expiresAt: any, user: { __typename?: 'User', id: string, name: string } } };
 
 export type SignupMutationVariables = Exact<{
   input: SignupInput;
 }>;
 
 
-export type SignupMutation = { __typename?: 'Mutation', signup: (
-    { __typename?: 'LoginOutput' }
-    & { ' $fragmentRefs'?: { 'AuthDataFragment': AuthDataFragment } }
-  ) };
+export type SignupMutation = { __typename?: 'Mutation', signup: { __typename?: 'LoginOutput', token: string, expiresAt: any, user: { __typename?: 'User', id: string, name: string } } };
 
 export type ListQueryVariables = Exact<{
   id: Scalars['String'];
@@ -238,6 +239,22 @@ export type ListQueryVariables = Exact<{
 
 
 export type ListQuery = { __typename?: 'Query', list?: { __typename?: 'List', id: string, title: string, movies: Array<{ __typename?: 'Movie', id: number, title: string, poster?: string | null, year?: number | null }> } | null };
+
+export type PushMovieMutationVariables = Exact<{
+  listId: Scalars['String'];
+  movieId: Scalars['Int'];
+}>;
+
+
+export type PushMovieMutation = { __typename?: 'Mutation', pushMovie: boolean };
+
+export type PullMovieMutationVariables = Exact<{
+  listId: Scalars['String'];
+  movieId: Scalars['Int'];
+}>;
+
+
+export type PullMovieMutation = { __typename?: 'Mutation', pullMovie: boolean };
 
 export type MovieQueryVariables = Exact<{
   id: Scalars['Int'];
@@ -253,26 +270,25 @@ export type SearchQueryVariables = Exact<{
 
 export type SearchQuery = { __typename?: 'Query', search: Array<{ __typename?: 'Movie', id: number, title: string, poster?: string | null, year?: number | null, genres: Array<string> }> };
 
-export type UserListFragment = { __typename?: 'List', id: string, title: string, cover?: string | null, updatedAt: any, movies: Array<{ __typename?: 'Movie', id: number, title: string, poster?: string | null }> } & { ' $fragmentName'?: 'UserListFragment' };
+export type UserListDataFragment = { __typename?: 'List', id: string, title: string, cover?: string | null, updatedAt: any, movies: Array<{ __typename?: 'Movie', id: number, title: string, poster?: string | null }> };
+
+export type UserDataFragment = { __typename?: 'User', id: string, email: string, name: string, photoUrl: string, following: Array<{ __typename?: 'User', id: string, name: string }>, followers: Array<{ __typename?: 'User', id: string, name: string }>, lists: Array<{ __typename?: 'List', id: string, title: string, cover?: string | null, updatedAt: any, movies: Array<{ __typename?: 'Movie', id: number, title: string, poster?: string | null }> }>, savedLists: Array<{ __typename?: 'List', id: string, title: string, cover?: string | null, updatedAt: any, movies: Array<{ __typename?: 'Movie', id: number, title: string, poster?: string | null }> }> };
 
 export type UserQueryVariables = Exact<{
   id: Scalars['String'];
 }>;
 
 
-export type UserQuery = { __typename?: 'Query', user?: { __typename?: 'User', id: string, email: string, name: string, photoUrl: string, following: Array<{ __typename?: 'User', id: string, name: string }>, followers: Array<{ __typename?: 'User', id: string, name: string }>, lists: Array<(
-      { __typename?: 'List' }
-      & { ' $fragmentRefs'?: { 'UserListFragment': UserListFragment } }
-    )>, savedLists: Array<(
-      { __typename?: 'List' }
-      & { ' $fragmentRefs'?: { 'UserListFragment': UserListFragment } }
-    )> } | null };
+export type UserQuery = { __typename?: 'Query', user?: { __typename?: 'User', id: string, email: string, name: string, photoUrl: string, following: Array<{ __typename?: 'User', id: string, name: string }>, followers: Array<{ __typename?: 'User', id: string, name: string }>, lists: Array<{ __typename?: 'List', id: string, title: string, cover?: string | null, updatedAt: any, movies: Array<{ __typename?: 'Movie', id: number, title: string, poster?: string | null }> }>, savedLists: Array<{ __typename?: 'List', id: string, title: string, cover?: string | null, updatedAt: any, movies: Array<{ __typename?: 'Movie', id: number, title: string, poster?: string | null }> }> } | null };
 
 export const AuthDataFragmentDoc = {"kind":"Document","definitions":[{"kind":"FragmentDefinition","name":{"kind":"Name","value":"AuthData"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"LoginOutput"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"token"}},{"kind":"Field","name":{"kind":"Name","value":"expiresAt"}},{"kind":"Field","name":{"kind":"Name","value":"user"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}}]}}]}}]} as unknown as DocumentNode<AuthDataFragment, unknown>;
-export const UserListFragmentDoc = {"kind":"Document","definitions":[{"kind":"FragmentDefinition","name":{"kind":"Name","value":"UserList"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"List"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"cover"}},{"kind":"Field","name":{"kind":"Name","value":"updatedAt"}},{"kind":"Field","name":{"kind":"Name","value":"movies"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"poster"}}]}}]}}]} as unknown as DocumentNode<UserListFragment, unknown>;
+export const UserListDataFragmentDoc = {"kind":"Document","definitions":[{"kind":"FragmentDefinition","name":{"kind":"Name","value":"UserListData"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"List"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"cover"}},{"kind":"Field","name":{"kind":"Name","value":"updatedAt"}},{"kind":"Field","name":{"kind":"Name","value":"movies"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"poster"}}]}}]}}]} as unknown as DocumentNode<UserListDataFragment, unknown>;
+export const UserDataFragmentDoc = {"kind":"Document", "definitions":[{"kind":"FragmentDefinition","name":{"kind":"Name","value":"UserData"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"User"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"email"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"photoUrl"}},{"kind":"Field","name":{"kind":"Name","value":"following"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}}]}},{"kind":"Field","name":{"kind":"Name","value":"followers"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}}]}},{"kind":"Field","name":{"kind":"Name","value":"lists"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"UserListData"}}]}},{"kind":"Field","name":{"kind":"Name","value":"savedLists"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"UserListData"}}]}}]}},...UserListDataFragmentDoc.definitions]} as unknown as DocumentNode<UserDataFragment, unknown>;
 export const LoginDocument = {"kind":"Document", "definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"Login"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"input"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"LoginInput"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"login"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"input"},"value":{"kind":"Variable","name":{"kind":"Name","value":"input"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"AuthData"}}]}}]}},...AuthDataFragmentDoc.definitions]} as unknown as DocumentNode<LoginMutation, LoginMutationVariables>;
 export const SignupDocument = {"kind":"Document", "definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"Signup"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"input"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"SignupInput"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"signup"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"input"},"value":{"kind":"Variable","name":{"kind":"Name","value":"input"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"AuthData"}}]}}]}},...AuthDataFragmentDoc.definitions]} as unknown as DocumentNode<SignupMutation, SignupMutationVariables>;
 export const ListDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"List"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"id"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"list"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"id"},"value":{"kind":"Variable","name":{"kind":"Name","value":"id"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"movies"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"poster"}},{"kind":"Field","name":{"kind":"Name","value":"year"}}]}}]}}]}}]} as unknown as DocumentNode<ListQuery, ListQueryVariables>;
+export const PushMovieDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"PushMovie"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"listId"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"movieId"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"pushMovie"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"listId"},"value":{"kind":"Variable","name":{"kind":"Name","value":"listId"}}},{"kind":"Argument","name":{"kind":"Name","value":"movieId"},"value":{"kind":"Variable","name":{"kind":"Name","value":"movieId"}}}]}]}}]} as unknown as DocumentNode<PushMovieMutation, PushMovieMutationVariables>;
+export const PullMovieDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"PullMovie"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"listId"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"movieId"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"pullMovie"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"listId"},"value":{"kind":"Variable","name":{"kind":"Name","value":"listId"}}},{"kind":"Argument","name":{"kind":"Name","value":"movieId"},"value":{"kind":"Variable","name":{"kind":"Name","value":"movieId"}}}]}]}}]} as unknown as DocumentNode<PullMovieMutation, PullMovieMutationVariables>;
 export const MovieDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"Movie"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"id"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"movie"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"id"},"value":{"kind":"Variable","name":{"kind":"Name","value":"id"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"imdbId"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"poster"}},{"kind":"Field","name":{"kind":"Name","value":"year"}},{"kind":"Field","name":{"kind":"Name","value":"countries"}},{"kind":"Field","name":{"kind":"Name","value":"genres"}},{"kind":"Field","name":{"kind":"Name","value":"directors"}},{"kind":"Field","name":{"kind":"Name","value":"writers"}},{"kind":"Field","name":{"kind":"Name","value":"stars"}},{"kind":"Field","name":{"kind":"Name","value":"rating"}},{"kind":"Field","name":{"kind":"Name","value":"trailerUrl"}}]}}]}}]} as unknown as DocumentNode<MovieQuery, MovieQueryVariables>;
 export const SearchDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"Search"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"input"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"search"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"input"},"value":{"kind":"Variable","name":{"kind":"Name","value":"input"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"poster"}},{"kind":"Field","name":{"kind":"Name","value":"year"}},{"kind":"Field","name":{"kind":"Name","value":"genres"}}]}}]}}]} as unknown as DocumentNode<SearchQuery, SearchQueryVariables>;
-export const UserDocument = {"kind":"Document", "definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"User"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"id"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"user"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"id"},"value":{"kind":"Variable","name":{"kind":"Name","value":"id"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"email"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"photoUrl"}},{"kind":"Field","name":{"kind":"Name","value":"following"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}}]}},{"kind":"Field","name":{"kind":"Name","value":"followers"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}}]}},{"kind":"Field","name":{"kind":"Name","value":"lists"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"UserList"}}]}},{"kind":"Field","name":{"kind":"Name","value":"savedLists"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"UserList"}}]}}]}}]}},...UserListFragmentDoc.definitions]} as unknown as DocumentNode<UserQuery, UserQueryVariables>;
+export const UserDocument = {"kind":"Document", "definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"User"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"id"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"user"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"id"},"value":{"kind":"Variable","name":{"kind":"Name","value":"id"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"UserData"}}]}}]}},...UserDataFragmentDoc.definitions]} as unknown as DocumentNode<UserQuery, UserQueryVariables>;

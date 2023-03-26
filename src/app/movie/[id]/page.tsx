@@ -1,6 +1,7 @@
 import { MovieDocument } from '@/graphql/graphql';
 import { apolloClient } from '@/utils/apollo';
 import Image from 'next/image';
+import ListControls from './components/ListControls';
 
 type Props = {
   params: {
@@ -31,10 +32,11 @@ export default async function MoviePage({ params }: Props) {
         </div>
       </div>
       <div className="basis-auto lg:basis-3/5 px-5 py-8 lg:p-8 lg:overflow-y-auto">
-        <div className="flex justify-between gap-3">
+        <div className="flex items-center gap-3">
           <h1 className="text-3xl lg:text-5xl mb-2">{data.movie.title}</h1>
+          <ListControls movieId={data.movie.id} />
           {data.movie.rating != null && (
-            <span className="text-2xl lg:text-5xl">{data.movie.rating}/10</span>
+            <span className="text-2xl lg:text-5xl ml-auto">{data.movie.rating}/10</span>
           )}
         </div>
         <div className="text-xl mb-4">

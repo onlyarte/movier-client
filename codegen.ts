@@ -14,6 +14,9 @@ const config: CodegenConfig = {
           Date: 'String',
         },
       },
+      presetConfig: {
+        fragmentMasking: false,
+      },
     },
   },
 };

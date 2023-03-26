@@ -1,4 +1,4 @@
-fragment UserList on List {
+fragment UserListData on List {
   id
   title
   cover
@@ -10,25 +10,29 @@ fragment UserList on List {
   }
 }
 
+fragment UserData on User {
+  id
+  email
+  name
+  photoUrl
+  following {
+    id
+    name
+  }
+  followers {
+    id
+    name
+  }
+  lists {
+    ...UserListData
+  }
+  savedLists {
+    ...UserListData
+  }
+}
+
 query User($id: String!) {
   user(id: $id) {
-    id
-    email
-    name
-    photoUrl
-    following {
-      id
-      name
-    }
-    followers {
-      id
-      name
-    }
-    lists {
-      ...UserList
-    }
-    savedLists {
-      ...UserList
-    }
+    ...UserData
   }
 }

@@ -1,0 +1,7 @@
+mutation PushMovie($listId: String!, $movieId: Int!) {
+  pushMovie(listId: $listId, movieId: $movieId)
+}
+
+mutation PullMovie($listId: String!, $movieId: Int!) {
+  pullMovie(listId: $listId, movieId: $movieId)
+}
