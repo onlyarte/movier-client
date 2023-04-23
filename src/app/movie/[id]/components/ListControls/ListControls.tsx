@@ -41,7 +41,7 @@ export default function ListControls({ movieId }: Props) {
       <MenuHandler>
         <IconButton Icon={Plus} type="button" />
       </MenuHandler>
-      <MenuList className="p-0">
+      <MenuList className="p-1 backdrop-blur bg-background/75 text-current">
         {userData?.lists?.map((list) => {
           const isAdded = list.movies.some(({ id }) => id === movieId);
           return (

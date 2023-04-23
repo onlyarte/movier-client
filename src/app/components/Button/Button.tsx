@@ -16,7 +16,7 @@ export default function Button({
   return (
     <button
       onClick={onClick}
-      className={`rounded-3xl bg-background p-3 border flex gap-2 items-center justify-center ${className}`}
+      className={`rounded-3xl p-3 border border-current flex gap-2 items-center justify-center ${className}`}
       {...otherProps}
     >
       {loading && (

@@ -20,7 +20,7 @@ export default forwardRef(function IconButton(
   return (
     <button
       onClick={onClick}
-      className={`rounded-3xl bg-background p-2 ${className}`}
+      className={`rounded-3xl bg-background/80 hover:bg-background/100 p-2 ${className}`}
       ref={ref}
       {...otherProps}
     >

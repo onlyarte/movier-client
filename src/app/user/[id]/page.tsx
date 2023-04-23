@@ -27,7 +27,7 @@ export default async function UserPage({ params }: Props) {
             }
             alt="User photo background"
             fill
-            className="object-cover blur-md"
+            className="object-cover blur-md scale-110"
           />
           <div className="absolute h-full w-full px-5 py-8 lg:p-8 flex flex-col justify-center items-center">
             <Image

@@ -1,10 +1,10 @@
 import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { UserListFragment } from '@/graphql/graphql';
+import { UserListDataFragment } from '@/graphql/graphql';
 
 type Props = {
-  lists?: UserListFragment[];
+  lists?: UserListDataFragment[];
 };
 
 export default function ListGroup({ lists }: Props) {

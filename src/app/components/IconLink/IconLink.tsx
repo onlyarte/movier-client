@@ -23,7 +23,7 @@ export default function IconLink({
 
   return (
     <Link {...otherProps}>
-      <div className={`rounded-3xl bg-background p-2 w-fit ${className}`}>
+      <div className={`rounded-3xl bg-background/80 hover:bg-background/100 p-2 w-fit ${className}`}>
         {loading ? (
           <Loader
             {...iconProps}

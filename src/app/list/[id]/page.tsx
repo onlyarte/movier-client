@@ -19,13 +19,14 @@ export default async function ListPage({ params }: Props) {
     <div className="px-5 py-8 pt-20 w-full">
       <h1 className="text-3xl lg:text-5xl mb-8">{data.list?.title}</h1>
 
-      <div className="flex flex-wrap gap-3 w-full">
+      <div
+        className="grid gap-3 w-full"
+        style={{
+          gridTemplateColumns: 'repeat(auto-fit, minmax(160px, 0.5fr))',
+        }}
+      >
         {data.list?.movies.map((movie) => (
-          <Link
-            href={`/movie/${movie.id}`}
-            key={movie.id}
-            className="basis-[48%] md:basis-[180px]"
-          >
+          <Link href={`/movie/${movie.id}`} key={movie.id}>
             <div className="relative h-[250px] w-full mb-2">
               <Image
                 src={

@@ -128,6 +128,7 @@ export default function AuthForm() {
       )}
       {isNew && (
         <InputFile
+          value={formState.file?.name}
           name="file"
           accept="image/png, image/jpeg"
           onChange={handleFileChange}
