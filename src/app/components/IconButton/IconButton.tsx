@@ -2,19 +2,21 @@
 
 import { ForwardedRef, forwardRef } from 'react';
 import { Icon, Loader } from 'react-feather';
+import { sizes } from './IconButton.config';
 
 type Props = React.ButtonHTMLAttributes<HTMLButtonElement> & {
   Icon: Icon;
+  size?: keyof typeof sizes;
   loading?: boolean;
 };
 
 export default forwardRef(function IconButton(
-  { Icon, onClick, className, loading, ...otherProps }: Props,
+  { Icon, size = 'md', onClick, className, loading, ...otherProps }: Props,
   ref: ForwardedRef<HTMLButtonElement | null>
 ) {
   const iconProps = {
     strokeWidth: 1,
-    size: 32,
+    size: sizes[size],
   };
 
   return (

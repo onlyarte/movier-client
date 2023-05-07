@@ -89,7 +89,6 @@ export default function AuthForm() {
 
     if (authData) {
       setAuthData?.(authData);
-      router.push(`/user/${authData.user.id}`);
     }
   };
 

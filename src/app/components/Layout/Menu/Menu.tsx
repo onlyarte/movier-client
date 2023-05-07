@@ -17,8 +17,11 @@ export default function Menu() {
         onClick={() => setIsMenuOpen(true)}
         className="absolute z-10 top-4 left-4"
       />
-      <Modal isOpen={isMenuOpen} onClose={() => setIsMenuOpen(false)}>
-        <Fab className="mb-2" />
+      <Modal
+        isOpen={isMenuOpen}
+        onClose={() => setIsMenuOpen(false)}
+        header={<Fab className="mb-2" />}
+      >
         <Search />
       </Modal>
     </>

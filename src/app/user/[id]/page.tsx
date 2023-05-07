@@ -2,6 +2,8 @@ import { UserDocument, UserListDataFragment } from '@/graphql/graphql';
 import { apolloClient } from '@/utils/apollo';
 import Image from 'next/image';
 import { ListGroup, UserControls } from './components';
+import { IconButton } from '@/app/components';
+import CreateListButton from './components/CreateListButton/CreateListButton';
 
 type Props = {
   params: {
@@ -13,6 +15,7 @@ export default async function UserPage({ params }: Props) {
   const { data } = await apolloClient.query({
     query: UserDocument,
     variables: { id: params.id },
+    fetchPolicy: 'network-only',
   });
 
   return (
@@ -46,8 +49,11 @@ export default async function UserPage({ params }: Props) {
           </div>
         </div>
       </div>
-      <div className="basis-auto lg:basis-3/5 px-5 py-8 lg:p-8 lg:overflow-y-auto">
-        <h2 className="text-3xl lg:text-4xl mb-2">Lists</h2>
+      <div className="basis-auto lg:basis-3/5 px-5 py-8 lg:p-8 lg:overflow-y-auto relative">
+        <div className="flex align-center mb-2">
+          <h2 className="text-3xl lg:text-4xl">Lists</h2>
+          <CreateListButton className="ml-2" />
+        </div>
         <ListGroup lists={data.user?.lists as UserListDataFragment[]} />
         <h2 className="text-3xl lg:text-4xl mt-5 mb-2">Saved Lists</h2>
         <ListGroup lists={data.user?.savedLists as UserListDataFragment[]} />
