@@ -1,7 +1,8 @@
 'use client';
 
-import { Button, IconButton, Input, Modal } from '@/app/components';
+import { Button, Dialog, IconButton, Input, Modal } from '@/app/components';
 import { CreateListDocument, UserDocument } from '@/graphql/graphql';
+import { useAuthContext } from '@/utils/auth/context';
 import { useMutation } from '@apollo/client';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
@@ -17,10 +18,14 @@ const defaultFormState = {
   description: '',
 };
 
-type Props = Partial<Omit<Parameters<typeof IconButton>['0'], 'onClick'>>;
+type Props = Partial<Omit<Parameters<typeof IconButton>['0'], 'onClick'>> & {
+  userId: string;
+};
 
-export default function CreateListButton(props: Props) {
-  const [isModalOpen, setIsModalOpen] = useState(false);
+export default function CreateListButton({ userId, ...buttonProps }: Props) {
+  const { authData } = useAuthContext();
+
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
 
   const [formState, setFormState] = useState<FormState>(defaultFormState);
 
@@ -47,27 +52,55 @@ export default function CreateListButton(props: Props) {
 
     router.refresh();
 
-    setIsModalOpen(false);
+    setIsDialogOpen(false);
     setFormState(defaultFormState);
   };
+
+  if (authData?.user.id !== userId) {
+    return null;
+  }
 
   return (
     <>
       <IconButton
         size="sm"
         Icon={Plus}
-        onClick={() => setIsModalOpen(true)}
-        {...props}
+        onClick={() => setIsDialogOpen(true)}
+        {...buttonProps}
       />
 
-      <Modal
+      <Dialog
+        isOpen={isDialogOpen}
+        onToggle={() => setIsDialogOpen(!isDialogOpen)}
+        size="sm"
         header="Create List"
-        isOpen={isModalOpen}
-        onClose={() => setIsModalOpen(false)}
-        position="right"
-        className="lg:w-full"
+        footer={
+          <>
+            <Button
+              disabled={loading}
+              onClick={() => setIsDialogOpen(false)}
+              className="w-[130px]"
+              outline={false}
+            >
+              Cancel
+            </Button>
+            <Button
+              type="submit"
+              form="create-list-form"
+              disabled={loading}
+              loading={loading}
+              className="w-[130px]"
+            >
+              Save
+            </Button>
+          </>
+        }
       >
-        <form className="flex flex-col gap-2" onSubmit={handleSubmit}>
+        <form
+          id="create-list-form"
+          className="flex flex-col gap-2"
+          onSubmit={handleSubmit}
+        >
           <Input
             name="title"
             placeholder="Title"
@@ -81,17 +114,8 @@ export default function CreateListButton(props: Props) {
             value={formState.description}
             onChange={handleChange}
           />
-
-          <Button
-            type="submit"
-            disabled={loading}
-            loading={loading}
-            className="w-[130px]"
-          >
-            Save
-          </Button>
         </form>
-      </Modal>
+      </Dialog>
     </>
   );
 }

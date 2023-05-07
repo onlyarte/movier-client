@@ -5,3 +5,4 @@ export { default as Modal } from './Modal';
 export { default as IconButton } from './IconButton';
 export { default as IconLink } from './IconLink';
 export { default as Input } from './Input';
+export { default as Dialog } from './Dialog';

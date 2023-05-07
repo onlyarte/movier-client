@@ -1,9 +1,11 @@
 'use client';
 
+import classNames from 'classnames';
 import { Loader } from 'react-feather';
 
 type Props = React.ButtonHTMLAttributes<HTMLButtonElement> & {
   loading?: boolean;
+  outline?: boolean;
 };
 
 export default function Button({
@@ -11,12 +13,17 @@ export default function Button({
   className,
   loading,
   children,
+  outline = true,
   ...otherProps
 }: Props) {
   return (
     <button
       onClick={onClick}
-      className={`rounded-3xl p-3 border border-current flex gap-2 items-center justify-center ${className}`}
+      className={classNames(
+        'rounded-3xl p-3 border-current flex gap-2 items-center justify-center',
+        className,
+        { border: outline }
+      )}
       {...otherProps}
     >
       {loading && (

@@ -34,7 +34,9 @@ export default function ListControls({ movieId }: Props) {
     await refetchUserData?.();
   };
 
-  if (!userData?.lists.length) return null;
+  if (!userData?.lists.length) {
+    return null;
+  }
 
   return (
     <Menu placement="bottom-start">

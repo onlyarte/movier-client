@@ -31,11 +31,13 @@ export default function ListGroup({ lists }: Props) {
             />
           </div>
           <h3 className="text-lg text-center">{list.title}</h3>
-          {list.movies.length > 1 && (
-            <div className="text-xs opacity-90 text-center">
-              {list.movies[0].title} and {list.movies.length - 1} more
-            </div>
-          )}
+          <div className="text-xs opacity-90 text-center">
+            {list.movies.length === 0
+              ? 'Empty'
+              : list.movies.length === 1
+              ? list.movies[0].title
+              : `${list.movies[0].title} and ${list.movies.length - 1} more`}
+          </div>
         </Link>
       ))}
     </div>

@@ -2,6 +2,7 @@ import { ListDocument } from '@/graphql/graphql';
 import { apolloClient } from '@/utils/apollo';
 import Image from 'next/image';
 import Link from 'next/link';
+import DeleteListButton from './components/DeleteListButton/DeleteListButton';
 
 type Props = {
   params: {
@@ -17,12 +18,17 @@ export default async function ListPage({ params }: Props) {
 
   return (
     <div className="px-5 py-8 pt-20 w-full">
-      <h1 className="text-3xl lg:text-5xl mb-8">{data.list?.title}</h1>
+      <div className="flex items-center mb-8 gap-2">
+        <h1 className="text-3xl lg:text-5xl">{data.list?.title}</h1>
+        {data.list && (
+          <DeleteListButton listId={params.id} ownerId={data.list.owner.id} />
+        )}
+      </div>
 
       <div
         className="grid gap-3 w-full"
         style={{
-          gridTemplateColumns: 'repeat(auto-fit, minmax(160px, 0.5fr))',
+          gridTemplateColumns: 'repeat(auto-fill, minmax(160px, 1fr))',
         }}
       >
         {data.list?.movies.map((movie) => (

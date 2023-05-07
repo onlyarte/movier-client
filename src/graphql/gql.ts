@@ -14,7 +14,8 @@ import { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/
  */
 const documents = {
     "fragment AuthData on LoginOutput {\n  token\n  expiresAt\n  user {\n    id\n    name\n  }\n}\n\nmutation Login($input: LoginInput!) {\n  login(input: $input) {\n    ...AuthData\n  }\n}\n\nmutation Signup($input: SignupInput!) {\n  signup(input: $input) {\n    ...AuthData\n  }\n}": types.AuthDataFragmentDoc,
-    "query List($id: String!) {\n  list(id: $id) {\n    id\n    title\n    movies {\n      id\n      title\n      poster\n      year\n    }\n  }\n}": types.ListDocument,
+    "mutation DeleteList($id: String!) {\n  deleteList(id: $id)\n}": types.DeleteListDocument,
+    "query List($id: String!) {\n  list(id: $id) {\n    id\n    title\n    owner {\n      id\n    }\n    movies {\n      id\n      title\n      poster\n      year\n    }\n  }\n}": types.ListDocument,
     "mutation PushMovie($listId: String!, $movieId: Int!) {\n  pushMovie(listId: $listId, movieId: $movieId)\n}\n\nmutation PullMovie($listId: String!, $movieId: Int!) {\n  pullMovie(listId: $listId, movieId: $movieId)\n}": types.PushMovieDocument,
     "query Movie($id: Int!) {\n  movie(id: $id) {\n    id\n    imdbId\n    title\n    description\n    poster\n    year\n    countries\n    genres\n    directors\n    writers\n    stars\n    rating\n    trailerUrl\n  }\n}": types.MovieDocument,
     "query Search($input: String!) {\n  search(input: $input) {\n    id\n    title\n    poster\n    year\n    genres\n  }\n}": types.SearchDocument,
@@ -43,7 +44,11 @@ export function graphql(source: "fragment AuthData on LoginOutput {\n  token\n  
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function graphql(source: "query List($id: String!) {\n  list(id: $id) {\n    id\n    title\n    movies {\n      id\n      title\n      poster\n      year\n    }\n  }\n}"): (typeof documents)["query List($id: String!) {\n  list(id: $id) {\n    id\n    title\n    movies {\n      id\n      title\n      poster\n      year\n    }\n  }\n}"];
+export function graphql(source: "mutation DeleteList($id: String!) {\n  deleteList(id: $id)\n}"): (typeof documents)["mutation DeleteList($id: String!) {\n  deleteList(id: $id)\n}"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "query List($id: String!) {\n  list(id: $id) {\n    id\n    title\n    owner {\n      id\n    }\n    movies {\n      id\n      title\n      poster\n      year\n    }\n  }\n}"): (typeof documents)["query List($id: String!) {\n  list(id: $id) {\n    id\n    title\n    owner {\n      id\n    }\n    movies {\n      id\n      title\n      poster\n      year\n    }\n  }\n}"];
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */

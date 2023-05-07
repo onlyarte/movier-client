@@ -17,6 +17,8 @@ export default forwardRef(function IconButton(
   const iconProps = {
     strokeWidth: 1,
     size: sizes[size],
+    width: sizes[size],
+    height: sizes[size],
   };
 
   return (

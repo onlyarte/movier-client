@@ -50,9 +50,9 @@ export default async function UserPage({ params }: Props) {
         </div>
       </div>
       <div className="basis-auto lg:basis-3/5 px-5 py-8 lg:p-8 lg:overflow-y-auto relative">
-        <div className="flex align-center mb-2">
+        <div className="flex items-center mb-2 gap-2">
           <h2 className="text-3xl lg:text-4xl">Lists</h2>
-          <CreateListButton className="ml-2" />
+          {data.user && <CreateListButton userId={data.user?.id} />}
         </div>
         <ListGroup lists={data.user?.lists as UserListDataFragment[]} />
         <h2 className="text-3xl lg:text-4xl mt-5 mb-2">Saved Lists</h2>

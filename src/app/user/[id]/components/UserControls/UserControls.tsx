@@ -19,11 +19,13 @@ export default function UserControls({ data }: Props) {
     router.push('/');
   };
 
+  if (authData?.user.id !== data.user?.id) {
+    return null;
+  }
+
   return (
     <div className="absolute z-10 top-4 right-4">
-      {authData?.user.id === data.user?.id && (
-        <IconButton Icon={LogOut} onClick={handleLogout} />
-      )}
+      <IconButton Icon={LogOut} onClick={handleLogout} />
     </div>
   );
 }
