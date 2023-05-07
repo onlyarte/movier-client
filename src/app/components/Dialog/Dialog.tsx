@@ -48,7 +48,7 @@ export default function Dialog({
         open={isOpen}
         handler={onToggle}
         size={size}
-        className="backdrop-blur bg-gray-900/75 text-current border border-gray-200/40"
+        className="backdrop-blur bg-background-secondary/75 dark:bg-gray-800/75 text-current border border-border-secondary/50"
       >
         <DialogHeader className="text-xl lg:text-2xl text-current">
           {header}

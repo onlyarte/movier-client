@@ -12,6 +12,8 @@ module.exports = withMT({
       colors: {
         foreground: 'rgba(var(--foreground-rgb), <alpha-value>)',
         background: 'rgba(var(--background-start-rgb), <alpha-value>)',
+        'background-secondary': 'rgba(var(--background-secondary), <alpha-value>)',
+        'border-secondary': 'rgba(var(--border-secondary), <alpha-value>)',
       },
     },
   },

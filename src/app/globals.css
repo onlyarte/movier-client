@@ -12,6 +12,8 @@
   --foreground-rgb: 0, 0, 0;
   --background-start-rgb: 214, 219, 220;
   --background-end-rgb: 255, 255, 255;
+  --background-secondary: 245, 245, 245;
+  --border-secondary: 163, 163, 163;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -19,6 +21,8 @@
     --foreground-rgb: 255, 255, 255;
     --background-start-rgb: 15,15,15;
     --background-end-rgb: 0, 0, 0;
+    --background-secondary: 23, 23, 23;
+    --border-secondary: 115, 115, 115;
   }
 }
 
