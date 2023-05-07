@@ -40,6 +40,13 @@ export default function Dialog({
                 backdropBlur: 'backdrop-blur',
               },
             },
+            sizes: {
+              sm: {
+                width: "w-9/10 lg:w-1/4",
+                minWidth: "min-w-[320px]",
+                maxWidth: "lg:max-w-[460px]",
+              },
+            },
           },
         },
       }}
