@@ -4,6 +4,7 @@ query List($id: String!) {
     title
     owner {
       id
+      name
     }
     movies {
       id

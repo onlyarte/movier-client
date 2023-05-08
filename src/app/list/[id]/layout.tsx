@@ -7,7 +7,7 @@ export default function ListLayout({
   children: React.ReactNode;
 }) {
   return (
-    <div>
+    <div className="min-h-screen">
       <Menu />
       {children}
     </div>

@@ -19,12 +19,18 @@ export default async function ListPage({ params }: Props) {
 
   return (
     <div className="px-5 py-8 pt-20 w-full">
-      <div className="flex items-center mb-8 gap-2">
+      <div className="flex items-center gap-2 mb-2">
         <h1 className="text-3xl lg:text-5xl">{data.list?.title}</h1>
         {data.list && (
           <DeleteListButton listId={params.id} ownerId={data.list.owner.id} />
         )}
       </div>
+      <p className="text mb-8">
+        Curated by{' '}
+        <Link href={`/user/${data.list?.owner.id}`} className="text-blue-600">
+          {data.list?.owner.name}
+        </Link>
+      </p>
 
       <div
         className="grid gap-3 w-full"
