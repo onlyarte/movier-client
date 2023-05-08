@@ -16,7 +16,7 @@ type Props = {
   className?: string;
 };
 
-export default function Modal({
+export default function Drawer({
   header,
   isOpen,
   onClose,

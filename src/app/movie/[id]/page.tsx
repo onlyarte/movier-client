@@ -2,6 +2,7 @@ import { MovieDocument } from '@/graphql/graphql';
 import { apolloClient } from '@/utils/apollo';
 import Image from 'next/image';
 import ListControls from './components/ListControls';
+import { makeMetadata } from '@/utils/metadata';
 
 type Props = {
   params: {
@@ -36,7 +37,9 @@ export default async function MoviePage({ params }: Props) {
           <h1 className="text-3xl lg:text-5xl mb-2">{data.movie.title}</h1>
           <ListControls movieId={data.movie.id} />
           {data.movie.rating != null && (
-            <span className="text-2xl lg:text-5xl ml-auto">{data.movie.rating}/10</span>
+            <span className="text-2xl lg:text-5xl ml-auto">
+              {data.movie.rating}/10
+            </span>
           )}
         </div>
         <div className="text-xl mb-4">
@@ -76,6 +79,15 @@ export default async function MoviePage({ params }: Props) {
       </div>
     </>
   );
+}
+
+export async function generateMetadata({ params }: Props) {
+  const { data } = await apolloClient.query({
+    query: MovieDocument,
+    variables: { id: parseInt(params.id) },
+  });
+
+  return makeMetadata({ title: `${data.movie.title} (${data.movie.year})` });
 }
 
 // https://beta.nextjs.org/docs/api-reference/segment-config#revalidate

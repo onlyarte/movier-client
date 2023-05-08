@@ -3,6 +3,7 @@ import { apolloClient } from '@/utils/apollo';
 import Image from 'next/image';
 import Link from 'next/link';
 import DeleteListButton from './components/DeleteListButton/DeleteListButton';
+import { makeMetadata } from '@/utils/metadata';
 
 type Props = {
   params: {
@@ -52,6 +53,15 @@ export default async function ListPage({ params }: Props) {
       </div>
     </div>
   );
+}
+
+export async function generateMetadata({ params }: Props) {
+  const { data } = await apolloClient.query({
+    query: ListDocument,
+    variables: { id: params.id },
+  });
+
+  return makeMetadata({ title: data.list?.title });
 }
 
 export const revalidate = 0;

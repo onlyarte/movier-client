@@ -1,3 +1,4 @@
+import { makeMetadata } from '@/utils/metadata';
 import Fab from './components/Layout/Menu/Fab';
 import Search from './movie/components/Search';
 
@@ -12,3 +13,5 @@ export default function Home() {
     </main>
   );
 }
+
+export const metadata = makeMetadata();

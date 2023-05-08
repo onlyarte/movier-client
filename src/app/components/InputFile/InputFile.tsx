@@ -8,7 +8,7 @@ type Props = React.InputHTMLAttributes<HTMLInputElement>;
 export default function InputFile({ value, className, ...otherProps }: Props) {
   return (
     <div
-      className={`relative flex items-center justify-between cursor-pointer w-full h-12 px-5 py-2 rounded-3xl focus-visible:outline-none bg-background border border-current ${className}`}
+      className={`relative flex items-center justify-between cursor-pointer w-full h-12 px-5 py-2 rounded-3xl focus-visible:outline-none bg-background/50 border border-border-secondary/50 ${className}`}
     >
       {value ? (
         <div>{value}</div>

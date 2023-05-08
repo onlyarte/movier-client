@@ -4,6 +4,7 @@ import Image from 'next/image';
 import { ListGroup, UserControls } from './components';
 import { IconButton } from '@/app/components';
 import CreateListButton from './components/CreateListButton/CreateListButton';
+import { makeMetadata } from '@/utils/metadata';
 
 type Props = {
   params: {
@@ -60,6 +61,15 @@ export default async function UserPage({ params }: Props) {
       </div>
     </>
   );
+}
+
+export async function generateMetadata({ params }: Props) {
+  const { data } = await apolloClient.query({
+    query: UserDocument,
+    variables: { id: params.id },
+  });
+
+  return makeMetadata({ title: data.user?.name });
 }
 
 export const revalidate = 0;
