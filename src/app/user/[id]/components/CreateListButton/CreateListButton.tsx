@@ -1,6 +1,6 @@
 'use client';
 
-import { Button, Dialog, IconButton, Input, Modal } from '@/app/components';
+import { Button, Dialog, IconButton, Input } from '@/app/components';
 import { CreateListDocument, UserDocument } from '@/graphql/graphql';
 import { useAuthContext } from '@/utils/auth/context';
 import { useMutation } from '@apollo/client';

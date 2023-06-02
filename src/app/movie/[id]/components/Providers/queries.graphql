@@ -1,0 +1,27 @@
+fragment ProviderData on Provider {
+  id
+  providerName
+  providerLogoUrl
+}
+
+fragment ProvidersData on Providers {
+  id
+  flatrate {
+    ...ProviderData
+  }
+  rent {
+    ...ProviderData
+  }
+  buy {
+    ...ProviderData
+  }
+}
+
+query MovieProviders($id: Int!, $region: String!) {
+  movie(id: $id) {
+    id
+    providers(region: $region) {
+      ...ProvidersData
+    }
+  }
+}

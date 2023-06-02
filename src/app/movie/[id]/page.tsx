@@ -3,6 +3,7 @@ import { apolloClient } from '@/utils/apollo';
 import Image from 'next/image';
 import ListControls from './components/ListControls';
 import { makeMetadata } from '@/utils/metadata';
+import MovieProviders from './components/Providers';
 
 type Props = {
   params: {
@@ -46,26 +47,26 @@ export default async function MoviePage({ params }: Props) {
           {data.movie.year} | {data.movie.genres.join(', ')}
         </div>
         <p className="text-base mb-4">{data.movie.description}</p>
-        <table className="mb-4">
-          <tbody>
-            {(
-              [
-                { key: 'directors', title: 'Directors' },
-                { key: 'writers', title: 'Writers' },
-                { key: 'stars', title: 'Stars' },
-              ] as const
-            ).map(
-              ({ key, title }) =>
-                data.movie[key] &&
-                data.movie[key].length > 0 && (
-                  <tr key={key}>
-                    <th className="text-left p-2 pl-0 align-top">{title}</th>
-                    <td className="p-2">{data.movie[key].join(', ')}</td>
-                  </tr>
-                )
-            )}
-          </tbody>
-        </table>
+        <div className="mb-8 flex flex-col gap-3">
+          {(
+            [
+              { key: 'directors', title: 'Directors' },
+              { key: 'writers', title: 'Writers' },
+              { key: 'stars', title: 'Stars' },
+            ] as const
+          ).map(
+            ({ key, title }) =>
+              data.movie[key] &&
+              data.movie[key].length > 0 && (
+                <div key={key} className="flex gap-2">
+                  <div className="font-semibold w-[100px]">{title}</div>
+                  <div className="grow">{data.movie[key].join(', ')}</div>
+                </div>
+              )
+          )}
+        </div>
+
+        <MovieProviders movieId={data.movie.id} />
 
         {data.movie.trailerUrl && (
           <iframe
@@ -76,6 +77,11 @@ export default async function MoviePage({ params }: Props) {
             className="w-screen lg:w-full h-[250px] lg:h-[450px] -mx-5 lg:m-0"
           />
         )}
+
+        <div className="text-xs font-light mt-10">
+          Provided by <a href="https://www.themoviedb.org/">TMDB</a> and{' '}
+          <a href="https://www.justwatch.com/">JustWatch</a>.
+        </div>
       </div>
     </>
   );
