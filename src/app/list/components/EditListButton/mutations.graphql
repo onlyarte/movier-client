@@ -1,0 +1,7 @@
+mutation UpdateList($id: String!, $input: UpdateListInput!) {
+  updateList(id: $id, input: $input) {
+    id
+    title
+    description
+  }
+}

@@ -1,10 +1,9 @@
 import { UserDocument, UserListDataFragment } from '@/graphql/graphql';
 import { apolloClient } from '@/utils/apollo';
-import Image from 'next/image';
-import { ListGroup, UserControls } from './components';
-import { IconButton } from '@/app/components';
-import CreateListButton from './components/CreateListButton/CreateListButton';
 import { makeMetadata } from '@/utils/metadata';
+import Image from 'next/image';
+import { CreateListButton } from '../../list/components';
+import { ListGroup, UserControls } from './components';
 
 type Props = {
   params: {

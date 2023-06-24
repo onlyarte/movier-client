@@ -1,16 +1,21 @@
-query List($id: String!) {
-  list(id: $id) {
+fragment ListData on List {
+  id
+  title
+  description
+  owner {
+    id
+    name
+  }
+  movies {
     id
     title
-    owner {
-      id
-      name
-    }
-    movies {
-      id
-      title
-      poster
-      year
-    }
+    poster
+    year
+  }
+}
+
+query List($id: String!) {
+  list(id: $id) {
+    ...ListData
   }
 }

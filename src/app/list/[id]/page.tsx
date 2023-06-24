@@ -2,8 +2,8 @@ import { ListDocument } from '@/graphql/graphql';
 import { apolloClient } from '@/utils/apollo';
 import Image from 'next/image';
 import Link from 'next/link';
-import DeleteListButton from './components/DeleteListButton/DeleteListButton';
 import { makeMetadata } from '@/utils/metadata';
+import { DeleteListButton, EditListButton } from '../components';
 
 type Props = {
   params: {
@@ -21,10 +21,12 @@ export default async function ListPage({ params }: Props) {
     <div className="px-5 py-8 pt-20 w-full">
       <div className="flex items-center gap-2 mb-2">
         <h1 className="text-3xl lg:text-5xl">{data.list?.title}</h1>
+        {data.list && <EditListButton list={data.list} />}
         {data.list && (
           <DeleteListButton listId={params.id} ownerId={data.list.owner.id} />
         )}
       </div>
+      <p className="text mb-2">{data.list?.description}</p>
       <p className="text mb-8">
         Curated by{' '}
         <Link href={`/user/${data.list?.owner.id}`} className="text-blue-600">
