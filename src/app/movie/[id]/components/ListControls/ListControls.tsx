@@ -15,6 +15,7 @@ import {
   MenuList,
 } from '@material-tailwind/react';
 import { Check, Plus } from 'react-feather';
+import { useRevalidatePath } from '@/utils/next-revalidate';
 
 type Props = {
   movieId: number;
@@ -26,12 +27,16 @@ export default function ListControls({ movieId }: Props) {
   const [pushMovie] = useMutation(PushMovieDocument);
   const [pullMovie] = useMutation(PullMovieDocument);
 
+  const [revalidatePath] = useRevalidatePath();
+
   const handleClick = async (listId: string, isAdded: boolean) => {
     await (isAdded ? pullMovie : pushMovie)({
       variables: { listId, movieId },
       refetchQueries: [{ query: ListDocument, variables: { id: listId } }],
     });
     await refetchUserData?.();
+
+    revalidatePath(`/list/${listId}`);
   };
 
   if (!userData?.lists.length) {

@@ -73,4 +73,4 @@ export async function generateMetadata({ params }: Props) {
   return makeMetadata({ title: data.list?.title });
 }
 
-export const revalidate = 0;
+// export const revalidate = 0;
