@@ -47,7 +47,7 @@ export default async function MoviePage({ params }: Props) {
         <div className="text-xl mb-4">
           {data.movie.year} | {data.movie.genres.join(', ')}
         </div>
-        <p className="text-base mb-4">{data.movie.description}</p>
+        <p className="text-base mb-8">{data.movie.description}</p>
         <div className="mb-8 flex flex-col gap-3">
           {(
             [
@@ -60,7 +60,7 @@ export default async function MoviePage({ params }: Props) {
               data.movie[key] &&
               data.movie[key].length > 0 && (
                 <div key={key} className="flex gap-2">
-                  <div className="font-semibold w-[100px]">{title}</div>
+                  <div className="font-semibold w-[100px] shrink-0">{title}</div>
                   <div className="grow">{data.movie[key].join(', ')}</div>
                 </div>
               )
