@@ -20,8 +20,8 @@ export default async function MoviePage({ params }: Props) {
 
   return (
     <>
-      <div className="basis-[400px] lg:basis-2/5">
-        <div className="h-full w-full relative">
+      <div className="basis-[400px] lg:basis-2/5 flex">
+        <div className="items-stretch w-full relative">
           <Image
             src={
               data.movie.poster ??

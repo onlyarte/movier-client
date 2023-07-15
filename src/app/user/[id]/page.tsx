@@ -20,8 +20,8 @@ export default async function UserPage({ params }: Props) {
 
   return (
     <>
-      <div className="basis-[350px] lg:basis-2/5 overflow-hidden">
-        <div className="h-full w-full relative">
+      <div className="basis-[350px] lg:basis-2/5 overflow-hidden flex">
+        <div className="items-stretch w-full relative">
           <UserControls data={data} />
           <Image
             src={
