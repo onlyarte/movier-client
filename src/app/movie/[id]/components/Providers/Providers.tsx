@@ -27,13 +27,13 @@ export default function MovieProviders({ movieId }: Props) {
   }
 
   return (
-    <div className="flex gap-5 justify-end mb-8">
+    <div className="flex gap-5 mb-8 flex-wrap">
       {config.map(
         ({ key, title }) =>
           !!data.movie.providers?.[key]?.length && (
             <div key={key} className="flex flex-col gap-2">
               <div className="text font-light">{title}</div>
-              <div className="grow flex gap-2">
+              <div className="grow flex gap-2 overflow-auto">
                 {data.movie.providers?.[key]?.map(
                   ({ id, providerName, providerLogoUrl }) => (
                     <Image
@@ -42,7 +42,7 @@ export default function MovieProviders({ movieId }: Props) {
                       width={50}
                       height={50}
                       quality={100}
-                      className="rounded-xl"
+                      className="shrink-0 rounded-xl"
                       key={id}
                     />
                   )
