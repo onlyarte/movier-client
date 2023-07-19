@@ -1,9 +1,9 @@
 import { ListDocument } from '@/graphql/graphql';
 import { apolloClient } from '@/utils/apollo';
-import Image from 'next/image';
 import Link from 'next/link';
 import { makeMetadata } from '@/utils/metadata';
 import { DeleteListButton, EditListButton } from '../components';
+import { Poster } from '@/app/components';
 
 type Props = {
   params: {
@@ -43,7 +43,7 @@ export default async function ListPage({ params }: Props) {
         {data.list?.movies.map((movie) => (
           <Link href={`/movie/${movie.id}`} key={movie.id}>
             <div className="relative h-[250px] w-full mb-2">
-              <Image
+              <Poster
                 src={
                   movie.poster ??
                   'https://storage.googleapis.com/movier-us/uploads%2F98eb2e7399cdbff0e67e42b967e15c50.jpg'

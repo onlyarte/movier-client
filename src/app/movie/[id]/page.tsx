@@ -1,9 +1,9 @@
 import { MovieDocument } from '@/graphql/graphql';
 import { apolloClient } from '@/utils/apollo';
-import Image from 'next/image';
 import ListControls from './components/ListControls';
 import { makeMetadata } from '@/utils/metadata';
 import MovieProviders from './components/Providers';
+import { Poster } from '@/app/components';
 
 type Props = {
   params: {
@@ -22,7 +22,7 @@ export default async function MoviePage({ params }: Props) {
     <>
       <div className="basis-[400px] lg:basis-2/5 flex">
         <div className="items-stretch w-full relative">
-          <Image
+          <Poster
             src={
               data.movie.poster ??
               'https://storage.googleapis.com/movier-us/uploads%2F98eb2e7399cdbff0e67e42b967e15c50.jpg'
