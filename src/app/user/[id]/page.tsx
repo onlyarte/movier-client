@@ -20,7 +20,7 @@ export default async function UserPage({ params }: Props) {
 
   return (
     <>
-      <div className="basis-[350px] lg:basis-2/5 overflow-hidden flex">
+      <div className="basis-[350px] lg:basis-2/5 overflow-hidden flex bg-black">
         <div className="items-stretch w-full relative">
           <UserControls data={data} />
           <Image
@@ -30,7 +30,7 @@ export default async function UserPage({ params }: Props) {
             }
             alt="User photo background"
             fill
-            className="object-cover blur-md scale-110"
+            className="object-cover blur-md scale-110 opacity-60"
           />
           <div className="absolute h-full w-full px-5 py-8 lg:p-8 flex flex-col justify-center items-center">
             <Image
@@ -43,7 +43,7 @@ export default async function UserPage({ params }: Props) {
               height={300}
               className="object-cover h-[200px] w-[200px] lg:h-[300px] lg:w-[300px] rounded-full"
             />
-            <h1 className="text-xl lg:text-3xl text-center mt-5">
+            <h1 className="text-xl lg:text-3xl text-center mt-5 text-white">
               {data.user?.name}
             </h1>
           </div>
