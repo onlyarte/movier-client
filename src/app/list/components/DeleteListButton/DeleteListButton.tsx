@@ -2,7 +2,7 @@
 
 import { Button, Dialog, IconButton } from '@/app/components';
 import { DeleteListDocument, UserDocument } from '@/graphql/graphql';
-import { useAuthContext } from '@/utils/auth/context';
+import { useAuth } from '@/utils/auth';
 import { useMutation } from '@apollo/client';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
@@ -18,7 +18,7 @@ export default function DeleteListButton({
   ownerId,
   ...buttonProps
 }: Props) {
-  const { authData } = useAuthContext();
+  const { user } = useAuth();
 
   const [isDialogOpen, setIsDialogOpen] = useState(false);
 
@@ -32,12 +32,12 @@ export default function DeleteListButton({
       refetchQueries: [UserDocument],
     });
 
-    router.push(`/user/${authData?.user.id}`);
+    router.push(`/user/${user?.id}`);
 
     setIsDialogOpen(false);
   };
 
-  if (!authData || authData.user.id !== ownerId) {
+  if (!user || user.id !== ownerId) {
     return null;
   }
 

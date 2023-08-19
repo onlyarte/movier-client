@@ -1,8 +1,8 @@
 'use client';
 
 import { apolloClient } from '@/utils/apollo';
-import { AuthProvider } from '@/utils/auth/context';
 import { ApolloProvider } from '@apollo/client';
+import { UserProvider } from '@auth0/nextjs-auth0/client';
 import { ThemeProvider } from '@material-tailwind/react';
 
 type Props = {
@@ -12,9 +12,9 @@ type Props = {
 export function Providers({ children }: Props) {
   return (
     <ApolloProvider client={apolloClient}>
-      <AuthProvider>
+      <UserProvider>
         <ThemeProvider>{children}</ThemeProvider>
-      </AuthProvider>
+      </UserProvider>
     </ApolloProvider>
   );
 }

@@ -2,8 +2,7 @@
 
 import { IconButton } from '@/app/components';
 import { UserQuery } from '@/graphql/graphql';
-import { useAuthContext } from '@/utils/auth/context';
-import { useRouter } from 'next/navigation';
+import { useAuth } from '@/utils/auth';
 import { LogOut } from 'react-feather';
 
 type Props = {
@@ -11,15 +10,13 @@ type Props = {
 };
 
 export default function UserControls({ data }: Props) {
-  const { authData, setAuthData } = useAuthContext();
-  const router = useRouter();
+  const { user } = useAuth();
 
   const handleLogout = () => {
-    setAuthData?.(undefined);
-    router.push('/');
+    window.location.href = '/api/auth/logout';
   };
 
-  if (authData?.user.id !== data.user?.id) {
+  if (!user || user.id !== data.user?.id) {
     return null;
   }
 

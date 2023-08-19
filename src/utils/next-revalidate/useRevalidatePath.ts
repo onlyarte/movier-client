@@ -5,13 +5,14 @@ export default function useRevalidatePath(defaultPath?: string) {
   const [isPending, startTransition] = useTransition();
 
   const handleRevalidate = useCallback(
-    (path?: string) => {
-      const finalPath = path ?? defaultPath;
-      if (!finalPath) return;
-      startTransition(() => {
-        revalidate(finalPath);
-      });
-    },
+    (path?: string) =>
+      new Promise<void>((resolve, reject) => {
+        const finalPath = path ?? defaultPath;
+        if (!finalPath) return resolve();
+        startTransition(() => {
+          revalidate(finalPath).then(resolve).catch(reject);
+        });
+      }),
     [defaultPath, startTransition]
   );
 

@@ -14,7 +14,7 @@ type Props = {
 export default async function UserPage({ params }: Props) {
   const { data } = await apolloClient.query({
     query: UserDocument,
-    variables: { id: params.id },
+    variables: { id: decodeURIComponent(params.id) },
     fetchPolicy: 'network-only',
   });
 

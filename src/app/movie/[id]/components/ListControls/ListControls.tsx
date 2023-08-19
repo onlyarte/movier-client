@@ -5,9 +5,9 @@ import {
   ListDocument,
   PullMovieDocument,
   PushMovieDocument,
+  UserDocument,
 } from '@/graphql/graphql';
-import { useAuthContext } from '@/utils/auth/context';
-import { useMutation } from '@apollo/client';
+import { useMutation, useQuery } from '@apollo/client';
 import {
   Menu,
   MenuHandler,
@@ -16,13 +16,16 @@ import {
 } from '@material-tailwind/react';
 import { Check, Plus } from 'react-feather';
 import { useRevalidatePath } from '@/utils/next-revalidate';
+import { useAuth } from '@/utils/auth';
 
 type Props = {
   movieId: number;
 };
 
 export default function ListControls({ movieId }: Props) {
-  const { userData, refetchUserData } = useAuthContext();
+  const { user, refetch } = useAuth();
+
+  const lists = user?.lists ?? [];
 
   const [pushMovie] = useMutation(PushMovieDocument);
   const [pullMovie] = useMutation(PullMovieDocument);
@@ -34,12 +37,12 @@ export default function ListControls({ movieId }: Props) {
       variables: { listId, movieId },
       refetchQueries: [{ query: ListDocument, variables: { id: listId } }],
     });
-    await refetchUserData?.();
+    await refetch?.();
 
     revalidatePath(`/list/${listId}`);
   };
 
-  if (!userData?.lists.length) {
+  if (!lists.length) {
     return null;
   }
 
@@ -49,7 +52,7 @@ export default function ListControls({ movieId }: Props) {
         <IconButton Icon={Plus} type="button" />
       </MenuHandler>
       <MenuList className="p-1 backdrop-blur bg-background/75 text-current">
-        {userData?.lists?.map((list) => {
+        {lists.map((list) => {
           const isAdded = list.movies.some(({ id }) => id === movieId);
           return (
             <MenuItem

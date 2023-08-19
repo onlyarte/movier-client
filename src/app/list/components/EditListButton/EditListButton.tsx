@@ -6,7 +6,8 @@ import {
   UpdateListDocument,
   UserDocument,
 } from '@/graphql/graphql';
-import { useAuthContext } from '@/utils/auth/context';
+import { useAuth } from '@/utils/auth';
+import { useRevalidatePath } from '@/utils/next-revalidate';
 import { useMutation } from '@apollo/client';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
@@ -22,7 +23,7 @@ type Props = Partial<Omit<Parameters<typeof IconButton>['0'], 'onClick'>> & {
 };
 
 export default function EditListButton({ list, ...buttonProps }: Props) {
-  const { authData } = useAuthContext();
+  const { user } = useAuth();
 
   const [isDialogOpen, setIsDialogOpen] = useState(false);
 
@@ -40,6 +41,8 @@ export default function EditListButton({ list, ...buttonProps }: Props) {
 
   const [updateList, { loading }] = useMutation(UpdateListDocument);
 
+  const [revalidatePath] = useRevalidatePath(`/list/${list.id}`);
+
   const router = useRouter();
 
   const handleSubmit: React.FormEventHandler<HTMLFormElement> = async (
@@ -52,6 +55,7 @@ export default function EditListButton({ list, ...buttonProps }: Props) {
       refetchQueries: [UserDocument],
     });
 
+    await revalidatePath();
     router.refresh();
 
     setIsDialogOpen(false);
@@ -61,7 +65,7 @@ export default function EditListButton({ list, ...buttonProps }: Props) {
     });
   };
 
-  if (authData?.user.id !== list.owner.id) {
+  if (!user || user.id !== list.owner.id) {
     return null;
   }
 

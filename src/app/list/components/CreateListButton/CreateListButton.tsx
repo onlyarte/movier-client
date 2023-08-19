@@ -2,7 +2,7 @@
 
 import { Button, Dialog, IconButton, Input } from '@/app/components';
 import { CreateListDocument, UserDocument } from '@/graphql/graphql';
-import { useAuthContext } from '@/utils/auth/context';
+import { useAuth } from '@/utils/auth';
 import { useMutation } from '@apollo/client';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
@@ -23,7 +23,7 @@ type Props = Partial<Omit<Parameters<typeof IconButton>['0'], 'onClick'>> & {
 };
 
 export default function CreateListButton({ userId, ...buttonProps }: Props) {
-  const { authData } = useAuthContext();
+  const { user } = useAuth();
 
   const [isDialogOpen, setIsDialogOpen] = useState(false);
 
@@ -56,7 +56,7 @@ export default function CreateListButton({ userId, ...buttonProps }: Props) {
     setFormState(defaultFormState);
   };
 
-  if (authData?.user.id !== userId) {
+  if (!user || user.id !== userId) {
     return null;
   }
 
