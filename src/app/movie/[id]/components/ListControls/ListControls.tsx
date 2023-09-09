@@ -16,7 +16,7 @@ import {
 } from '@material-tailwind/react';
 import { Check, Plus } from 'react-feather';
 import { useRevalidatePath } from '@/utils/next-revalidate';
-import { useAuth } from '@/utils/auth';
+import { useAuth } from '@/app/auth';
 
 type Props = {
   movieId: number;

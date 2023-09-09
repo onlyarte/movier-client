@@ -2,7 +2,7 @@
 
 import { Button, Dialog, IconButton, Input } from '@/app/components';
 import { CreateListDocument, UserDocument } from '@/graphql/graphql';
-import { useAuth } from '@/utils/auth';
+import { useAuth } from '@/app/auth';
 import { useMutation } from '@apollo/client';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';

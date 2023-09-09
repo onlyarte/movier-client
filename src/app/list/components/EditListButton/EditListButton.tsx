@@ -6,7 +6,7 @@ import {
   UpdateListDocument,
   UserDocument,
 } from '@/graphql/graphql';
-import { useAuth } from '@/utils/auth';
+import { useAuth } from '@/app/auth';
 import { useRevalidatePath } from '@/utils/next-revalidate';
 import { useMutation } from '@apollo/client';
 import { useRouter } from 'next/navigation';

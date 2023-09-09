@@ -1,5 +1,5 @@
 import { makeMetadata } from '@/utils/metadata';
-import Fab from './components/Layout/Menu/Fab';
+import Fab from './auth/Fab';
 import Search from './movie/components/Search';
 
 export default function Home() {

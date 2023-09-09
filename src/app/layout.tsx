@@ -1,11 +1,14 @@
+import { getServerSession } from 'next-auth';
 import './globals.css';
 import { Providers } from './providers';
+import { authOptions } from './auth/config';
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  const session = await getServerSession(authOptions);
   return (
     <html lang="en">
       {/*
@@ -14,7 +17,7 @@ export default function RootLayout({
       */}
       <head />
       <body>
-        <Providers>{children}</Providers>
+        <Providers session={session}>{children}</Providers>
       </body>
     </html>
   );

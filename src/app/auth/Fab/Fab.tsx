@@ -2,9 +2,9 @@
 
 import { Home as HomeIcon, LogIn as LoginIcon } from 'react-feather';
 import IconLink from '@/app/components/IconLink';
-import { useUser } from '@auth0/nextjs-auth0/client';
-import { NativeLink } from '@/app/components/IconLink/IconLink';
-import { useAuth } from '@/utils/auth';
+import { signIn, signOut, useSession } from 'next-auth/react';
+import { useAuth } from '@/app/auth';
+import IconButton from '@/app/components/IconButton/IconButton';
 
 type Props = {
   className?: string;
@@ -20,11 +20,10 @@ export default function Fab({ className }: Props) {
   return user ? (
     <IconLink Icon={HomeIcon} href={`/user/${user.id}`} className={className} />
   ) : (
-    <IconLink
+    <IconButton
       Icon={LoginIcon}
-      href="/api/auth/login"
       className={className}
-      Component={NativeLink}
+      onClick={() => signIn('google')}
     />
   );
 }

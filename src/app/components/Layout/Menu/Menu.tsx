@@ -5,7 +5,7 @@ import { Menu as MenuIcon } from 'react-feather';
 import Search from '@/app/movie/components/Search';
 import IconButton from '../../IconButton';
 import Drawer from '../../Drawer';
-import Fab from './Fab/Fab';
+import Fab from '../../../auth/Fab/Fab';
 
 export default function Menu() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
