@@ -3,14 +3,14 @@
   "version": "0.1.0",
   "private": true,
   "engines": {
-    "node": "16"
+    "node": "18"
   },
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "deploy": "next build && firebase deploy",
+    "deploy": "docker build . --tag gcr.io/movier-371821/movier-client --platform linux/amd64 && docker push gcr.io/movier-371821/movier-client && gcloud run deploy movier-client --image gcr.io/movier-371821/movier-client --platform managed --project movier-371821 --region europe-west1",
     "generate": "graphql-codegen --config codegen.ts"
   },
   "dependencies": {
