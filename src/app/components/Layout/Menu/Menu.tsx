@@ -2,10 +2,10 @@
 
 import { useState } from 'react';
 import { Menu as MenuIcon } from 'react-feather';
-import Search from '@/app/movie/components/Search';
 import IconButton from '../../IconButton';
 import Drawer from '../../Drawer';
 import Fab from '../../../auth/Fab/Fab';
+import SearchBar from '@/app/search/components/SearchBar';
 
 export default function Menu() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -22,7 +22,7 @@ export default function Menu() {
         onClose={() => setIsMenuOpen(false)}
         header={<Fab className="mb-2" />}
       >
-        <Search />
+        <SearchBar onSubmit={() => setIsMenuOpen(false)} />
       </Drawer>
     </>
   );

@@ -45,7 +45,7 @@ export default function Drawer({
             ) : (
               header
             )}
-            <IconButton Icon={X} onClick={onClose} />
+            <IconButton Icon={X} onClick={onClose} className="ml-auto" />
           </div>
           {children}
         </div>
