@@ -1,7 +1,11 @@
 'use client';
 
 import { IconButton } from '@/app/components';
-import { SaveListDocument, UserDocument } from '@/graphql/graphql';
+import {
+  SaveListDocument,
+  UnsaveListDocument,
+  UserDocument,
+} from '@/graphql/graphql';
 import { useAuth } from '@/app/auth';
 import { useMutation } from '@apollo/client';
 import { Eye, EyeOff } from 'react-feather';
@@ -25,7 +29,7 @@ export default function SaveListButton({
   );
 
   const [saveList, { loading: saving }] = useMutation(SaveListDocument);
-  const [unsaveList, { loading: unsaving }] = useMutation(SaveListDocument);
+  const [unsaveList, { loading: unsaving }] = useMutation(UnsaveListDocument);
 
   const handleSubmit = async () => {
     if (isSaved) {
