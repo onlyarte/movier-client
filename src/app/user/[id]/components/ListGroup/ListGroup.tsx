@@ -22,7 +22,7 @@ export default function ListGroup({ lists }: Props) {
           <div className="relative h-[250px] w-full mb-2">
             <Image
               src={
-                list.movies[0]?.poster ??
+                list.movies[list.movies.length - 1]?.poster ??
                 'https://storage.googleapis.com/movier-us/uploads%2F98eb2e7399cdbff0e67e42b967e15c50.jpg'
               }
               alt="List cover"
@@ -31,7 +31,7 @@ export default function ListGroup({ lists }: Props) {
             />
           </div>
           <h3 className="text-lg text-center">{list.title}</h3>
-          <div className="text-xs opacity-90 text-center">
+          <div className="text-xs opacity-90 text-center mb-3">
             {list.movies.length === 0
               ? 'Empty'
               : list.movies.length === 1

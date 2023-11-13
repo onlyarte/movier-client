@@ -1,0 +1,7 @@
+mutation SaveList($id: String!) {
+  saveList(id: $id)
+}
+
+mutation UnsaveList($id: String!) {
+  unsaveList(id: $id)
+}

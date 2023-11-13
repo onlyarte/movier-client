@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { makeMetadata } from '@/utils/metadata';
 import { DeleteListButton, EditListButton } from '../components';
 import { Poster } from '@/app/components';
+import SaveListButton from '../components/SaveListButton';
 
 type Props = {
   params: {
@@ -24,6 +25,9 @@ export default async function ListPage({ params }: Props) {
         {data.list && <EditListButton list={data.list} />}
         {data.list && (
           <DeleteListButton listId={params.id} ownerId={data.list.owner.id} />
+        )}
+        {data.list && (
+          <SaveListButton listId={params.id} ownerId={data.list.owner.id} />
         )}
       </div>
       <p className="text mb-2">{data.list?.description}</p>
@@ -54,7 +58,7 @@ export default async function ListPage({ params }: Props) {
                 className="object-cover"
               />
             </div>
-            <h2 className="text-lg text-center">
+            <h2 className="text-lg text-center mb-3">
               {movie.title} ({movie.year})
             </h2>
           </Link>
@@ -73,4 +77,4 @@ export async function generateMetadata({ params }: Props) {
   return makeMetadata({ title: data.list?.title });
 }
 
-// export const revalidate = 0;
+export const revalidate = 0;

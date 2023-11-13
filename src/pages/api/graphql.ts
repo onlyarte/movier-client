@@ -4,7 +4,9 @@ export default async function handler(
   request: NextApiRequest,
   response: NextApiResponse
 ) {
-  const sessionToken = request.cookies['next-auth.session-token'];
+  const sessionToken =
+    request.cookies['next-auth.session-token'] ||
+    request.cookies['__Secure-next-auth.session-token'];
 
   const apiResponse = await fetch(process.env.API_URL as string, {
     method: 'POST',

@@ -18,11 +18,4 @@ export const authOptions: AuthOptions = {
       privateKey: process.env.GOOGLE_PRIVATE_KEY!.replace(/\\n/g, '\n'),
     }),
   }) as Adapter,
-  cookies: {
-    callbackUrl: {
-      name: '__Secure-next-auth.callback-url',
-      options: { sameSite: 'lax', path: '/', secure: false },
-    },
-  },
-  debug: true,
 };
