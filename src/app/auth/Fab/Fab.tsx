@@ -1,6 +1,6 @@
 'use client';
 
-import { Home as HomeIcon, LogIn as LoginIcon } from 'react-feather';
+import { User as UserIcon, LogIn as LoginIcon } from 'react-feather';
 import IconLink from '@/app/components/IconLink';
 import { signIn } from 'next-auth/react';
 import { useAuth } from '@/app/auth';
@@ -36,6 +36,6 @@ export default function Fab({ className }: Props) {
   }
 
   return (
-    <IconLink Icon={HomeIcon} href={`/user/${user.id}`} className={className} />
+    <IconLink Icon={UserIcon} href={`/user/${user.id}`} className={className} />
   );
 }
