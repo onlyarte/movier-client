@@ -12,12 +12,6 @@ fragment ListData on List {
     poster
     year
   }
-  recommendations {
-    id
-    title
-    poster
-    year
-  }
 }
 
 query List($id: String!) {

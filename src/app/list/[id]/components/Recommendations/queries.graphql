@@ -1,0 +1,15 @@
+fragment ListRecommendationsData on List {
+  id
+  recommendations {
+    id
+    title
+    poster
+    year
+  }
+}
+
+query ListRecommendations($listId: String!) {
+  list(id: $listId) {
+    ...ListRecommendationsData
+  }
+}

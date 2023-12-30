@@ -13,7 +13,8 @@ import { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/
  * Therefore it is highly recommended to use the babel-plugin for production.
  */
 const documents = {
-    "fragment ListData on List {\n  id\n  title\n  description\n  owner {\n    id\n    name\n  }\n  movies {\n    id\n    title\n    poster\n    year\n  }\n  recommendations {\n    id\n    title\n    poster\n    year\n  }\n}\n\nquery List($id: String!) {\n  list(id: $id) {\n    ...ListData\n  }\n}": types.ListDataFragmentDoc,
+    "fragment ListRecommendationsData on List {\n  id\n  recommendations {\n    id\n    title\n    poster\n    year\n  }\n}\n\nquery ListRecommendations($listId: String!) {\n  list(id: $listId) {\n    ...ListRecommendationsData\n  }\n}": types.ListRecommendationsDataFragmentDoc,
+    "fragment ListData on List {\n  id\n  title\n  description\n  owner {\n    id\n    name\n  }\n  movies {\n    id\n    title\n    poster\n    year\n  }\n}\n\nquery List($id: String!) {\n  list(id: $id) {\n    ...ListData\n  }\n}": types.ListDataFragmentDoc,
     "mutation CreateList($input: CreateListInput!) {\n  createList(input: $input) {\n    id\n  }\n}": types.CreateListDocument,
     "mutation DeleteList($id: String!) {\n  deleteList(id: $id)\n}": types.DeleteListDocument,
     "mutation UpdateList($id: String!, $input: UpdateListInput!) {\n  updateList(id: $id, input: $input) {\n    id\n    title\n    description\n  }\n}": types.UpdateListDocument,
@@ -42,7 +43,11 @@ export function graphql(source: string): unknown;
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function graphql(source: "fragment ListData on List {\n  id\n  title\n  description\n  owner {\n    id\n    name\n  }\n  movies {\n    id\n    title\n    poster\n    year\n  }\n  recommendations {\n    id\n    title\n    poster\n    year\n  }\n}\n\nquery List($id: String!) {\n  list(id: $id) {\n    ...ListData\n  }\n}"): (typeof documents)["fragment ListData on List {\n  id\n  title\n  description\n  owner {\n    id\n    name\n  }\n  movies {\n    id\n    title\n    poster\n    year\n  }\n  recommendations {\n    id\n    title\n    poster\n    year\n  }\n}\n\nquery List($id: String!) {\n  list(id: $id) {\n    ...ListData\n  }\n}"];
+export function graphql(source: "fragment ListRecommendationsData on List {\n  id\n  recommendations {\n    id\n    title\n    poster\n    year\n  }\n}\n\nquery ListRecommendations($listId: String!) {\n  list(id: $listId) {\n    ...ListRecommendationsData\n  }\n}"): (typeof documents)["fragment ListRecommendationsData on List {\n  id\n  recommendations {\n    id\n    title\n    poster\n    year\n  }\n}\n\nquery ListRecommendations($listId: String!) {\n  list(id: $listId) {\n    ...ListRecommendationsData\n  }\n}"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "fragment ListData on List {\n  id\n  title\n  description\n  owner {\n    id\n    name\n  }\n  movies {\n    id\n    title\n    poster\n    year\n  }\n}\n\nquery List($id: String!) {\n  list(id: $id) {\n    ...ListData\n  }\n}"): (typeof documents)["fragment ListData on List {\n  id\n  title\n  description\n  owner {\n    id\n    name\n  }\n  movies {\n    id\n    title\n    poster\n    year\n  }\n}\n\nquery List($id: String!) {\n  list(id: $id) {\n    ...ListData\n  }\n}"];
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
