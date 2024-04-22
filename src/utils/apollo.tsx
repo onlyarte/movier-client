@@ -10,4 +10,9 @@ export const apolloClient = new ApolloClient({
   link: httpLink,
   cache: apolloCache,
   connectToDevTools: true,
+  defaultOptions: {
+    query: {
+      fetchPolicy: 'no-cache',
+    },
+  },
 });

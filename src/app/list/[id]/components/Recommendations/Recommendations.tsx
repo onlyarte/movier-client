@@ -21,7 +21,7 @@ export default function Recommendations({ listId }: Props) {
       {loading ? (
         <LoadingSkeleton />
       ) : data?.list?.recommendations.length === 0 ? (
-        <p className="text-lg">No recommendations yet.</p>
+        <p className="text-lg">No recommendations yet</p>
       ) : (
         <div
           className="grid gap-3 w-full"
@@ -49,10 +49,6 @@ export default function Recommendations({ listId }: Props) {
             </Link>
           ))}
         </div>
-      )}
-
-      {data?.list?.recommendations.length === 0 && (
-        <p className="text-lg">No recommendations yet.</p>
       )}
     </>
   );

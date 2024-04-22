@@ -7,6 +7,7 @@ import { useMutation } from '@apollo/client';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { Trash2 } from 'react-feather';
+import { useRevalidatePath } from '@/utils/next-revalidate';
 
 type Props = Partial<Omit<Parameters<typeof IconButton>['0'], 'onClick'>> & {
   listId: string;
@@ -25,6 +26,7 @@ export default function DeleteListButton({
   const [deleteList, { loading }] = useMutation(DeleteListDocument);
 
   const router = useRouter();
+  const [revalidatePath] = useRevalidatePath(`/user/${user?.id}`);
 
   const handleSubmit = async () => {
     await deleteList({
@@ -32,6 +34,7 @@ export default function DeleteListButton({
       refetchQueries: [UserDocument],
     });
 
+    await revalidatePath();
     router.push(`/user/${user?.id}`);
 
     setIsDialogOpen(false);

@@ -15,7 +15,7 @@ export default function Fab({ className }: Props) {
   const { user, error, loading } = useAuth();
   const pathname = usePathname();
 
-  if (error || loading) {
+  if (error) {
     return null;
   }
 
@@ -25,6 +25,7 @@ export default function Fab({ className }: Props) {
         Icon={LoginIcon}
         className={className}
         onClick={() => signIn('google')}
+        loading={loading}
       />
     );
   }

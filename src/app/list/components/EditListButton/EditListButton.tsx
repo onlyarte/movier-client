@@ -1,17 +1,11 @@
 'use client';
 
 import { Button, Dialog, IconButton, Input } from '@/app/components';
-import {
-  ListDataFragment,
-  UpdateListDocument,
-  UserDocument,
-} from '@/graphql/graphql';
+import { ListDataFragment } from '@/graphql/graphql';
 import { useAuth } from '@/app/auth';
-import { useRevalidatePath } from '@/utils/next-revalidate';
-import { useMutation } from '@apollo/client';
-import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { Edit } from 'react-feather';
+import { updateList } from './actions';
 
 type FormState = {
   title: string;
@@ -39,24 +33,12 @@ export default function EditListButton({ list, ...buttonProps }: Props) {
     }));
   };
 
-  const [updateList, { loading }] = useMutation(UpdateListDocument);
-
-  const [revalidatePath] = useRevalidatePath(`/list/${list.id}`);
-
-  const router = useRouter();
-
   const handleSubmit: React.FormEventHandler<HTMLFormElement> = async (
     event
   ) => {
     event.preventDefault();
 
-    await updateList({
-      variables: { id: list.id, input: formState },
-      refetchQueries: [UserDocument],
-    });
-
-    await revalidatePath();
-    router.refresh();
+    await updateList(list.id, formState);
 
     setIsDialogOpen(false);
     setFormState({
@@ -86,20 +68,13 @@ export default function EditListButton({ list, ...buttonProps }: Props) {
         footer={
           <>
             <Button
-              disabled={loading}
               onClick={() => setIsDialogOpen(false)}
               className="w-[130px]"
               outline={false}
             >
               Cancel
             </Button>
-            <Button
-              type="submit"
-              form="edit-list-form"
-              disabled={loading}
-              loading={loading}
-              className="w-[130px]"
-            >
+            <Button type="submit" form="edit-list-form" className="w-[130px]">
               Save
             </Button>
           </>
