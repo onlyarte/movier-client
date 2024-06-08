@@ -48,6 +48,7 @@ export default function DeleteListButton({
     <>
       <IconButton
         size="sm"
+        background="highlight"
         Icon={Trash2}
         onClick={() => setIsDialogOpen(true)}
         {...buttonProps}

@@ -1,0 +1,21 @@
+.collapse-enter {
+  max-height: 0;
+  opacity: 0;
+}
+
+.collapse-enter-active {
+  max-height: unset;
+  opacity: 1;
+  transition: all 500ms;
+}
+
+.collapse-exit {
+  max-height: unset;
+  opacity: 1;
+}
+
+.collapse-exit-active {
+  max-height: 0;
+  opacity: 0;
+  transition: all 500ms;
+}

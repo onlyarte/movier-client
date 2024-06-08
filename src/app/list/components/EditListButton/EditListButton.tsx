@@ -55,6 +55,7 @@ export default function EditListButton({ list, ...buttonProps }: Props) {
     <>
       <IconButton
         size="sm"
+        background="highlight"
         Icon={Edit}
         onClick={() => setIsDialogOpen(true)}
         {...buttonProps}

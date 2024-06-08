@@ -1,3 +1,14 @@
+fragment NoteData on Note {
+  id
+  content
+  createdAt
+  user {
+    id
+    name
+    photoUrl
+  }
+}
+
 query Movie($id: Int!) {
   movie(id: $id) {
     id
@@ -13,5 +24,8 @@ query Movie($id: Int!) {
     stars
     rating
     trailerUrl
+    notes {
+      ...NoteData
+    }
   }
 }

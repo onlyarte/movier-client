@@ -20,8 +20,10 @@ const documents = {
     "mutation UpdateList($id: String!, $input: UpdateListInput!) {\n  updateList(id: $id, input: $input) {\n    id\n    title\n    description\n  }\n}": types.UpdateListDocument,
     "mutation SaveList($id: String!) {\n  saveList(id: $id)\n}\n\nmutation UnsaveList($id: String!) {\n  unsaveList(id: $id)\n}": types.SaveListDocument,
     "mutation PushMovie($listId: String!, $movieId: Int!) {\n  pushMovie(listId: $listId, movieId: $movieId)\n}\n\nmutation PullMovie($listId: String!, $movieId: Int!) {\n  pullMovie(listId: $listId, movieId: $movieId)\n}": types.PushMovieDocument,
+    "mutation AddNote($movieId: Int!, $content: String!) {\n  addNoteToMovie(movieId: $movieId, content: $content) {\n    id\n  }\n}": types.AddNoteDocument,
+    "mutation DeleteNote($id: String!) {\n  deleteNoteFromMovie(noteId: $id)\n}": types.DeleteNoteDocument,
     "fragment ProviderData on Provider {\n  id\n  providerName\n  providerLogoUrl\n}\n\nfragment ProvidersData on Providers {\n  id\n  flatrate {\n    ...ProviderData\n  }\n  rent {\n    ...ProviderData\n  }\n  buy {\n    ...ProviderData\n  }\n}\n\nquery MovieProviders($id: Int!, $region: String!) {\n  movie(id: $id) {\n    id\n    providers(region: $region) {\n      ...ProvidersData\n    }\n  }\n}": types.ProviderDataFragmentDoc,
-    "query Movie($id: Int!) {\n  movie(id: $id) {\n    id\n    imdbId\n    title\n    description\n    poster\n    year\n    countries\n    genres\n    directors\n    writers\n    stars\n    rating\n    trailerUrl\n  }\n}": types.MovieDocument,
+    "fragment NoteData on Note {\n  id\n  content\n  createdAt\n  user {\n    id\n    name\n    photoUrl\n  }\n}\n\nquery Movie($id: Int!) {\n  movie(id: $id) {\n    id\n    imdbId\n    title\n    description\n    poster\n    year\n    countries\n    genres\n    directors\n    writers\n    stars\n    rating\n    trailerUrl\n    notes {\n      ...NoteData\n    }\n  }\n}": types.NoteDataFragmentDoc,
     "query Search($input: String!) {\n  search(input: $input) {\n    id\n    title\n    poster\n    year\n    genres\n  }\n}": types.SearchDocument,
     "fragment UserListData on List {\n  id\n  title\n  cover\n  updatedAt\n  movies {\n    id\n    title\n    poster\n  }\n}\n\nfragment UserData on User {\n  id\n  email\n  name\n  photoUrl\n  following {\n    id\n    name\n  }\n  followers {\n    id\n    name\n  }\n  lists {\n    ...UserListData\n  }\n  savedLists {\n    ...UserListData\n  }\n}\n\nquery User($id: String!) {\n  user(id: $id) {\n    ...UserData\n  }\n}": types.UserListDataFragmentDoc,
 };
@@ -71,11 +73,19 @@ export function graphql(source: "mutation PushMovie($listId: String!, $movieId: 
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
+export function graphql(source: "mutation AddNote($movieId: Int!, $content: String!) {\n  addNoteToMovie(movieId: $movieId, content: $content) {\n    id\n  }\n}"): (typeof documents)["mutation AddNote($movieId: Int!, $content: String!) {\n  addNoteToMovie(movieId: $movieId, content: $content) {\n    id\n  }\n}"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "mutation DeleteNote($id: String!) {\n  deleteNoteFromMovie(noteId: $id)\n}"): (typeof documents)["mutation DeleteNote($id: String!) {\n  deleteNoteFromMovie(noteId: $id)\n}"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
 export function graphql(source: "fragment ProviderData on Provider {\n  id\n  providerName\n  providerLogoUrl\n}\n\nfragment ProvidersData on Providers {\n  id\n  flatrate {\n    ...ProviderData\n  }\n  rent {\n    ...ProviderData\n  }\n  buy {\n    ...ProviderData\n  }\n}\n\nquery MovieProviders($id: Int!, $region: String!) {\n  movie(id: $id) {\n    id\n    providers(region: $region) {\n      ...ProvidersData\n    }\n  }\n}"): (typeof documents)["fragment ProviderData on Provider {\n  id\n  providerName\n  providerLogoUrl\n}\n\nfragment ProvidersData on Providers {\n  id\n  flatrate {\n    ...ProviderData\n  }\n  rent {\n    ...ProviderData\n  }\n  buy {\n    ...ProviderData\n  }\n}\n\nquery MovieProviders($id: Int!, $region: String!) {\n  movie(id: $id) {\n    id\n    providers(region: $region) {\n      ...ProvidersData\n    }\n  }\n}"];
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function graphql(source: "query Movie($id: Int!) {\n  movie(id: $id) {\n    id\n    imdbId\n    title\n    description\n    poster\n    year\n    countries\n    genres\n    directors\n    writers\n    stars\n    rating\n    trailerUrl\n  }\n}"): (typeof documents)["query Movie($id: Int!) {\n  movie(id: $id) {\n    id\n    imdbId\n    title\n    description\n    poster\n    year\n    countries\n    genres\n    directors\n    writers\n    stars\n    rating\n    trailerUrl\n  }\n}"];
+export function graphql(source: "fragment NoteData on Note {\n  id\n  content\n  createdAt\n  user {\n    id\n    name\n    photoUrl\n  }\n}\n\nquery Movie($id: Int!) {\n  movie(id: $id) {\n    id\n    imdbId\n    title\n    description\n    poster\n    year\n    countries\n    genres\n    directors\n    writers\n    stars\n    rating\n    trailerUrl\n    notes {\n      ...NoteData\n    }\n  }\n}"): (typeof documents)["fragment NoteData on Note {\n  id\n  content\n  createdAt\n  user {\n    id\n    name\n    photoUrl\n  }\n}\n\nquery Movie($id: Int!) {\n  movie(id: $id) {\n    id\n    imdbId\n    title\n    description\n    poster\n    year\n    countries\n    genres\n    directors\n    writers\n    stars\n    rating\n    trailerUrl\n    notes {\n      ...NoteData\n    }\n  }\n}"];
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */

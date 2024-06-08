@@ -4,6 +4,7 @@ import ListControls from './components/ListControls';
 import { makeMetadata } from '@/utils/metadata';
 import MovieProviders from './components/Providers';
 import { Poster } from '@/app/components';
+import Notes from './components/Notes';
 
 type Props = {
   params: {
@@ -45,7 +46,7 @@ export default async function MoviePage({ params }: Props) {
           )}
         </div>
         <div className="text-xl mb-4">
-          {data.movie.year} | {data.movie.genres.join(', ')}
+          {data.movie.year} | {data.movie.genres?.join(', ')}
         </div>
         <p className="text-base mb-8">{data.movie.description}</p>
         <div className="mb-8 flex flex-col gap-3">
@@ -57,11 +58,12 @@ export default async function MoviePage({ params }: Props) {
             ] as const
           ).map(
             ({ key, title }) =>
-              data.movie[key] &&
-              data.movie[key].length > 0 && (
+              (data.movie[key]?.length ?? 0) > 0 && (
                 <div key={key} className="flex gap-2">
-                  <div className="font-semibold w-[100px] shrink-0">{title}</div>
-                  <div className="grow">{data.movie[key].join(', ')}</div>
+                  <div className="font-semibold w-[100px] shrink-0">
+                    {title}
+                  </div>
+                  <div className="grow">{data.movie[key]?.join(', ')}</div>
                 </div>
               )
           )}
@@ -79,10 +81,12 @@ export default async function MoviePage({ params }: Props) {
           />
         )}
 
-        <div className="text-xs font-light mt-10">
+        <div className="text-xs font-light mt-4">
           Provided by <a href="https://www.themoviedb.org/">TMDB</a> and{' '}
           <a href="https://www.justwatch.com/">JustWatch</a>.
         </div>
+
+        <Notes movieId={data.movie.id} notes={data.movie.notes} />
       </div>
     </>
   );

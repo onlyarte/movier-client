@@ -49,7 +49,7 @@ export default function ListControls({ movieId }: Props) {
   return (
     <Menu placement="bottom-start">
       <MenuHandler>
-        <IconButton Icon={Plus} type="button" />
+        <IconButton Icon={Plus} type="button" background="highlight" />
       </MenuHandler>
       <MenuList className="p-1 backdrop-blur bg-background/75 text-current">
         {lists.map((list) => {

@@ -1,0 +1,5 @@
+mutation AddNote($movieId: Int!, $content: String!) {
+  addNoteToMovie(movieId: $movieId, content: $content) {
+    id
+  }
+}

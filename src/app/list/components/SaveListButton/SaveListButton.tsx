@@ -52,6 +52,7 @@ export default function SaveListButton({
   return (
     <IconButton
       size="sm"
+      background="highlight"
       Icon={isSaved ? EyeOff : Eye}
       onClick={handleSubmit}
       disabled={saving || unsaving}

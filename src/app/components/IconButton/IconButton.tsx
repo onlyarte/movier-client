@@ -7,11 +7,20 @@ import { sizes } from './IconButton.config';
 type Props = React.ButtonHTMLAttributes<HTMLButtonElement> & {
   Icon: Icon;
   size?: keyof typeof sizes;
+  background?: 'neutral' | 'highlight';
   loading?: boolean;
 };
 
 export default forwardRef(function IconButton(
-  { Icon, size = 'md', onClick, className, loading, ...otherProps }: Props,
+  {
+    Icon,
+    size = 'md',
+    background = 'neutral',
+    onClick,
+    className,
+    loading,
+    ...otherProps
+  }: Props,
   ref: ForwardedRef<HTMLButtonElement | null>
 ) {
   const iconProps = {
@@ -24,7 +33,11 @@ export default forwardRef(function IconButton(
   return (
     <button
       onClick={onClick}
-      className={`rounded-3xl bg-background/80 hover:bg-background/100 p-2 ${className}`}
+      className={`rounded-3xl ${
+        background === 'neutral'
+          ? 'bg-background/80 hover:bg-background/100'
+          : 'bg-gray-900/10 hover:bg-gray-900/20 dark:bg-gray-100/10 dark:hover:bg-gray-100/20'
+      } p-2 ${className}`}
       ref={ref}
       {...otherProps}
     >

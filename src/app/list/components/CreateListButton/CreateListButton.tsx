@@ -64,6 +64,7 @@ export default function CreateListButton({ userId, ...buttonProps }: Props) {
     <>
       <IconButton
         size="sm"
+        background="highlight"
         Icon={Plus}
         onClick={() => setIsDialogOpen(true)}
         {...buttonProps}
