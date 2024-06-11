@@ -43,7 +43,7 @@ export type Movie = {
   genres?: Maybe<Array<Scalars['String']>>;
   id: Scalars['Int'];
   imdbId?: Maybe<Scalars['String']>;
-  notes: Array<Note>;
+  notes?: Maybe<Array<Note>>;
   poster?: Maybe<Scalars['String']>;
   providers?: Maybe<Providers>;
   rating?: Maybe<Scalars['Float']>;
@@ -314,7 +314,7 @@ export type MovieQueryVariables = Exact<{
 }>;
 
 
-export type MovieQuery = { __typename?: 'Query', movie: { __typename?: 'Movie', id: number, imdbId?: string | null, title: string, description?: string | null, poster?: string | null, year?: number | null, countries?: Array<string> | null, genres?: Array<string> | null, directors?: Array<string> | null, writers?: Array<string> | null, stars?: Array<string> | null, rating?: number | null, trailerUrl?: string | null, notes: Array<{ __typename?: 'Note', id: string, content: string, createdAt: any, user?: { __typename?: 'User', id: string, name: string, photoUrl: string } | null }> } };
+export type MovieQuery = { __typename?: 'Query', movie: { __typename?: 'Movie', id: number, imdbId?: string | null, title: string, description?: string | null, poster?: string | null, year?: number | null, countries?: Array<string> | null, genres?: Array<string> | null, directors?: Array<string> | null, writers?: Array<string> | null, stars?: Array<string> | null, rating?: number | null, trailerUrl?: string | null, notes?: Array<{ __typename?: 'Note', id: string, content: string, createdAt: any, user?: { __typename?: 'User', id: string, name: string, photoUrl: string } | null }> | null } };
 
 export type SearchQueryVariables = Exact<{
   input: Scalars['String'];

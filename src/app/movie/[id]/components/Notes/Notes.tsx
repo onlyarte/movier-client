@@ -17,7 +17,7 @@ export default function Notes({ movieId, notes }: Props) {
   const [isExpanded, setIsExpanded] = useState(false);
 
   return (
-    <div className="mt-12 mb-4 md:bg-gray-200 md:dark:bg-gray-800 md:rounded-2xl md:p-4">
+    <div className="mt-12 mb-4 md:bg-gray-200 md:dark:bg-gray-800 md:rounded-2xl md:p-4 md:border border-black/5">
       <div
         role="button"
         className="flex justify-between items-center"

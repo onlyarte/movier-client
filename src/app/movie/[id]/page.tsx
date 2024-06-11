@@ -86,7 +86,7 @@ export default async function MoviePage({ params }: Props) {
           <a href="https://www.justwatch.com/">JustWatch</a>.
         </div>
 
-        <Notes movieId={data.movie.id} notes={data.movie.notes} />
+        <Notes movieId={data.movie.id} notes={data.movie.notes ?? []} />
       </div>
     </>
   );
