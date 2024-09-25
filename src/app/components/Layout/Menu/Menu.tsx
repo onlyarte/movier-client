@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { Menu as MenuIcon } from 'react-feather';
 import IconButton from '../../IconButton';
 import Drawer from '../../Drawer';
-import Fab from '../../../auth/Fab/Fab';
+import SignInButton from '../../../auth/SignInButton/SignInButton';
 import SearchBar from '@/app/search/components/SearchBar';
 
 export default function Menu() {
@@ -20,7 +20,7 @@ export default function Menu() {
       <Drawer
         isOpen={isMenuOpen}
         onClose={() => setIsMenuOpen(false)}
-        header={<Fab className="mb-2" />}
+        header={<SignInButton className="mb-2" outlined={false} />}
       >
         <SearchBar onSubmit={() => setIsMenuOpen(false)} />
       </Drawer>

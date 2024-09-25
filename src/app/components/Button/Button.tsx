@@ -6,12 +6,14 @@ import { Loader } from 'react-feather';
 type Props = React.ButtonHTMLAttributes<HTMLButtonElement> & {
   loading?: boolean;
   outline?: boolean;
+  icon?: React.ReactNode;
 };
 
 export default function Button({
   onClick,
   className,
   loading,
+  icon,
   children,
   outline = true,
   ...otherProps
@@ -20,13 +22,13 @@ export default function Button({
     <button
       onClick={onClick}
       className={classNames(
-        'rounded-3xl p-2 border-current flex gap-2 items-center justify-center',
+        'rounded-3xl p-2 pr-4 border-current flex gap-2 items-center justify-center',
         className,
         { border: outline }
       )}
       {...otherProps}
     >
-      {loading && (
+      {loading ? (
         <Loader
           strokeWidth={1}
           size={24}
@@ -37,6 +39,8 @@ export default function Button({
             animationTimingFunction: 'linear',
           }}
         />
+      ) : (
+        icon
       )}
       {children}
     </button>
