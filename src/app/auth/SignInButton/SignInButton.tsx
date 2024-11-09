@@ -6,6 +6,7 @@ import { useAuth } from '@/app/auth';
 import { usePathname, useRouter } from 'next/navigation';
 import { Button } from '@/app/components';
 import SignOutButton from '../SignOutButton';
+import Image from 'next/image';
 
 type Props = {
   className?: string;
@@ -24,9 +25,15 @@ export default function SignInButton({ className, outlined = true }: Props) {
   if (!user) {
     return (
       <Button
-        onClick={() => signIn('google')}
+        onClick={() =>
+          signIn('google', {
+            callbackUrl: pathname === '/' ? '/user' : undefined,
+          })
+        }
         loading={loading}
-        icon={<img src="/google.png" style={{ height: 24 }} />}
+        icon={
+          <Image src="/google.png" width={24} height={24} alt="Google logo" />
+        }
         className={`${className} bg-background/80 hover:bg-background/100 p-3 ${
           outlined ? '' : 'border-0'
         }`}

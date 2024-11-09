@@ -22,7 +22,7 @@ export default function Button({
     <button
       onClick={onClick}
       className={classNames(
-        'rounded-3xl p-2 pr-4 border-current flex gap-2 items-center justify-center',
+        'rounded-3xl p-2 pr-4 flex gap-2 items-center justify-center border-border-secondary/50',
         className,
         { border: outline }
       )}
