@@ -46,6 +46,11 @@ export default function Dialog({
                 minWidth: "min-w-[320px]",
                 maxWidth: "lg:max-w-[460px]",
               },
+              md: {
+                width: "w-9/10 lg:w-2/4",
+                minWidth: "min-w-[320px]",
+                maxWidth: "lg:max-w-[620px]",
+              },
             },
           },
         },

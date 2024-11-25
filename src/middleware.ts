@@ -9,11 +9,16 @@ export function middleware(request: NextRequest) {
   if (sessionToken) {
     request.headers.set('Authorization', `Bearer ${btoa(sessionToken)}`);
   }
-  return NextResponse.rewrite(new URL(process.env.API_URL as string), {
-    request,
-  });
+
+  return NextResponse.rewrite(
+    (process.env.API_URL as string) +
+      new URL(request.url).pathname.replace('/api', ''),
+    {
+      request,
+    }
+  );
 }
 
 export const config = {
-  matcher: '/api/graphql',
+  matcher: ['/api/graphql', '/api/upload'],
 };

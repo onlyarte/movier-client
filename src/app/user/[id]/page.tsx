@@ -21,7 +21,6 @@ export default async function UserPage({ params }: Props) {
     <>
       <div className="basis-[350px] lg:basis-2/5 overflow-hidden flex bg-black">
         <div className="items-stretch w-full relative">
-          <UserControls data={data} />
           <Image
             src={
               data.user?.photoUrl ??
@@ -42,9 +41,12 @@ export default async function UserPage({ params }: Props) {
               height={300}
               className="object-cover h-[200px] w-[200px] lg:h-[300px] lg:w-[300px] rounded-full"
             />
-            <h1 className="text-xl lg:text-3xl text-center mt-5 text-white">
-              {data.user?.name}
-            </h1>
+            <div className="flex gap-2 items-center mt-5">
+              <h1 className="text-xl lg:text-3xl text-center text-white">
+                {data.user?.name}
+              </h1>
+              <UserControls data={data} />
+            </div>
           </div>
         </div>
       </div>
