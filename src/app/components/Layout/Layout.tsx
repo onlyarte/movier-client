@@ -6,7 +6,7 @@ type Props = {
 
 export default function Layout({ children }: Props) {
   return (
-    <div className="flex flex-col lg:flex-row min-h-screen lg:h-screen relative">
+    <div className="min-h-screen relative">
       <Menu />
       {children}
     </div>

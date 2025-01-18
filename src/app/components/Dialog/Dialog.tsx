@@ -36,19 +36,19 @@ export default function Dialog({
           styles: {
             base: {
               backdrop: {
-                backgroundColor: 'bg-background/25',
-                backdropBlur: 'backdrop-blur',
+                backgroundColor: 'bg-background/75',
+                backdropBlur: 'backdrop-blur-none',
               },
             },
             sizes: {
               sm: {
                 width: "w-9/10 lg:w-1/4",
-                minWidth: "min-w-[320px]",
+                minWidth: "min-w-[360px]",
                 maxWidth: "lg:max-w-[460px]",
               },
               md: {
                 width: "w-9/10 lg:w-2/4",
-                minWidth: "min-w-[320px]",
+                minWidth: "min-w-[360px]",
                 maxWidth: "lg:max-w-[620px]",
               },
             },
@@ -60,13 +60,13 @@ export default function Dialog({
         open={isOpen}
         handler={onToggle}
         size={size}
-        className="backdrop-blur bg-background-secondary/75 dark:bg-gray-800/75 text-current border border-border-secondary/50"
+        className="bg-background-secondary dark:bg-gray-800 text-current rounded-3xl shadow-2xl"
       >
-        <DialogHeader className="text-xl lg:text-2xl text-current">
+        <DialogHeader className="text-xl lg:text-xl text-current font-normal p-5">
           {header}
         </DialogHeader>
-        <DialogBody className="text-current">{children}</DialogBody>
-        <DialogFooter className="text-current">{footer}</DialogFooter>
+        <DialogBody className="text-current px-5 py-0">{children}</DialogBody>
+        <DialogFooter className="text-current px-5">{footer}</DialogFooter>
       </DialogBase>
     </ThemeProvider>
   );

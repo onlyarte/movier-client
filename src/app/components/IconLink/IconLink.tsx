@@ -1,7 +1,8 @@
 'use client';
 
 import Link, { LinkProps } from 'next/link';
-import { Icon, Loader } from 'react-feather';
+import { Icon } from 'react-feather';
+import Loader from '../Loader';
 
 export const NativeLink = (props: any) => <a {...props} />;
 
@@ -30,19 +31,7 @@ export default function IconLink({
       <div
         className={`rounded-3xl bg-background/80 hover:bg-background/100 p-2 w-fit ${className}`}
       >
-        {loading ? (
-          <Loader
-            {...iconProps}
-            style={{
-              animationName: 'spin',
-              animationDuration: '5000ms',
-              animationIterationCount: 'infinite',
-              animationTimingFunction: 'linear',
-            }}
-          />
-        ) : (
-          <Icon {...iconProps} />
-        )}
+        {loading ? <Loader {...iconProps} /> : <Icon {...iconProps} />}
       </div>
     </Component>
   );

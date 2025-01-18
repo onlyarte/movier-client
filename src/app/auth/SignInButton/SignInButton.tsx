@@ -1,19 +1,17 @@
 'use client';
 
-import { User as UserIcon } from 'react-feather';
 import { signIn } from 'next-auth/react';
 import { useAuth } from '@/app/auth';
 import { usePathname, useRouter } from 'next/navigation';
-import { Button } from '@/app/components';
-import SignOutButton from '../SignOutButton';
+import { Button, IconButton } from '@/app/components';
 import Image from 'next/image';
+import { AVATAR, GOOGLE_LOGO } from '@/app/components/Image/assets';
 
 type Props = {
   className?: string;
-  outlined?: boolean;
 };
 
-export default function SignInButton({ className, outlined = true }: Props) {
+export default function SignInButton({ className }: Props) {
   const { user, error, loading } = useAuth();
   const pathname = usePathname();
   const router = useRouter();
@@ -32,11 +30,9 @@ export default function SignInButton({ className, outlined = true }: Props) {
         }
         loading={loading}
         icon={
-          <Image src="/google.png" width={24} height={24} alt="Google logo" />
+          <Image width={24} height={24} src={GOOGLE_LOGO} alt="Google logo" />
         }
-        className={`${className} bg-background/80 hover:bg-background/100 p-3 ${
-          outlined ? '' : 'border-0'
-        }`}
+        className={`${className} bg-gray-400/85 hover:bg-gray-400/100 dark:bg-gray-600/85 dark:hover:bg-gray-600/100 p-3 border-0`}
       >
         Sign in with Google
       </Button>
@@ -45,20 +41,23 @@ export default function SignInButton({ className, outlined = true }: Props) {
 
   const userPageUrl = `/user/${user.id}`;
 
+  if (pathname === userPageUrl) return null;
+
   return (
-    <div className={`flex items-center gap-2 ${className}`}>
-      <Button
-        onClick={() => router.push(userPageUrl)}
-        loading={loading}
-        disabled={pathname === userPageUrl}
-        icon={<UserIcon size={24} />}
-        className={`bg-background/80 hover:bg-background/100 p-3 ${
-          outlined ? '' : 'border-0'
-        }`}
-      >
-        {user.name}
-      </Button>
-      <SignOutButton />
-    </div>
+    <IconButton
+      Icon={() => (
+        <Image
+          src={user?.photoUrl ?? AVATAR}
+          alt="User photo"
+          width={48}
+          height={48}
+          className="object-cover h-[48px] w-[48px] rounded-full"
+        />
+      )}
+      onClick={() => router.push(userPageUrl)}
+      loading={loading}
+      padding="p-0"
+      className={className}
+    />
   );
 }

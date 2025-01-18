@@ -8,6 +8,8 @@ import { useRouter } from 'next/navigation';
 type Props = {
   onSubmit?: () => void;
   initialValue?: string;
+  placeholder?: string;
+  autoFocus?: boolean;
   className?: string;
   style?: CSSProperties;
 };
@@ -15,6 +17,8 @@ type Props = {
 export default function SearchBar({
   onSubmit,
   initialValue,
+  placeholder = 'Search...',
+  autoFocus,
   className = '',
   style,
 }: Props) {
@@ -23,6 +27,7 @@ export default function SearchBar({
 
   const handleSubmit: React.FormEventHandler<HTMLFormElement> = (event) => {
     event.preventDefault();
+    if (!inputValue) return;
     router.push(`/search?q=${encodeURIComponent(inputValue)}`);
     onSubmit?.();
   };
@@ -36,7 +41,9 @@ export default function SearchBar({
       <Input
         value={inputValue}
         onChange={(event) => setInputValue(event.target.value)}
-        placeholder="Search..."
+        placeholder={placeholder}
+        autoFocus={autoFocus}
+        outlined
       />
       <IconButton type="submit" Icon={SearchIcon} />
     </form>

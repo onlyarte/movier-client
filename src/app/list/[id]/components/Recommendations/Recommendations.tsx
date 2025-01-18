@@ -4,6 +4,7 @@ import { ListRecommendationsDocument } from '@/graphql/graphql';
 import { useQuery } from '@apollo/client';
 import Link from 'next/link';
 import LoadingSkeleton from '../LoadingSkeleton';
+import { COVER } from '@/app/components/Image/assets';
 
 type Props = {
   listId: string;
@@ -33,10 +34,7 @@ export default function Recommendations({ listId }: Props) {
             <Link href={`/movie/${movie.id}`} key={movie.id}>
               <div className="relative h-[250px] w-full mb-2">
                 <Poster
-                  src={
-                    movie.poster ??
-                    'https://storage.googleapis.com/movier-us/uploads%2F98eb2e7399cdbff0e67e42b967e15c50.jpg'
-                  }
+                  src={movie.poster ?? COVER}
                   alt="Poster"
                   fill
                   sizes="(max-width: 640px) 50vw, (max-width: 768px) 33vw, 20vw"

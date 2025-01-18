@@ -16,6 +16,7 @@ fragment UserData on User {
   name
   about
   photoUrl
+  createdAt
   following {
     id
     name
@@ -28,6 +29,12 @@ fragment UserData on User {
     ...UserListData
   }
   savedLists {
+    ...UserListData
+  }
+  watchlist {
+    ...UserListData
+  }
+  favourite {
     ...UserListData
   }
 }

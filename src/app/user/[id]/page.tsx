@@ -1,9 +1,10 @@
 import { UserDocument, UserListDataFragment } from '@/graphql/graphql';
 import { apolloClient } from '@/utils/apollo';
 import { makeMetadata } from '@/utils/metadata';
-import Image from 'next/image';
 import { CreateListButton } from '../../list/components';
-import { ListGroup, UserControls } from './components';
+import { ListGroup, UserControls } from '../components';
+import { AVATAR } from '@/app/components/Image/assets';
+import Image from 'next/image';
 
 type Props = {
   params: {
@@ -18,27 +19,22 @@ export default async function UserPage({ params }: Props) {
   });
 
   return (
-    <>
-      <div className="basis-[350px] lg:basis-2/5 overflow-hidden flex bg-black">
-        <div className="items-stretch w-full relative">
+    <div className="flex flex-col lg:flex-row min-h-screen lg:h-screen">
+      <div className="basis-[380px] lg:basis-2/5 overflow-hidden flex bg-black">
+        <div className="w-full relative">
           <Image
-            src={
-              data.user?.photoUrl ??
-              'https://storage.googleapis.com/movier-us/uploads%2F98eb2e7399cdbff0e67e42b967e15c50.jpg'
-            }
+            src={data.user?.photoUrl ?? AVATAR}
+            width={500}
+            height={500}
             alt="User photo background"
-            fill
-            className="object-cover blur-md scale-110 opacity-60"
+            className="absolute w-full h-full object-cover blur-md grayscale scale-110 opacity-60"
           />
-          <div className="absolute h-full w-full px-5 py-8 lg:p-8 flex flex-col justify-center items-center">
+          <div className="absolute h-full w-full px-5 pt-20 pb-8 lg:p-8 flex flex-col justify-center items-center">
             <Image
-              src={
-                data.user?.photoUrl ??
-                'https://storage.googleapis.com/movier-us/uploads%2F98eb2e7399cdbff0e67e42b967e15c50.jpg'
-              }
+              src={data.user?.photoUrl ?? AVATAR}
+              width={500}
+              height={500}
               alt="User photo"
-              width={300}
-              height={300}
               className="object-cover h-[200px] w-[200px] lg:h-[300px] lg:w-[300px] rounded-full"
             />
             <div className="flex gap-2 items-center mt-5">
@@ -59,7 +55,7 @@ export default async function UserPage({ params }: Props) {
         <h2 className="text-3xl lg:text-4xl mt-5 mb-2">Saved Lists</h2>
         <ListGroup lists={data.user?.savedLists as UserListDataFragment[]} />
       </div>
-    </>
+    </div>
   );
 }
 

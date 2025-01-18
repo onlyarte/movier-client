@@ -36,7 +36,7 @@ export default function Drawer({
     >
       <div
         ref={nodeRef}
-        className={`absolute top-0 bottom-0 ${position}-0 z-20 w-full lg:w-2/5 h-full backdrop-blur bg-background/25 ${className}`}
+        className={`absolute top-0 bottom-0 ${position}-0 z-20 w-full lg:w-2/5 h-full backdrop-blur bg-background ${className}`}
       >
         <div className="px-5 py-8 lg:p-8">
           <div className="flex items-center justify-between pb-3">

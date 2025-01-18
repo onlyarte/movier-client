@@ -1,10 +1,11 @@
 import { MovieDocument } from '@/graphql/graphql';
 import { apolloClient } from '@/utils/apollo';
-import ListControls from './components/ListControls';
+import ListControls from '../components/ListControls';
 import { makeMetadata } from '@/utils/metadata';
-import MovieProviders from './components/Providers';
+import MovieProviders from '../components/Providers';
 import { Poster } from '@/app/components';
-import Notes from './components/Notes';
+import Notes from '../components/Notes';
+import { COVER } from '@/app/components/Image/assets';
 
 type Props = {
   params: {
@@ -20,14 +21,11 @@ export default async function MoviePage({ params }: Props) {
   });
 
   return (
-    <>
+    <div className="flex flex-col lg:flex-row min-h-screen lg:h-screen">
       <div className="basis-[400px] lg:basis-2/5 flex">
         <div className="items-stretch w-full relative">
           <Poster
-            src={
-              data.movie.poster ??
-              'https://storage.googleapis.com/movier-us/uploads%2F98eb2e7399cdbff0e67e42b967e15c50.jpg'
-            }
+            src={data.movie.poster ?? COVER}
             alt="Poster"
             fill
             sizes="(max-width: 640px) 100vw, 50vw"
@@ -41,7 +39,8 @@ export default async function MoviePage({ params }: Props) {
           <ListControls movieId={data.movie.id} />
           {data.movie.rating != null && (
             <span className="text-2xl lg:text-5xl ml-auto">
-              {data.movie.rating}/10
+              {data.movie.rating}
+              <span className="text-lg lg:text-2xl opacity-50">/10</span>
             </span>
           )}
         </div>
@@ -88,7 +87,7 @@ export default async function MoviePage({ params }: Props) {
 
         <Notes movieId={data.movie.id} notes={data.movie.notes ?? []} />
       </div>
-    </>
+    </div>
   );
 }
 

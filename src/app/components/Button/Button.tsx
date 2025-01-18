@@ -1,7 +1,7 @@
 'use client';
 
 import classNames from 'classnames';
-import { Loader } from 'react-feather';
+import Loader from '../Loader';
 
 type Props = React.ButtonHTMLAttributes<HTMLButtonElement> & {
   loading?: boolean;
@@ -28,20 +28,7 @@ export default function Button({
       )}
       {...otherProps}
     >
-      {loading ? (
-        <Loader
-          strokeWidth={1}
-          size={24}
-          style={{
-            animationName: 'spin',
-            animationDuration: '5000ms',
-            animationIterationCount: 'infinite',
-            animationTimingFunction: 'linear',
-          }}
-        />
-      ) : (
-        icon
-      )}
+      {loading ? <Loader strokeWidth={1} size={24} /> : icon}
       {children}
     </button>
   );

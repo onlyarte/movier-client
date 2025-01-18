@@ -6,12 +6,16 @@ type Props = {
   value?: string;
   onChange?: React.ChangeEventHandler<HTMLInputElement>;
   placeholder?: string;
+  autoFocus?: boolean;
+  outlined?: boolean;
 } & InputHTMLAttributes<HTMLInputElement>;
 
 export default function Input({
   value,
   onChange,
   placeholder,
+  autoFocus,
+  outlined,
   className,
   ...otherProps
 }: Props) {
@@ -20,7 +24,12 @@ export default function Input({
       value={value}
       onChange={onChange}
       placeholder={placeholder}
-      className={`w-full h-12 px-5 py-2 rounded-3xl focus-visible:outline-none bg-background/50 border border-border-secondary/50 placeholder:text-foreground/50 ${className}`}
+      autoFocus={autoFocus}
+      className={`w-full h-12 px-5 py-2 rounded-3xl focus-visible:outline-none bg-gray-300 dark:bg-gray-700 placeholder:text-foreground/50 ${
+        outlined
+          ? 'bg-gray-400/75 dark:bg-gray-600/75'
+          : ''
+      } ${className}`}
       {...otherProps}
     />
   );

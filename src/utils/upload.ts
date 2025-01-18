@@ -1,4 +1,4 @@
-export const uploadFile = async (file: File) => {
+export const uploadFile = async (file: File | Blob) => {
   if (!file) return undefined;
 
   const formData = new FormData();

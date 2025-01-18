@@ -2,22 +2,39 @@
 
 import Link from 'next/link';
 import { Poster } from '@/app/components';
-import { SearchDocument } from '@/graphql/graphql';
+import { SearchDocument, SearchQuery } from '@/graphql/graphql';
 import { useQuery } from '@apollo/client';
 import LoadingSkeleton from './LoadingSkeleton';
+import EaseInOut from '@/app/components/EaseInOut';
+import { COVER } from '@/app/components/Image/assets';
 
 type Props = {
   query: string | undefined;
+  mock?: SearchQuery['search'];
 };
 
-export default function SearchResults({ query }: Props) {
+export default function SearchResults({ query, mock }: Props) {
   const { data, loading } = useQuery(SearchDocument, {
     variables: { input: query! },
-    skip: !query,
+    skip: !query || !!mock,
   });
 
-  if (loading) {
-    return <LoadingSkeleton />;
+  if (!mock) {
+    if (loading) {
+      return <LoadingSkeleton />;
+    }
+
+    if (!query) {
+      return null;
+    }
+
+    if (!data?.search.length) {
+      return (
+        <p className="mt-10 text-8xl lg:text-9xl text-current opacity-20 lg:text-center">
+          No results found :(
+        </p>
+      );
+    }
   }
 
   return (
@@ -27,24 +44,23 @@ export default function SearchResults({ query }: Props) {
         gridTemplateColumns: 'repeat(auto-fill, minmax(160px, 1fr))',
       }}
     >
-      {data?.search.map((movie) => (
-        <Link href={`/movie/${movie.id}`} key={movie.id}>
-          <div className="relative h-[250px] w-full mb-2">
-            <Poster
-              src={
-                movie.poster ??
-                'https://storage.googleapis.com/movier-us/uploads%2F98eb2e7399cdbff0e67e42b967e15c50.jpg'
-              }
-              alt="Poster"
-              fill
-              sizes="(max-width: 640px) 50vw, (max-width: 768px) 33vw, 20vw"
-              className="object-cover"
-            />
-          </div>
-          <h2 className="text-lg text-center mb-3">
-            {movie.title} ({movie.year})
-          </h2>
-        </Link>
+      {(mock ?? data?.search ?? []).map((movie) => (
+        <EaseInOut key={movie.id}>
+          <Link href={`/movie/${movie.id}`}>
+            <div className="relative h-[250px] w-full mb-2">
+              <Poster
+                src={movie.poster ?? COVER}
+                alt="Poster"
+                fill
+                sizes="(max-width: 640px) 50vw, (max-width: 768px) 33vw, 20vw"
+                className="object-cover"
+              />
+            </div>
+            <h2 className="text-lg text-center mb-3">
+              {movie.title} ({movie.year})
+            </h2>
+          </Link>
+        </EaseInOut>
       ))}
     </div>
   );

@@ -11,7 +11,13 @@ export default function CurrentUserPage() {
   }
 
   if (user) {
-    redirect(`/user/${user.id}`, RedirectType.replace);
+    const isNewUser =
+      new Date(user.createdAt) > new Date(Date.now() - 3 * 60000); // created less than 3 mins ago
+
+    redirect(
+      `/user/${user.id}${isNewUser ? '?onboarding=1' : ''}`,
+      RedirectType.replace
+    );
   } else {
     redirect('/', RedirectType.replace);
   }

@@ -6,6 +6,8 @@ import { DeleteListButton, EditListButton } from '../components';
 import { Poster } from '@/app/components';
 import SaveListButton from '../components/SaveListButton';
 import Recommendations from './components/Recommendations';
+import EaseInOut from '@/app/components/EaseInOut';
+import { COVER } from '@/app/components/Image/assets';
 
 type Props = {
   params: {
@@ -39,34 +41,41 @@ export default async function ListPage({ params }: Props) {
         </Link>
       </p>
 
-      <div
-        className="grid gap-3 w-full mb-8"
-        style={{
-          gridTemplateColumns: 'repeat(auto-fill, minmax(160px, 1fr))',
-        }}
-      >
-        {data.list?.movies.map((movie) => (
-          <Link href={`/movie/${movie.id}`} key={movie.id}>
-            <div className="relative h-[250px] w-full mb-2">
-              <Poster
-                src={
-                  movie.poster ??
-                  'https://storage.googleapis.com/movier-us/uploads%2F98eb2e7399cdbff0e67e42b967e15c50.jpg'
-                }
-                alt="Poster"
-                fill
-                sizes="(max-width: 640px) 50vw, (max-width: 768px) 33vw, 20vw"
-                className="object-cover"
-              />
-            </div>
-            <h2 className="text-lg text-center mb-3">
-              {movie.title} ({movie.year})
-            </h2>
-          </Link>
-        ))}
-      </div>
+      {data.list?.movies.length ? (
+        <>
+          <div
+            className="grid gap-3 w-full mb-8"
+            style={{
+              gridTemplateColumns: 'repeat(auto-fill, minmax(160px, 1fr))',
+            }}
+          >
+            {data.list?.movies.map((movie) => (
+              <EaseInOut key={movie.id}>
+                <Link href={`/movie/${movie.id}`}>
+                  <div className="relative h-[250px] w-full mb-2">
+                    <Poster
+                      src={movie.poster ?? COVER}
+                      alt="Poster"
+                      fill
+                      sizes="(max-width: 640px) 50vw, (max-width: 768px) 33vw, 20vw"
+                      className="object-cover"
+                    />
+                  </div>
+                  <h2 className="text-lg text-center mb-3">
+                    {movie.title} ({movie.year})
+                  </h2>
+                </Link>
+              </EaseInOut>
+            ))}
+          </div>
 
-      <Recommendations listId={params.id} />
+          <Recommendations listId={params.id} />
+        </>
+      ) : (
+        <p className="mt-10 text-8xl lg:text-9xl text-current opacity-20">
+          Nothing here yet
+        </p>
+      )}
     </div>
   );
 }

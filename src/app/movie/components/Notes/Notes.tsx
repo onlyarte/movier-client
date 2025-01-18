@@ -7,9 +7,9 @@ import AddNoteForm from './AddNoteForm';
 import DeleteNoteButton from './DeleteNoteButton';
 import { ChevronDown, ChevronUp } from 'react-feather';
 import { useState } from 'react';
-import { CSSTransition } from 'react-transition-group';
 
 import './styles.css';
+import { AVATAR } from '@/app/components/Image/assets';
 
 type Props = { movieId: number; notes: NoteDataFragment[] };
 
@@ -45,15 +45,11 @@ export default function Notes({ movieId, notes }: Props) {
             >
               <div className="flex gap-3 mb-2 items-center">
                 <Image
-                  src={
-                    note.user?.photoUrl ??
-                    'https://storage.googleapis.com/movier-us/uploads%2F98eb2e7399cdbff0e67e42b967e15c50.jpg'
-                  }
+                  src={note.user?.photoUrl ?? AVATAR}
                   alt="User photo"
                   width={50}
                   height={50}
-                  quality={100}
-                  className="object-cover rounded-full min-h-[50px] min-w-[50px]"
+                  className="object-cover rounded-full h-[50px] w-[50px]"
                 />
                 <div className="text-sm">
                   <div className="mb-1 font-semibold">{note.user?.name}</div>
