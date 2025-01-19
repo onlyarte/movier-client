@@ -13,6 +13,7 @@ import { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/
  * Therefore it is highly recommended to use the babel-plugin for production.
  */
 const documents = {
+    "mutation UpsertUserLocation($input: UpsertUserLocationInput!) {\n  upsertUserLocation(input: $input)\n}": types.UpsertUserLocationDocument,
     "fragment ListRecommendationsData on List {\n  id\n  recommendations {\n    id\n    title\n    poster\n    year\n  }\n}\n\nquery ListRecommendations($listId: String!) {\n  list(id: $listId) {\n    ...ListRecommendationsData\n  }\n}": types.ListRecommendationsDataFragmentDoc,
     "fragment ListData on List {\n  id\n  title\n  description\n  owner {\n    id\n    name\n  }\n  movies {\n    id\n    title\n    poster\n    year\n  }\n}\n\nquery List($id: String!) {\n  list(id: $id) {\n    ...ListData\n  }\n}": types.ListDataFragmentDoc,
     "mutation CreateList($input: CreateListInput!) {\n  createList(input: $input) {\n    id\n  }\n}": types.CreateListDocument,
@@ -25,8 +26,8 @@ const documents = {
     "mutation DeleteNote($id: String!) {\n  deleteNoteFromMovie(noteId: $id)\n}": types.DeleteNoteDocument,
     "fragment ProviderData on Provider {\n  id\n  providerName\n  providerLogoUrl\n}\n\nfragment ProvidersData on Providers {\n  id\n  flatrate {\n    ...ProviderData\n  }\n  rent {\n    ...ProviderData\n  }\n  buy {\n    ...ProviderData\n  }\n}\n\nquery MovieProviders($id: Int!, $region: String!) {\n  movie(id: $id) {\n    id\n    providers(region: $region) {\n      ...ProvidersData\n    }\n  }\n}": types.ProviderDataFragmentDoc,
     "query Search($input: String!) {\n  search(input: $input) {\n    id\n    title\n    poster\n    year\n    genres\n  }\n}": types.SearchDocument,
-    "mutation UpdateUser($input: UpdateUserInput!) {\n  updateUser(input: $input) {\n    id\n    name\n    photoUrl\n    about\n  }\n}": types.UpdateUserDocument,
     "fragment UserListData on List {\n  id\n  title\n  cover\n  updatedAt\n  movies {\n    id\n    title\n    poster\n  }\n}\n\nfragment UserData on User {\n  id\n  email\n  name\n  about\n  photoUrl\n  createdAt\n  following {\n    id\n    name\n  }\n  followers {\n    id\n    name\n  }\n  lists {\n    ...UserListData\n  }\n  savedLists {\n    ...UserListData\n  }\n  watchlist {\n    ...UserListData\n  }\n  favourite {\n    ...UserListData\n  }\n}\n\nquery User($id: String!) {\n  user(id: $id) {\n    ...UserData\n  }\n}": types.UserListDataFragmentDoc,
+    "mutation UpdateUser($input: UpdateUserInput!) {\n  updateUser(input: $input) {\n    id\n    name\n    photoUrl\n    about\n  }\n}": types.UpdateUserDocument,
 };
 
 /**
@@ -43,6 +44,10 @@ const documents = {
  */
 export function graphql(source: string): unknown;
 
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "mutation UpsertUserLocation($input: UpsertUserLocationInput!) {\n  upsertUserLocation(input: $input)\n}"): (typeof documents)["mutation UpsertUserLocation($input: UpsertUserLocationInput!) {\n  upsertUserLocation(input: $input)\n}"];
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
@@ -94,11 +99,11 @@ export function graphql(source: "query Search($input: String!) {\n  search(input
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function graphql(source: "mutation UpdateUser($input: UpdateUserInput!) {\n  updateUser(input: $input) {\n    id\n    name\n    photoUrl\n    about\n  }\n}"): (typeof documents)["mutation UpdateUser($input: UpdateUserInput!) {\n  updateUser(input: $input) {\n    id\n    name\n    photoUrl\n    about\n  }\n}"];
+export function graphql(source: "fragment UserListData on List {\n  id\n  title\n  cover\n  updatedAt\n  movies {\n    id\n    title\n    poster\n  }\n}\n\nfragment UserData on User {\n  id\n  email\n  name\n  about\n  photoUrl\n  createdAt\n  following {\n    id\n    name\n  }\n  followers {\n    id\n    name\n  }\n  lists {\n    ...UserListData\n  }\n  savedLists {\n    ...UserListData\n  }\n  watchlist {\n    ...UserListData\n  }\n  favourite {\n    ...UserListData\n  }\n}\n\nquery User($id: String!) {\n  user(id: $id) {\n    ...UserData\n  }\n}"): (typeof documents)["fragment UserListData on List {\n  id\n  title\n  cover\n  updatedAt\n  movies {\n    id\n    title\n    poster\n  }\n}\n\nfragment UserData on User {\n  id\n  email\n  name\n  about\n  photoUrl\n  createdAt\n  following {\n    id\n    name\n  }\n  followers {\n    id\n    name\n  }\n  lists {\n    ...UserListData\n  }\n  savedLists {\n    ...UserListData\n  }\n  watchlist {\n    ...UserListData\n  }\n  favourite {\n    ...UserListData\n  }\n}\n\nquery User($id: String!) {\n  user(id: $id) {\n    ...UserData\n  }\n}"];
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function graphql(source: "fragment UserListData on List {\n  id\n  title\n  cover\n  updatedAt\n  movies {\n    id\n    title\n    poster\n  }\n}\n\nfragment UserData on User {\n  id\n  email\n  name\n  about\n  photoUrl\n  createdAt\n  following {\n    id\n    name\n  }\n  followers {\n    id\n    name\n  }\n  lists {\n    ...UserListData\n  }\n  savedLists {\n    ...UserListData\n  }\n  watchlist {\n    ...UserListData\n  }\n  favourite {\n    ...UserListData\n  }\n}\n\nquery User($id: String!) {\n  user(id: $id) {\n    ...UserData\n  }\n}"): (typeof documents)["fragment UserListData on List {\n  id\n  title\n  cover\n  updatedAt\n  movies {\n    id\n    title\n    poster\n  }\n}\n\nfragment UserData on User {\n  id\n  email\n  name\n  about\n  photoUrl\n  createdAt\n  following {\n    id\n    name\n  }\n  followers {\n    id\n    name\n  }\n  lists {\n    ...UserListData\n  }\n  savedLists {\n    ...UserListData\n  }\n  watchlist {\n    ...UserListData\n  }\n  favourite {\n    ...UserListData\n  }\n}\n\nquery User($id: String!) {\n  user(id: $id) {\n    ...UserData\n  }\n}"];
+export function graphql(source: "mutation UpdateUser($input: UpdateUserInput!) {\n  updateUser(input: $input) {\n    id\n    name\n    photoUrl\n    about\n  }\n}"): (typeof documents)["mutation UpdateUser($input: UpdateUserInput!) {\n  updateUser(input: $input) {\n    id\n    name\n    photoUrl\n    about\n  }\n}"];
 
 export function graphql(source: string) {
   return (documents as any)[source] ?? {};

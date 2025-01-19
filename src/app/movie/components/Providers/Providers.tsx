@@ -1,7 +1,7 @@
 'use client';
 
+import { useGeoData } from '@/app/components/GeoProvider';
 import { MovieProvidersDocument } from '@/graphql/graphql';
-import { getCountryCode } from '@/utils/geo';
 import { useQuery } from '@apollo/client';
 import Image from 'next/image';
 
@@ -16,10 +16,12 @@ type Props = {
 };
 
 export default function MovieProviders({ movieId }: Props) {
-  const region = getCountryCode() ?? 'US';
+  const clientLocation = useGeoData();
+  const countryCode = clientLocation?.country;
 
   const { data } = useQuery(MovieProvidersDocument, {
-    variables: { id: movieId, region },
+    variables: { id: movieId, region: countryCode! },
+    skip: !countryCode,
   });
 
   if (!data?.movie.providers) {

@@ -37,6 +37,9 @@ fragment UserData on User {
   favourite {
     ...UserListData
   }
+  location {
+    country
+  }
 }
 
 query User($id: String!) {
