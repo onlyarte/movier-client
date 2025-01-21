@@ -3,6 +3,8 @@ export const AVATAR =
 
 export const COVER = '/ghost-cover.jpg';
 
+export const GHOST = '/pink-ghost.png';
+
 export const MOVIER_LOGO = '/logo-big.png';
 
 export const GOOGLE_LOGO =

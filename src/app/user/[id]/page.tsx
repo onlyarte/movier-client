@@ -27,7 +27,8 @@ export default async function UserPage({ params }: Props) {
             width={500}
             height={500}
             alt="User photo background"
-            className="absolute w-full h-full object-cover blur-md grayscale scale-110 opacity-60"
+            className="absolute w-full h-full object-cover blur-md grayscale scale-150 opacity-60"
+            style={{ willChange: 'filter' }}
           />
           <div className="absolute h-full w-full px-5 pt-20 pb-8 lg:p-8 flex flex-col justify-center items-center">
             <Image
@@ -48,7 +49,7 @@ export default async function UserPage({ params }: Props) {
       </div>
       <div className="basis-auto lg:basis-3/5 px-5 py-8 lg:p-8 lg:overflow-y-auto relative">
         <div className="flex items-center mb-2 gap-2">
-          <h2 className="text-3xl lg:text-4xl">Lists</h2>
+          <h2 className="text-3xl lg:text-4xl">My Lists</h2>
           {data.user && <CreateListButton userId={data.user?.id} />}
         </div>
         <ListGroup lists={data.user?.lists as UserListDataFragment[]} />

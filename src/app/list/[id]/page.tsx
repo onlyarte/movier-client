@@ -7,7 +7,8 @@ import { Poster } from '@/app/components';
 import SaveListButton from '../components/SaveListButton';
 import Recommendations from './components/Recommendations';
 import EaseInOut from '@/app/components/EaseInOut';
-import { COVER } from '@/app/components/Image/assets';
+import { COVER, GHOST } from '@/app/components/Image/assets';
+import Image from 'next/image';
 
 type Props = {
   params: {
@@ -22,7 +23,7 @@ export default async function ListPage({ params }: Props) {
   });
 
   return (
-    <div className="px-5 py-8 pt-20 w-full">
+    <div className="px-5 py-8 pt-20 w-full min-h-screen relative">
       <div className="flex items-center gap-2 mb-2">
         <h1 className="text-3xl lg:text-5xl">{data.list?.title}</h1>
         {data.list && <EditListButton list={data.list} />}
@@ -72,9 +73,18 @@ export default async function ListPage({ params }: Props) {
           <Recommendations listId={params.id} />
         </>
       ) : (
-        <p className="mt-10 text-8xl lg:text-9xl text-current opacity-20">
-          Nothing here yet
-        </p>
+        <>
+          <p className="mt-10 text-8xl lg:text-9xl text-current opacity-20">
+            Nothing here yet
+          </p>
+          <Image
+            src={GHOST}
+            alt="Pink ghost"
+            width={300}
+            height={300}
+            className="absolute w-[200px] lg:w-[300px] right-3 lg:right-1/3 top-1/2 lg:top-1/3"
+          />
+        </>
       )}
     </div>
   );

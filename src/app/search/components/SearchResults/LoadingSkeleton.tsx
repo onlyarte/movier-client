@@ -1,17 +1,16 @@
 import EaseInOut from '@/app/components/EaseInOut';
 
-export default function LoadingSkeleton() {
+type Props = {
+  length?: number;
+  className?: string;
+};
+
+export default function LoadingSkeleton({ length = 9, className }: Props) {
   return (
-    <div
-      role="status"
-      className="grid gap-3 w-full animate-pulse"
-      style={{
-        gridTemplateColumns: 'repeat(auto-fill, minmax(160px, 1fr))',
-      }}
-    >
-      {new Array(9).fill(undefined).map((_, index) => (
+    <>
+      {new Array(length).fill(undefined).map((_, index) => (
         <EaseInOut key={index}>
-          <div key={index}>
+          <div key={index} className={className}>
             <div className="relative h-[250px] w-full mb-2">
               <div className="w-full h-full bg-gray-400 dark:bg-gray-800" />
             </div>
@@ -19,6 +18,6 @@ export default function LoadingSkeleton() {
           </div>
         </EaseInOut>
       ))}
-    </div>
+    </>
   );
 }

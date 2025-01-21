@@ -4,6 +4,5 @@ query Search($input: String!) {
     title
     poster
     year
-    genres
   }
 }

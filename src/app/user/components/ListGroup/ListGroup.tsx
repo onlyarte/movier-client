@@ -3,7 +3,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { UserListDataFragment } from '@/graphql/graphql';
 import EaseInOut from '@/app/components/EaseInOut';
-import { COVER } from '@/app/components/Image/assets';
+import { GHOST } from '@/app/components/Image/assets';
 
 type Props = {
   lists?: UserListDataFragment[];
@@ -25,12 +25,13 @@ export default function ListGroup({ lists }: Props) {
         return (
           <EaseInOut key={list.id}>
             <Link href={`/list/${list.id}`}>
-              <div className="relative h-[250px] w-full mb-2">
+              <div className="relative h-[250px] w-full mb-2 bg-gray-400/40 dark:bg-gray-600/20">
                 <Image
-                  src={cover ?? COVER}
+                  src={cover ?? GHOST}
                   alt="List cover"
-                  fill
-                  className={`object-cover ${cover ? '' : 'opacity-30'}`}
+                  width={300}
+                  height={300}
+                  className={`${cover ? 'h-full object-cover' : 'absolute w-[100px] bottom-2 right-2'}`}
                 />
               </div>
               <h3 className="text-lg text-center">{list.title}</h3>

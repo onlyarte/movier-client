@@ -37,7 +37,6 @@ export function GeoProvider({ children }: { children: React.ReactNode }) {
 
   useEffect(() => {
     if (geoData && user) {
-      alert('update');
       updateLocation({ variables: { input: geoData } });
     }
   }, [geoData, user]);

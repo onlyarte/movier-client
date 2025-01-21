@@ -10,9 +10,12 @@ export function middleware(request: NextRequest) {
     request.headers.set('Authorization', `Bearer ${btoa(sessionToken)}`);
   }
 
+  const oldUrl = new URL(request.url);
+
   return NextResponse.rewrite(
     (process.env.API_URL as string) +
-      new URL(request.url).pathname.replace('/api', ''),
+      oldUrl.pathname.replace('/api', '') +
+      oldUrl.search,
     {
       request,
     }
@@ -20,5 +23,5 @@ export function middleware(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ['/api/graphql', '/api/upload'],
+  matcher: ['/api/graphql', '/api/upload', '/api/search'],
 };
