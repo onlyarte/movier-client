@@ -1,9 +1,16 @@
 'use client';
 
-import { CSSProperties, useState } from 'react';
+import { CSSProperties } from 'react';
 import { Search as SearchIcon } from 'react-feather';
 import { IconButton, Input } from '@/app/components';
 import { useRouter } from 'next/navigation';
+import { z } from 'zod';
+
+const FormValues = z.object({
+  q: z.object({
+    value: z.string(),
+  }),
+});
 
 type Props = {
   onSubmit?: () => void;
@@ -22,14 +29,17 @@ export default function SearchBar({
   className = '',
   style,
 }: Props) {
-  const [inputValue, setInputValue] = useState(initialValue ?? '');
   const router = useRouter();
 
   const handleSubmit: React.FormEventHandler<HTMLFormElement> = (event) => {
     event.preventDefault();
-    if (!inputValue) return;
-    router.push(`/search?q=${encodeURIComponent(inputValue)}`);
-    onSubmit?.();
+    try {
+      const formValues = FormValues.parse(event.currentTarget);
+      router.push(`/search?q=${encodeURIComponent(formValues.q.value)}`);
+      onSubmit?.();
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   return (
@@ -39,8 +49,8 @@ export default function SearchBar({
       style={style}
     >
       <Input
-        value={inputValue}
-        onChange={(event) => setInputValue(event.target.value)}
+        defaultValue={initialValue}
+        name="q"
         placeholder={placeholder}
         autoFocus={autoFocus}
         outlined

@@ -14,10 +14,10 @@ type Props = {
 };
 
 export default async function MoviePage({ params }: Props) {
-  // https://beta.nextjs.org/docs/data-fetching/fetching#asyncawait-in-server-components
   const { data } = await apolloClient.query({
     query: MovieDocument,
     variables: { id: parseInt(params.id) },
+    fetchPolicy: 'cache-first',
   });
 
   return (
