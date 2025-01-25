@@ -9,9 +9,9 @@ fragment NoteData on Note {
   }
 }
 
-query Movie($id: Int!) {
-  movie(id: $id) {
-    id
+query Movie($tmdbId: Int!) {
+  movie(tmdbId: $tmdbId) {
+    tmdbId
     imdbId
     title
     description

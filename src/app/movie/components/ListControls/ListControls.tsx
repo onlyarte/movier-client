@@ -20,10 +20,10 @@ import { useState } from 'react';
 import { CreateListDialog } from '@/app/list/components/CreateListButton';
 
 type Props = {
-  movieId: number;
+  movieTmdbId: number;
 };
 
-export default function ListControls({ movieId }: Props) {
+export default function ListControls({ movieTmdbId }: Props) {
   const { user, refetch } = useAuth();
 
   const lists = user?.lists ?? [];
@@ -35,7 +35,7 @@ export default function ListControls({ movieId }: Props) {
 
   const handleClick = async (listId: string, isAdded: boolean) => {
     await (isAdded ? pullMovie : pushMovie)({
-      variables: { listId, movieId },
+      variables: { listId, movieTmdbId },
       refetchQueries: [{ query: ListDocument, variables: { id: listId } }],
     });
     await refetch?.();
@@ -57,7 +57,9 @@ export default function ListControls({ movieId }: Props) {
         </MenuHandler>
         <MenuList className="p-0 border-0 rounded-lg backdrop-blur bg-background/75 text-current shadow-2xl">
           {lists.map((list) => {
-            const isAdded = list.movies.some(({ id }) => id === movieId);
+            const isAdded = list.movies.some(
+              ({ tmdbId }) => tmdbId === String(movieTmdbId)
+            );
             return (
               <MenuItem
                 role="button"

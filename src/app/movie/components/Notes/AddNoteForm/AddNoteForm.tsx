@@ -9,10 +9,10 @@ import { useAuth } from '@/app/auth';
 import { Send } from 'react-feather';
 
 type Props = {
-  movieId: number;
+  movieTmdbId: number;
 };
 
-export default function AddNoteForm({ movieId }: Props) {
+export default function AddNoteForm({ movieTmdbId }: Props) {
   const { user } = useAuth();
 
   const [value, setValue] = useState<string>('');
@@ -26,7 +26,7 @@ export default function AddNoteForm({ movieId }: Props) {
     event.preventDefault();
 
     await addNote({
-      variables: { content: value, movieId },
+      variables: { content: value, movieTmdbId },
     });
 
     router.refresh();

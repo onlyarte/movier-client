@@ -11,9 +11,9 @@ import { useState } from 'react';
 import './styles.css';
 import { AVATAR } from '@/app/components/Image/assets';
 
-type Props = { movieId: number; notes: NoteDataFragment[] };
+type Props = { movieTmdbId: number; notes: NoteDataFragment[] };
 
-export default function Notes({ movieId, notes }: Props) {
+export default function Notes({ movieTmdbId, notes }: Props) {
   const [isExpanded, setIsExpanded] = useState(false);
 
   return (
@@ -37,7 +37,7 @@ export default function Notes({ movieId, notes }: Props) {
       </div>
       {isExpanded && (
         <div className="mt-4 flex flex-col gap-4">
-          <AddNoteForm movieId={movieId} />
+          <AddNoteForm movieTmdbId={movieTmdbId} />
           {notes.map((note) => (
             <div
               key={note.id}
@@ -60,7 +60,7 @@ export default function Notes({ movieId, notes }: Props) {
 
                 <DeleteNoteButton
                   noteId={note.id}
-                  movieId={movieId}
+                  movieTmdbId={movieTmdbId}
                   ownerId={note.user!.id}
                   className="ml-auto opacity-100 md:opacity-0 group-hover:opacity-100 transition-opacity duration-200 ease-in-out bg-transparent"
                 />

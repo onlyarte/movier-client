@@ -1,5 +1,5 @@
-mutation AddNote($movieId: Int!, $content: String!) {
-  addNoteToMovie(movieId: $movieId, content: $content) {
+mutation AddNote($movieTmdbId: Int!, $content: String!) {
+  addNoteToMovie(movieTmdbId: $movieTmdbId, content: $content) {
     id
   }
 }

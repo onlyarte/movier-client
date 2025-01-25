@@ -4,9 +4,21 @@ import { useAuth } from '@/app/auth';
 import { UpsertUserLocationDocument } from '@/graphql/graphql';
 import { useMutation } from '@apollo/client';
 import { createContext, useContext, useEffect, useState } from 'react';
+import { z } from 'zod';
+
+const ApiResponse = z.object({
+  query: z.string().nullable(),
+  country: z.string().nullable(),
+  countryCode: z.string().nullable(),
+  region: z.string().nullable(),
+  regionName: z.string().nullable(),
+  city: z.string().nullable(),
+  timezone: z.string().nullable(),
+});
 
 type GeoData = {
   country: string | null | undefined;
+  countryCode: string | null | undefined;
   region: string | null | undefined;
   city: string | null | undefined;
   ip: string | null | undefined;
@@ -22,12 +34,16 @@ export function GeoProvider({ children }: { children: React.ReactNode }) {
 
   useEffect(() => {
     (async () => {
-      const response = await fetch('/api/geo');
+      const response = await fetch('http://ip-api.com/json');
       if (response.ok) {
-        const geoData = await response.json();
+        const geoData = ApiResponse.parse(await response.json());
         setGeoData({
-          ...geoData,
-          timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
+          country: geoData.country,
+          countryCode: geoData.countryCode,
+          region: geoData.region,
+          city: geoData.city,
+          ip: geoData.query,
+          timezone: geoData.timezone,
         });
       }
     })();
@@ -36,10 +52,11 @@ export function GeoProvider({ children }: { children: React.ReactNode }) {
   const [updateLocation] = useMutation(UpsertUserLocationDocument);
 
   useEffect(() => {
-    if (geoData && user) {
-      updateLocation({ variables: { input: geoData } });
+    if (geoData?.country && user) {
+      const { countryCode, ...payload } = geoData;
+      updateLocation({ variables: { input: payload } });
     }
-  }, [geoData, user]);
+  }, [geoData, user, updateLocation]);
 
   return <GeoContext.Provider value={geoData}>{children}</GeoContext.Provider>;
 }

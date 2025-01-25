@@ -14,9 +14,10 @@ type Props = {
 };
 
 export default async function MoviePage({ params }: Props) {
+  const tmdbId = parseInt(params.id);
   const { data } = await apolloClient.query({
     query: MovieDocument,
-    variables: { id: parseInt(params.id) },
+    variables: { tmdbId },
     fetchPolicy: 'cache-first',
   });
 
@@ -36,7 +37,7 @@ export default async function MoviePage({ params }: Props) {
       <div className="basis-auto lg:basis-3/5 px-5 py-8 lg:p-8 lg:overflow-y-auto">
         <div className="flex items-center gap-3">
           <h1 className="text-3xl lg:text-5xl mb-2">{data.movie.title}</h1>
-          <ListControls movieId={data.movie.id} />
+          <ListControls movieTmdbId={tmdbId} />
           {data.movie.rating != null && (
             <span className="text-2xl lg:text-5xl ml-auto">
               {data.movie.rating}
@@ -68,7 +69,7 @@ export default async function MoviePage({ params }: Props) {
           )}
         </div>
 
-        <MovieProviders movieId={data.movie.id} />
+        <MovieProviders movieTmdbId={tmdbId} />
 
         {data.movie.trailerUrl && (
           <iframe
@@ -85,7 +86,7 @@ export default async function MoviePage({ params }: Props) {
           <a href="https://www.justwatch.com/">JustWatch</a>.
         </div>
 
-        <Notes movieId={data.movie.id} notes={data.movie.notes ?? []} />
+        <Notes movieTmdbId={tmdbId} notes={data.movie.notes ?? []} />
       </div>
     </div>
   );
@@ -94,7 +95,7 @@ export default async function MoviePage({ params }: Props) {
 export async function generateMetadata({ params }: Props) {
   const { data } = await apolloClient.query({
     query: MovieDocument,
-    variables: { id: parseInt(params.id) },
+    variables: { tmdbId: parseInt(params.id) },
   });
 
   return makeMetadata({ title: `${data.movie.title} (${data.movie.year})` });

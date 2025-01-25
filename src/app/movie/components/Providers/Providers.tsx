@@ -12,15 +12,15 @@ const config = [
 ] as const;
 
 type Props = {
-  movieId: number;
+  movieTmdbId: number;
 };
 
-export default function MovieProviders({ movieId }: Props) {
+export default function MovieProviders({ movieTmdbId }: Props) {
   const clientLocation = useGeoData();
-  const countryCode = clientLocation?.country;
+  const countryCode = clientLocation?.countryCode;
 
   const { data } = useQuery(MovieProvidersDocument, {
-    variables: { id: movieId, region: countryCode! },
+    variables: { tmdbId: movieTmdbId, region: countryCode! },
     skip: !countryCode,
   });
 

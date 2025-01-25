@@ -51,8 +51,8 @@ export default async function ListPage({ params }: Props) {
             }}
           >
             {data.list?.movies.map((movie) => (
-              <EaseInOut key={movie.id}>
-                <Link href={`/movie/${movie.id}`}>
+              <EaseInOut key={movie.tmdbId}>
+                <Link href={`/movie/${movie.tmdbId}`}>
                   <div className="relative h-[250px] w-full mb-2">
                     <Poster
                       src={movie.poster ?? COVER}

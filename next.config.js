@@ -3,6 +3,9 @@ const nextConfig = {
   output: 'standalone',
   reactStrictMode: false,
   experimental: {},
+  typescript: {
+    ignoreBuildErrors: false,
+  },
   images: {
     remotePatterns: [
       {
@@ -19,7 +22,7 @@ const nextConfig = {
         protocol: 'https',
         hostname: '*.googleusercontent.com',
         port: '',
-      }
+      },
     ],
   },
 };

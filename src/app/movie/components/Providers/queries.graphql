@@ -17,9 +17,9 @@ fragment ProvidersData on Providers {
   }
 }
 
-query MovieProviders($id: Int!, $region: String!) {
-  movie(id: $id) {
-    id
+query MovieProviders($tmdbId: Int!, $region: String!) {
+  movie(tmdbId: $tmdbId) {
+    tmdbId
     providers(region: $region) {
       ...ProvidersData
     }

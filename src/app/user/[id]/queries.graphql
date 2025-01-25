@@ -4,7 +4,7 @@ fragment UserListData on List {
   cover
   updatedAt
   movies {
-    id
+    tmdbId
     title
     poster
   }

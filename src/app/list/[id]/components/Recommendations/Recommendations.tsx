@@ -31,7 +31,7 @@ export default function Recommendations({ listId }: Props) {
           }}
         >
           {data?.list?.recommendations.map((movie) => (
-            <Link href={`/movie/${movie.id}`} key={movie.id}>
+            <Link href={`/movie/${movie.tmdbId}`} key={movie.tmdbId}>
               <div className="relative h-[250px] w-full mb-2">
                 <Poster
                   src={movie.poster ?? COVER}

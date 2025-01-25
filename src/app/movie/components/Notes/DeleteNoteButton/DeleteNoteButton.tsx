@@ -9,13 +9,13 @@ import { Trash } from 'react-feather';
 import { useRevalidatePath } from '@/utils/next-revalidate';
 
 type Props = Partial<Omit<Parameters<typeof IconButton>['0'], 'onClick'>> & {
-  movieId: number;
+  movieTmdbId: number;
   noteId: string;
   ownerId: string;
 };
 
 export default function DeleteNoteButton({
-  movieId,
+  movieTmdbId,
   noteId,
   ownerId,
   ...buttonProps
@@ -25,7 +25,7 @@ export default function DeleteNoteButton({
   const [deleteNote, { loading }] = useMutation(DeleteNoteDocument);
 
   const router = useRouter();
-  const [revalidatePath] = useRevalidatePath(`/movie/${movieId}`);
+  const [revalidatePath] = useRevalidatePath(`/movie/${movieTmdbId}`);
 
   const handleSubmit = async () => {
     await deleteNote({

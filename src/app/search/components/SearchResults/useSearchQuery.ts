@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { z } from 'zod';
 
 const Item = z.object({
-  id: z.number(),
+  tmdbId: z.number(),
   title: z.string(),
   poster: z.string().nullable(),
   year: z.number(),
@@ -34,9 +34,12 @@ export const useSearchQuery = ({
           `/api/search?input=${encodeURIComponent(variables.input)}`
         );
 
-        console.log(output.headers.get('Transfer-Encoding'));
         if (output.headers.get('Transfer-Encoding') !== 'chunked') {
-          const parsedList = List.parse(await output.json());
+          let text = await output.text();
+          if (!text.startsWith('[')) {
+            text = `[${text.split('\n').filter(Boolean).join(',')}]`;
+          }
+          const parsedList = List.parse(JSON.parse(text));
           setResults(parsedList);
           return;
         }
