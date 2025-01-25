@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { z } from 'zod';
 
 const Item = z.object({
@@ -8,19 +8,28 @@ const Item = z.object({
   year: z.number(),
 });
 
-const List = z.array(Item);
-
 export type SearchQuery = { search: z.infer<typeof Item>[] };
+
+type Variables = { input: string };
 
 export const useSearchQuery = ({
   variables,
   skip,
 }: {
-  variables: { input: string };
+  variables: Variables;
   skip?: boolean;
 }) => {
   const [loading, setLoading] = useState(false);
   const [results, setResults] = useState<SearchQuery['search']>();
+
+  const currentVariables = useRef<Variables>(variables);
+  if (variables.input !== currentVariables.current?.input && !loading) {
+    setLoading(true);
+  }
+  if (skip && (loading || results)) {
+    setLoading(false);
+    setResults(undefined);
+  }
 
   useEffect(() => {
     if (skip) return;
@@ -29,20 +38,11 @@ export const useSearchQuery = ({
       try {
         setLoading(true);
         setResults(undefined);
+        currentVariables.current = variables;
 
         const output = await fetch(
           `/api/search?input=${encodeURIComponent(variables.input)}`
         );
-
-        if (output.headers.get('Transfer-Encoding') !== 'chunked') {
-          let text = await output.text();
-          if (!text.startsWith('[')) {
-            text = `[${text.split('\n').filter(Boolean).join(',')}]`;
-          }
-          const parsedList = List.parse(JSON.parse(text));
-          setResults(parsedList);
-          return;
-        }
 
         const reader = output.body!.getReader();
         const decoder = new TextDecoder();
